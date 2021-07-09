@@ -11,7 +11,7 @@ const UPDATE_QUESTION = "UPDATE_QUESTION";
 const DELETE_QUESTION = "DELETE_QUESTION";
 
 //Reducer
-export default function productReducer(state = data, action) {
+export default function questionReducer(state = data, action) {
   switch (action.type) {
     case GET_QUESTIONS:
       return { ...state, array: action.payload };

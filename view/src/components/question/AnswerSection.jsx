@@ -7,8 +7,6 @@ const AnswerSection = ({
   setActivateBtnSendAnswer,
 }) => {
   const selectAnswer = (data) => {
-    // console.log(data.target);
-    // console.log(data.target.id);
     setAnswerSelected(data.target.id);
     setActivateBtnSendAnswer(true);
   };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 
-const GameOver = ({ resetGameAction }) => {
+const GameOver = ({ resetGameAction, score }) => {
   const playAgainAction = () => {
     resetGameAction();
   };
@@ -16,7 +16,7 @@ const GameOver = ({ resetGameAction }) => {
           Play Again
         </Button>
       </Card.Body>
-      <Card.Footer className="text-muted">Score: 5</Card.Footer>
+      <Card.Footer className="text-muted">Score: {score}</Card.Footer>
     </Card>
   );
 };

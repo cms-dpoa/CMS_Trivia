@@ -284,20 +284,17 @@ const Body = () => {
   const [IdAswerSelected, setIdAnswerSelected] = useState(0);
 
   const NextQuestion = () => {
-    // console.log(IdAswerSelected);
     if (numQuestion <= 5) {
       const optionsQuestion = question.options;
-      // const category = categories.find((category) => category.name === name);
-
       const answerSeleted = optionsQuestion.find(
-        (option) => option.id_label === IdAswerSelected
+        (option) => option.id_label == IdAswerSelected
       );
-      setScore(score + 1);
-      // console.log(optionsQuestion);
-      console.log(answerSeleted);
+      if (answerSeleted.is_correct) {
+        setScore(score + 1);
+      }
     }
+    setQuestion(questions[numQuestion]);
     setNumQuestion(numQuestion + 1);
-    setQuestion(questions[numQuestion - 1]);
     setActivateBtnSendAnswer(false);
     var print = "Question " + numQuestion + " - Score " + score;
     console.log(print);
@@ -313,7 +310,7 @@ const Body = () => {
   return (
     <Container>
       {numQuestion > 10 ? (
-        <GameOver resetGameAction={resetGameAction} />
+        <GameOver resetGameAction={resetGameAction} score={score} />
       ) : (
         <Fragment>
           <Question

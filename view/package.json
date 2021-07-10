@@ -12,7 +12,7 @@
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^1.1.5",
     "redux": "^4.1.0",
     "redux-devtools": "^3.7.0",
     "redux-thunk": "^2.3.0",
@@ -22,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.{jsx,js}",
+    "lint": "eslint src/components/"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +43,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "prettier": "^2.3.2"
   }
 }

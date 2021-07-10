@@ -1,29 +1,13 @@
 import React, { useState, Fragment } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import ModalNewLabel from "./ModalNewLabel";
+import { getLabels } from "../initData";
 
 const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
+  const labels = getLabels;
+
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
-
-  const labels = [
-    {
-      id_label: 1,
-      name: "Label 1",
-    },
-    {
-      id_label: 2,
-      name: "Label 2",
-    },
-    {
-      id_label: 3,
-      name: "Label 3",
-    },
-    {
-      id_label: 4,
-      name: "Label 4",
-    },
-  ];
 
   const selectAnswer = () => {
     setActivateBtnSendAnswer(true);

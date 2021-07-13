@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Redirect,
-  HashRouter,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Body from "./components/Body";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
@@ -14,7 +8,7 @@ import Layout from "./components/Layout";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Layout>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/play" />} />
@@ -24,7 +18,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </Layout>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

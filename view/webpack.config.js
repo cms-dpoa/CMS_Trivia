@@ -47,7 +47,7 @@ module.exports = {
       filename: "./index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: "src/**/*.css",
+      filename: "src/[name].css",
     }),
   ],
   devServer: {

@@ -1,0 +1,26 @@
+id_label	name	was_created
+1	Higgs Physics/Standard Model	0
+2	Higgs Physics/Beyond Standard Model	0
+3	Standard Model Physics/Drell-Yan	0
+4	Standard Model Physics/ElectroWeak	0
+5	Standard Model Physics/Forward and Small-x QCD Physics	0
+6	Standard Model Physics/Minimum Bias	0
+7	Standard Model Physics/QCD	0
+8	Standard Model Physics/Top physics	0
+9	Standard Model Physics/Miscellaneous	0
+10	Heavy-Ion Physics	0
+11	Beyond 2 Generations	0
+12	Exotica/Colorons, Axigluons, Diquarks	0
+13	Exotica/Contact Interaction	0
+14	Exotica/Dark Matter	0
+15	Exotica/Excited Fermions	0
+16	Exotica/Extra Dimensions	0
+17	Exotica/Gravitons	0
+18	Exotica/Heavy Fermions, Heavy Righ-Handed Neutrinos	0
+19	Exotica/Heavy Gauge Bosons	0
+20	Exotica/Leptoquarks	0
+21	Exotica/Resonances	0
+22	Exotica/Miscellaneous	0
+23	Supersymmetry	0
+24	Physics Modelling	0
+25	Miscellaneous	0

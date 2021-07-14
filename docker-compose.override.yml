@@ -1,0 +1,8 @@
+version: "3.3"
+
+services:
+  view:
+    build: ./view
+
+  # api:
+  #   build: ./api

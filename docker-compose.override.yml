@@ -4,5 +4,5 @@ services:
   view:
     build: ./view
 
-  # api:
-  #   build: ./api
+  api:
+    build: ./api

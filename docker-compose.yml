@@ -3,9 +3,13 @@ version: "3.3"
 services:
   view:
     image: view_cms_game
-    # depends_on:
-    #   - api
+    depends_on:
+      - api
     ports:
       - "8080:80"
-#   api:
-#     image: api_cms_game
+
+  api:
+    image: api_cms_game
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"

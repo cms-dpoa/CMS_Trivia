@@ -1,11 +1,17 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import ModalNewLabel from "./ModalNewLabel";
-import { getLabels } from "../initData";
+import { getLabelsAction } from "../../redux/ducks/labelDucks";
 
 const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
-  const labels = getLabels;
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getLabelsAction());
+  }, []);
+
+  const labels = useSelector((store) => store.labels.array);
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
 
@@ -17,7 +23,7 @@ const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
     <Fragment>
       <Form>
         <Form.Group as={Row} controlId="select-section" className="mb-0">
-          <Col sm="3">
+          <Col sm="6">
             <Form.Control as="select" custom onClick={selectAnswer}>
               <option>Select Label</option>
               {labels.map((label) => (

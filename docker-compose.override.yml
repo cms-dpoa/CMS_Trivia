@@ -1,8 +1,8 @@
 version: "3.3"
 
 services:
-  view:
+  frontend:
     build: ./view
 
-  api:
+  backend:
     build: ./api

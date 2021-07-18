@@ -13,7 +13,7 @@ class Game(models.Model):
     score = models.FloatField(default=-1)
 
     def __str__(self):
-        return self.id_game
+        return f"{self.id_game}, {self.username}"
 
 class Label(models.Model):
     id_label = models.IntegerField(primary_key=True)
@@ -33,12 +33,11 @@ class Data(models.Model):
         return self.title
 
 class Vote(models.Model):
-    id_vote = models.IntegerField(primary_key=True)
+    #id_vote = models.IntegerField(primary_key=True)
     dataset = models.ForeignKey(Data, on_delete=models.CASCADE)
     label = models.ForeignKey(Label, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
-        return {'user': self.user, 'dataset': self.dataset, 'label': self.label}
-   
+        return f"{self.id_vote}, {self.dataset}, {self.label}"

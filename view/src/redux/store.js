@@ -1,21 +1,21 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-import authReducer from "./ducks/authDucks";
+// import authReducer from "./ducks/authDucks";
 import labelReducer from "./ducks/labelDucks";
 import questionReducer from "./ducks/questionDucks";
 
+// auth: authReducer,
 const rootReducer = combineReducers({
-  auth: authReducer,
-  questions: questionReducer,
   labels: labelReducer,
+  questions: questionReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function generateStore() {
   const middleware = applyMiddleware(thunk);
-  const compose = composeEnhancers(middleware);
-  const store = createStore(rootReducer, compose);
+  const storeCompose = composeEnhancers(middleware);
+  const store = createStore(rootReducer, storeCompose);
   return store;
 }

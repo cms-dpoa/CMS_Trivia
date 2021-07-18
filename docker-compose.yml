@@ -1,15 +1,24 @@
 version: "3.3"
 
 services:
-  view:
+  frontend:
     image: view_cms_game
+    # environment:
+    #   MONGO_URL: "django://api:8000/"
     depends_on:
-      - api
+      - backend
+    # volumen:
+    #   - view:/view/build
     ports:
       - "8080:80"
 
-  api:
+  backend:
     image: api_cms_game
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
+
+  # nginx:
+  #   image: nginx:1.19.0-alpin
+  #   ports:
+  #     - 80:80

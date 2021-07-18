@@ -1,11 +1,23 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import GameOver from "./GameOver";
 import Question from "./question/Question";
 import { getQuestions } from "./initData";
+import { getQuestionsAction } from "../redux/ducks/questionDucks";
 
 const Body = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getQuestionsAction());
+  }, []);
+
+  const questions2 = useSelector((store) => store.questions.array);
   const questions = getQuestions;
+  const questions3 = Object.values(questions2);
+  // console.log(questions);
+  // console.log(questions3);
 
   const [numQuestion, setNumQuestion] = useState(1);
   const [question, setQuestion] = useState(questions[numQuestion - 1]);
@@ -31,7 +43,6 @@ const Body = () => {
   };
 
   const resetGameAction = () => {
-    console.log("reset Game");
     setNumQuestion(1);
     setScore(0);
     setQuestion(questions[0]);

@@ -33,7 +33,6 @@ class Data(models.Model):
         return self.title
 
 class Vote(models.Model):
-    #id_vote = models.IntegerField(primary_key=True)
     dataset = models.ForeignKey(Data, on_delete=models.CASCADE)
     label = models.ForeignKey(Label, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

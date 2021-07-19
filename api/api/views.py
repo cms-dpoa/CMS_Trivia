@@ -143,9 +143,9 @@ def question_level_two():
 class all_questions(viewsets.GenericViewSet):
     def list(self, request):
         questions = {}
-        for i in range(1, 11):
-            tag = "questions_"+str(i)
-            if i<6:
+        for num_question in range(1, 11):
+            tag = "questions_"+str(num_question)
+            if num_question<6:
                 questions[tag] = question_level_one()
             else:
                 questions[tag] = question_level_two()

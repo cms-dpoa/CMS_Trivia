@@ -17,7 +17,7 @@ const Question = ({
         <Card.Text>{question.title}</Card.Text>
         {numQuestion <= 5 ? (
           <AnswerSection
-            options={question.options}
+            options={Object.values(question.options)}
             setAnswerSelected={setAnswerSelected}
             setActivateBtnSendAnswer={setActivateBtnSendAnswer}
           />

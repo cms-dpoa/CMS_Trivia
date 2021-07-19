@@ -8,26 +8,27 @@ import { getQuestionsAction } from "../redux/ducks/questionDucks";
 
 const Body = () => {
   const dispatch = useDispatch();
+  // const questions = getQuestions;
 
   useEffect(() => {
     dispatch(getQuestionsAction());
   }, []);
 
-  const questions2 = useSelector((store) => store.questions.array);
-  const questions = getQuestions;
-  const questions3 = Object.values(questions2);
-  // console.log(questions);
-  // console.log(questions3);
+  const loadQuestion = useSelector((store) => store.questions.array);
+  const questions = Object.values(loadQuestion);
 
   const [numQuestion, setNumQuestion] = useState(1);
   const [question, setQuestion] = useState(questions[numQuestion - 1]);
   const [score, setScore] = useState(0);
   const [activateBtnSendAnswer, setActivateBtnSendAnswer] = useState(false);
   const [IdAswerSelected, setIdAnswerSelected] = useState(0);
+  if (questions.length > 0 && !question) {
+    setQuestion(questions[numQuestion - 1]);
+  }
 
   const NextQuestion = () => {
     if (numQuestion <= 5) {
-      const optionsQuestion = question.options;
+      const optionsQuestion = Object.values(question.options);
       const answerSeleted = optionsQuestion.find(
         (option) => option.id_label == IdAswerSelected
       );
@@ -50,26 +51,31 @@ const Body = () => {
 
   return (
     <Container>
-      {numQuestion > 10 ? (
+      {numQuestion > 9 ? (
         <GameOver resetGameAction={resetGameAction} score={score} />
       ) : (
         <Fragment>
-          <Question
-            question={question}
-            numQuestion={numQuestion}
-            setAnswerSelected={setIdAnswerSelected}
-            setActivateBtnSendAnswer={setActivateBtnSendAnswer}
-          />
-
-          <Button
-            variant="primary"
-            className="mt-5 font-weight-bold"
-            block
-            onClick={NextQuestion}
-            disabled={!activateBtnSendAnswer}
-          >
-            Send Answer
-          </Button>
+          {questions.length > 0 ? (
+            <Fragment>
+              <Question
+                question={question}
+                numQuestion={numQuestion}
+                setAnswerSelected={setIdAnswerSelected}
+                setActivateBtnSendAnswer={setActivateBtnSendAnswer}
+              />
+              <Button
+                variant="primary"
+                className="mt-5 font-weight-bold"
+                block
+                onClick={NextQuestion}
+                disabled={!activateBtnSendAnswer}
+              >
+                Send Answer
+              </Button>
+            </Fragment>
+          ) : (
+            <p>no</p>
+          )}
         </Fragment>
       )}
     </Container>

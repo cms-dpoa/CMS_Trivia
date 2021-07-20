@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import User, Data, Label, Game, Vote
-from .game_objects import option, question
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

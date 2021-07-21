@@ -36,7 +36,7 @@ def question_level_one():
     #Get categories that are not Miscellaneous
     possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label")
 
-    #Get all Datasets in a random category avoiding empty categories
+    #Get all Datasets in a random category and re-sample if category is empty
     possible_datasets = []
     while len(possible_datasets) < 1:
         #Sample a label from the possible labels

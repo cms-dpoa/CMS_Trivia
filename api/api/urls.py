@@ -10,6 +10,7 @@ router.register(r'games', views.GameViewSet)
 router.register(r'votes', views.VoteViewSet)
 router.register(r'datas', views.DataViewSet)
 router.register(r'questions', views.all_questions, basename="all_questions")
+router.register(r'analysis', views.analysisView, basename="analysis")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

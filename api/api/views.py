@@ -11,6 +11,7 @@ from django.db.models import Avg
 from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer, OptionSerializer, QuestionSerializer
 from .models import User, Label, Game, Vote, Data
 from .views_utils import question_level_one, question_level_two, generate_options, misc_categories
+from .analysis import get_analysis
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('username')
@@ -73,8 +74,11 @@ class DataViewSet(viewsets.ModelViewSet):
 
 class all_questions(viewsets.GenericViewSet):
     def list(self, request):
+
+        #Get artificial sub-categories for the Miscelaneous categories
         level_two_categories = misc_categories()
 
+        #Build 10 question dictionary for game setup
         questions = {}
         for num_question in range(1, 11):
             tag = "question_"+str(num_question)
@@ -82,4 +86,9 @@ class all_questions(viewsets.GenericViewSet):
                 questions[tag] = question_level_one()
             else:
                 questions[tag] = question_level_two(level_two_categories)
+
         return JsonResponse(data = questions)
+
+class analysisView(viewsets.GenericViewSet):
+    def list(self, request):
+        return JsonResponse(data = get_analysis())

@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 
 // import authReducer from "./ducks/authDucks";
 import labelReducer from "./ducks/labelDucks";
+import analysisReducer from "./ducks/analysisDucks";
 import questionReducer from "./ducks/questionDucks";
 
 // auth: authReducer,
 const rootReducer = combineReducers({
   labels: labelReducer,
+  analysis: analysisReducer,
   questions: questionReducer,
 });
 

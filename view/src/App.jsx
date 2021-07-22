@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import MyScore from "./components/MyScore";
 import Layout from "./components/Layout";
 import generateStore from "./redux/store";
+import DashBoard from "./components/dashboard/dashboard";
 
 function App() {
   const store = generateStore();
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/play" component={Body} />
             <Route exact path="/myscore" component={MyScore} />
+            <Route exact path="/dashboard" component={DashBoard} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

@@ -6,8 +6,6 @@ services:
     build: "./api"
     ports:
       - "8000:8000"
-    # command: gunicorn trivia.wsgi -b 0.0.0.0:8000
-    command: python manage.py runserver 0.0.0.0:8000
 
   frontend:
     image: view_cms_game
@@ -18,14 +16,3 @@ services:
       - "80:80"
     # links:
     #   - backend
-
-    # environment:
-    #   MONGO_URL: "django://api:8000/"
-    # volumen:
-    #   - view:/view/build
-
-    # command: python manage.py runserver 0.0.0.0:8000
-  # nginx:
-  #   image: nginx:1.19.0-alpin
-  #   ports:
-  #     - 80:80

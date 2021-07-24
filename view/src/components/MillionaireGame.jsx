@@ -1,33 +1,83 @@
-import React from "react";
-import { Spinner, Button, Container } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-
-import Body from "./Body";
+import React, { Fragment, useState, useEffect } from "react";
+import { Container, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import GameOver from "./GameOver";
+import Question from "./question/Question";
+import { getQuestions } from "./initData";
+import { getQuestionsAction } from "../redux/ducks/questionDucks";
 
 const MillionaireGame = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  // const questions = getQuestions;
 
-  const handleStartGame = () => {
-    console.log("To game");
-    history.push("/play/millionaire");
+  useEffect(() => {
+    dispatch(getQuestionsAction());
+  }, []);
+
+  const loadQuestion = useSelector((store) => store.questions.array);
+  const questions = Object.values(loadQuestion);
+
+  const [numQuestion, setNumQuestion] = useState(1);
+  const [question, setQuestion] = useState(questions[numQuestion - 1]);
+  const [score, setScore] = useState(0);
+  const [activateBtnSendAnswer, setActivateBtnSendAnswer] = useState(false);
+  const [IdAswerSelected, setIdAnswerSelected] = useState(0);
+  if (questions.length > 0 && !question) {
+    setQuestion(questions[numQuestion - 1]);
+  }
+
+  const NextQuestion = () => {
+    if (numQuestion <= 5) {
+      const optionsQuestion = Object.values(question.options);
+      const answerSeleted = optionsQuestion.find(
+        (option) => option.id_label == IdAswerSelected
+      );
+      if (answerSeleted.is_correct) {
+        setScore(score + 1);
+      }
+    }
+    setQuestion(questions[numQuestion]);
+    setNumQuestion(numQuestion + 1);
+    setActivateBtnSendAnswer(false);
+    var print = "Question " + numQuestion + " - Score " + score;
+    console.log(print);
+  };
+
+  const resetGameAction = () => {
+    setNumQuestion(1);
+    setScore(0);
+    setQuestion(questions[0]);
   };
 
   return (
-    <Container className="text-center mt-5 pt-5">
-      <h1>Who want to be a millionaire at CMS</h1>
-      <Button className="pr-5 pl-5 mt-5" onClick={handleStartGame}>
-        Start Game
-      </Button>
-      {/* <Button variant="primary" disabled>
-        <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        Loading...
-      </Button> */}
+    <Container>
+      {numQuestion > 9 ? (
+        <GameOver resetGameAction={resetGameAction} score={score} />
+      ) : (
+        <Fragment>
+          {questions.length > 0 ? (
+            <Fragment>
+              <Question
+                question={question}
+                numQuestion={numQuestion}
+                setAnswerSelected={setIdAnswerSelected}
+                setActivateBtnSendAnswer={setActivateBtnSendAnswer}
+              />
+              <Button
+                variant="primary"
+                className="mt-5 font-weight-bold"
+                block
+                onClick={NextQuestion}
+                disabled={!activateBtnSendAnswer}
+              >
+                Send Answer
+              </Button>
+            </Fragment>
+          ) : (
+            <p>no</p>
+          )}
+        </Fragment>
+      )}
     </Container>
   );
 };

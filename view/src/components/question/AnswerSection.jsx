@@ -15,13 +15,13 @@ const AnswerSection = ({
     <ButtonGroup>
       <Row>
         {options.map((option) => (
-          <Col key={option.id_label} sm="6" lg="6">
+          <Col key={option.id_label} sm="12" lg="6">
             <Button
               block
               key={option.id_label}
               id={option.id_label}
               variant="outline-primary"
-              className="mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-3"
+              className="mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3"
               onClick={selectAnswer}
             >
               {option.name}

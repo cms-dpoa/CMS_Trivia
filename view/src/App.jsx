@@ -8,7 +8,7 @@ import MyScore from "./components/MyScore";
 import Layout from "./components/Layout";
 import generateStore from "./redux/store";
 import DashBoard from "./components/dashboard/dashboard";
-import Body from "./components/Body";
+import MillionaireGame from "./components/MillionaireGame";
 
 function App() {
   const store = generateStore();
@@ -21,7 +21,7 @@ function App() {
             <Route exact path="/" render={() => <Redirect to="/play" />} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/play" component={GameSection} />
-            <Route exact path="/play/millionaire" component={Body} />
+            <Route exact path="/play/millionaire" component={MillionaireGame} />
             <Route exact path="/myscore" component={MyScore} />
             <Route exact path="/dashboard" component={DashBoard} />
             <Route component={NotFound} />

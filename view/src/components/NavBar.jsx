@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -7,10 +8,18 @@ const NavBar = () => {
       <Container>
         <Navbar.Brand href="/home">CMS Game</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="/home">Home</Nav.Link>
-          <Nav.Link href="/play">Let's Play</Nav.Link>
-          <Nav.Link href="/myscore">My Score</Nav.Link>
-          <Nav.Link href="/dashboard">DashBoard</Nav.Link>
+          <Link className="nav-link" to="/home">
+            Home
+          </Link>
+          <Link className="nav-link" to="/play">
+            Let's Play
+          </Link>
+          <Link className="nav-link" to="/myscore">
+            My Score
+          </Link>
+          <Link className="nav-link" to="/dashboard">
+            DashBoard
+          </Link>
         </Nav>
       </Container>
     </Navbar>

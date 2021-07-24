@@ -14,7 +14,7 @@ const Question = ({
       <Card.Header as="h5">Question {numQuestion}</Card.Header>
       <Card.Body>
         <Card.Title>What's the label of this dataset?</Card.Title>
-        <Card.Text>{question.title}</Card.Text>
+        <Card.Text className="text-center">{question.title}</Card.Text>
         {numQuestion <= 5 ? (
           <AnswerSection
             options={Object.values(question.options)}

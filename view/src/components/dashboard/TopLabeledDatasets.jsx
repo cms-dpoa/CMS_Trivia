@@ -27,21 +27,8 @@ const TopLabeledDataset = () => {
   const options = {
     responsive: false,
     legend: { display: false },
-    tooltips: {
-      enabled: true,
-      displayColors: false,
-      yPadding: 10,
-      xPadding: 30,
-      caretSize: 10,
-      backgroundColor: "rgba(240, 240, 240, 1)",
-      titleFontColor: "rgb(50, 100, 50)",
-      bodyFontColor: "rgb(50, 50, 50)",
-      borderColor: "rgba(0,0,0,1)",
-      borderWidth: 1,
-      cornerRadius: 0,
-      yAlign: "bottom",
-      xAlign: "center",
-      position: "custom",
+    plugins: {
+      tooltip: {},
     },
     scales: {
       yAxes: [

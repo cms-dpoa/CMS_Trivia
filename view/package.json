@@ -9,7 +9,7 @@
     "start": "webpack serve",
     "build": "webpack --mode production",
     "format": "prettier --write src/**/*.{jsx,js}",
-    "lint": "eslint src/components/"
+    "lint": "eslint src/**/*.{jsx,js}"
   },
   "keywords": [],
   "author": "",

@@ -15,6 +15,7 @@ const MillionaireGame = () => {
 
   const loadQuestion = useSelector((store) => store.questions.array);
   const questions = Object.values(loadQuestion);
+  console.log(questions);
 
   const [numQuestion, setNumQuestion] = useState(1);
   const [question, setQuestion] = useState(questions[numQuestion - 1]);

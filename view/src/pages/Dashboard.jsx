@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Container, Form, Col, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getAnalisisAction } from "../../redux/ducks/analysisDucks";
-import { getDatasAction } from "../../redux/ducks/datasDucks";
-import TopReliability from "./TopReliability";
+import { getAnalisisAction } from "../redux/ducks/analysisDucks";
+import { getDatasAction } from "../redux/ducks/datasDucks";
+import TopReliability from "../components/dashboard/TopReliability";
 
 const Dashboard = () => {
   const dispatch = useDispatch();

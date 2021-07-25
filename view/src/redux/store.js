@@ -6,6 +6,7 @@ import labelReducer from "./ducks/labelDucks";
 import analysisReducer from "./ducks/analysisDucks";
 import questionReducer from "./ducks/questionDucks";
 import dataReducer from "./ducks/datasDucks";
+import voteReducer from "./ducks/voteDucks";
 
 const rootReducer = combineReducers({
   labels: labelReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   analysis: analysisReducer,
   questions: questionReducer,
   datas: dataReducer,
+  votes: voteReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

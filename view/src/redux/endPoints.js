@@ -7,3 +7,6 @@ export const ENDPOINT_QUESTION = `${MAIN}/questions/`;
 export const ENDPOINT_LABEL = `${MAIN}/labels/`;
 export const ENDPOINT_ANALYSIS = `${MAIN}/analysis/`;
 export const ENDPOINT_DATA = `${MAIN}/datas/`;
+export const ENDPOINT_GAME = `${MAIN}/games/`;
+export const ENDPOINT_VOTE = `${MAIN}/votes/`;
+export const ENDPOINT_USER = `${MAIN}/users/`;

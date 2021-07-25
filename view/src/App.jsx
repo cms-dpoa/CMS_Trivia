@@ -5,9 +5,9 @@ import GameSection from "./pages/GameSection";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import MyScore from "./pages/MyScore";
+import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import generateStore from "./redux/store";
-import Dashboard from "./components/dashboard/Dashboard";
 import MillionaireGame from "./components/game/MillionaireGame";
 
 function App() {

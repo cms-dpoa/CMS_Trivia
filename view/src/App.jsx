@@ -8,7 +8,7 @@ import MyScore from "./pages/MyScore";
 import Layout from "./components/Layout";
 import generateStore from "./redux/store";
 import Dashboard from "./components/dashboard/Dashboard";
-import MillionaireGame from "./components/MillionaireGame";
+import MillionaireGame from "./components/game/MillionaireGame";
 
 function App() {
   const store = generateStore();

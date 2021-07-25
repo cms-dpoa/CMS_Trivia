@@ -10,7 +10,7 @@ const Question = ({
   setActivateBtnSendAnswer,
 }) => {
   return (
-    <Card className="mt-5">
+    <Card className="mt-3">
       <Card.Header as="h5">Question {numQuestion}</Card.Header>
       <Card.Body>
         <Card.Title>What's the label of this dataset?</Card.Title>

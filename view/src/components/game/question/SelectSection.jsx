@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import ModalNewLabel from "./ModalNewLabel";
-import { getLabelsAction } from "../../redux/ducks/labelDucks";
+import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
 const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   const dispatch = useDispatch();

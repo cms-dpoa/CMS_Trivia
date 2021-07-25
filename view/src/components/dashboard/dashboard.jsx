@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAnalisisAction } from "../../redux/ducks/analysisDucks";
 import TopLabeledDataset from "./TopLabeledDatasets";
 
-const DashBoard = () => {
+const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const DashBoard = () => {
   };
 
   const data = {
-    labels: ["1", "2", "3", "4", "5"],
+    labels: ["Data 1", "Data 2", "Data 3", "Data 4", "Data 5"],
     datasets: [
       {
         label: "Reliability (2,3]",
@@ -71,11 +71,11 @@ const DashBoard = () => {
 
   return (
     <Container>
-      <h1>DashBoard</h1>
+      <h1>Dashboard</h1>
       <Bar data={data} options={options} height={100} />
       {/* <TopLabeledDataset /> */}
     </Container>
   );
 };
 
-export default DashBoard;
+export default Dashboard;

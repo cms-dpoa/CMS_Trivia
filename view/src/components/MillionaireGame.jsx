@@ -3,12 +3,10 @@ import { Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import GameOver from "./GameOver";
 import Question from "./question/Question";
-import { getQuestions } from "./initData";
 import { getQuestionsAction } from "../redux/ducks/questionDucks";
 
 const MillionaireGame = () => {
   const dispatch = useDispatch();
-  // const questions = getQuestions;
 
   useEffect(() => {
     dispatch(getQuestionsAction());

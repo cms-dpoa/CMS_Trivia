@@ -7,19 +7,12 @@ const data = {
 
 const GET_LABELS = "GET_LABELS";
 const POST_LABEL = "POST_LABEL";
-const UPDATE_LABEL = "UPDATE_LABEL";
-const DELETE_LABEL = "DELETE_LABEL";
 
 export default function labelReducer(state = data, action) {
   switch (action.type) {
     case GET_LABELS:
       return { ...state, array: action.payload };
     case POST_LABEL:
-      return state;
-    case UPDATE_LABEL:
-      return state;
-    case DELETE_LABEL:
-      window.location.reload();
       return state;
     default:
       return state;

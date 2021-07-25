@@ -10,3 +10,5 @@ npm-debug.log*
 README.md
 *.txt
 txts/*
+.prettierrc
+.eslintrc

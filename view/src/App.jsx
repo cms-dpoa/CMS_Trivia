@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
-import GameSection from "./components/GameSection";
-import NotFound from "./components/NotFound";
-import Home from "./components/Home";
-import MyScore from "./components/MyScore";
+import GameSection from "./pages/GameSection";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/Home";
+import MyScore from "./pages/MyScore";
 import Layout from "./components/Layout";
 import generateStore from "./redux/store";
-import DashBoard from "./components/dashboard/dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import MillionaireGame from "./components/MillionaireGame";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route exact path="/play" component={GameSection} />
             <Route exact path="/play/millionaire" component={MillionaireGame} />
             <Route exact path="/myscore" component={MyScore} />
-            <Route exact path="/dashboard" component={DashBoard} />
+            <Route exact path="/dashboard" component={Dashboard} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

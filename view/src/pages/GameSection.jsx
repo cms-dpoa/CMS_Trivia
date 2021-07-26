@@ -40,7 +40,7 @@ const GameSection = () => {
 
   return (
     <Container className="text-center mt-5 pt-5">
-      <h1>Who want to be a millionaire at CMS</h1>
+      <h1>Who wants to be a Millionaire? CMS edition</h1>
       <Button
         className="pr-5 pl-5 mt-5"
         onClick={handleStartGame}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, Tab, Container } from "react-bootstrap";
 import MyOwnScore from "../components/score/MyOwnScore";
-import TopScore from "../components/score/TopScore";
+import Leaderboard from "../components/score/Leaderboard";
 
 const MyScore = () => {
   return (
@@ -10,8 +10,8 @@ const MyScore = () => {
         <Tab eventKey="my-score" title="My Score">
           <MyOwnScore />
         </Tab>
-        <Tab eventKey="top-score" title="Top Scores">
-          <TopScore />
+        <Tab eventKey="leaderboard" title="Leaderboard">
+          <Leaderboard />
         </Tab>
       </Tabs>
     </Container>

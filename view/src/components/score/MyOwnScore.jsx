@@ -15,7 +15,7 @@ const MyOwnScore = () => {
   return (
     <Container>
       <h1>My Score</h1>
-      <h5>Mean Score {user.mean_score}</h5>
+      <h5 className="text-right">Mean Score {user.mean_score}</h5>
       <Table striped bordered hover>
         <thead>
           <tr>

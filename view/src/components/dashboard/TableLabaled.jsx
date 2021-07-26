@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import { Table, Container, Button } from "react-bootstrap";
+import { Table, Container, DropdownButton, Dropdown } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RiFileExcel2Line } from "react-icons/ri";
+import { VscJson } from "react-icons/vsc";
 
 const TableLabaled = () => {
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     dispatch(getAuthAction());
+  // useEffect(() => {
+  //   dispatch(getAuthAction());
   //   }, []);
 
-  const user = useSelector((store) => store.auth.user);
+  // const user = useSelector((store) => store.auth.user);
 
   return (
     <Container>
@@ -54,10 +55,16 @@ const TableLabaled = () => {
           </tr>
         </tbody>
       </Table>
-      <Button>
-        Download Excel
-        <RiFileExcel2Line size="1.5em" className="ml-2 my-auto" />
-      </Button>
+      <DropdownButton id="dropdown-basic-button" title="Download Table ">
+        <Dropdown.Item href="#/action-1">
+          Excel
+          <RiFileExcel2Line size="1.5em" className="ml-5 my-auto" />
+        </Dropdown.Item>
+        <Dropdown.Item href="#/action-2">
+          Json
+          <VscJson size="1.5em" className="ml-5 my-auto" />
+        </Dropdown.Item>
+      </DropdownButton>
     </Container>
   );
 };

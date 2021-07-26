@@ -1,8 +1,9 @@
 import axios from "axios";
-import { ENDPOINT_GAME } from "../endPoints";
+import { ENDPOINT_GAME, ENDPOINT_USER } from "../endPoints";
 
 const data = {
   array: [],
+  idGame: 0,
 };
 
 const GET_GAMES = "GET_GAMES";
@@ -13,7 +14,7 @@ export default function gameReducer(state = data, action) {
     case GET_GAMES:
       return { ...state, array: action.payload };
     case POST_GAME:
-      return state;
+      return { ...state, idGame: action.payload };
     default:
       return state;
   }
@@ -31,11 +32,15 @@ export const getGamesAction = () => async (dispatch) => {
   }
 };
 
-export const postGameAction = (label) => async (dispatch) => {
+export const postGameAction = (username) => async (dispatch) => {
   try {
-    const res = await axios.post(ENDPOINT_GAME, label);
+    const jsonNewGame = {
+      username,
+    };
+    const res = await axios.post(ENDPOINT_USER, jsonNewGame);
     dispatch({
       type: POST_GAME,
+      payload: res.data,
     });
   } catch (error) {
     console.log(error);

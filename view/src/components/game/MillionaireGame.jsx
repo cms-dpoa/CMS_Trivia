@@ -15,7 +15,6 @@ const MillionaireGame = () => {
 
   const loadQuestion = useSelector((store) => store.questions.array);
   const questions = Object.values(loadQuestion);
-  console.log(questions);
 
   const [numQuestion, setNumQuestion] = useState(1);
   const [question, setQuestion] = useState(questions[numQuestion - 1]);
@@ -36,22 +35,25 @@ const MillionaireGame = () => {
         setScore(score + 1);
       }
     }
-    setQuestion(questions[numQuestion]);
     setNumQuestion(numQuestion + 1);
-    setActivateBtnSendAnswer(false);
-    var print = "Question " + numQuestion + " - Score " + score;
-    console.log(print);
+    if (numQuestion < 10) {
+      setQuestion(questions[numQuestion]);
+      setActivateBtnSendAnswer(false);
+      const print = `Question ${numQuestion} - Score ${score}`;
+      console.log(print);
+    }
   };
 
   const resetGameAction = () => {
     setNumQuestion(1);
     setScore(0);
     setQuestion(questions[0]);
+    setActivateBtnSendAnswer(false);
   };
 
   return (
     <Container>
-      {numQuestion > 9 ? (
+      {numQuestion > 10 ? (
         <GameOver resetGameAction={resetGameAction} score={score} />
       ) : (
         <Fragment>
@@ -65,8 +67,7 @@ const MillionaireGame = () => {
                 setActivateBtnSendAnswer={setActivateBtnSendAnswer}
               />
               <Button
-                variant="primary"
-                className="mt-5 font-weight-bold"
+                className="mt-5 mb-5 font-weight-bold"
                 block
                 onClick={NextQuestion}
                 disabled={!activateBtnSendAnswer}
@@ -75,7 +76,7 @@ const MillionaireGame = () => {
               </Button>
             </Fragment>
           ) : (
-            <p>no</p>
+            <h5>Loading</h5>
           )}
         </Fragment>
       )}

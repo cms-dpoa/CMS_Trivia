@@ -19,7 +19,7 @@ def generate_options(correct_label):
     
     # Add wrong options
     for i in chosen_labels:
-        options.append({'id_label':possible_labels[i]['id_label'], 'name': possible_labels[i]['name'], 'is_correct': False })
+        options.append({'id_label':possible_labels[i]['id_label'], 'name': possible_labels[i]['name'], 'is_correct': False , 'show' : True})
     
     # Generate options dict with tags:
     option_tags = ["option_1", "option_2", "option_3", "option_4"]

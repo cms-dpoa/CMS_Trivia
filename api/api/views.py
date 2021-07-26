@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.db.models import Avg
 
-from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer, OptionSerializer, QuestionSerializer
+from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer
 from .models import User, Label, Game, Vote, Data
 from .views_utils import question_level_one, question_level_two, generate_options, misc_categories
 from .analysis import get_analysis

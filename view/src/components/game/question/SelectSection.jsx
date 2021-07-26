@@ -24,12 +24,18 @@ const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
       <Form>
         <Form.Group as={Row} controlId="select-section" className="mb-0">
           <Col sm="6">
-            <Form.Control as="select" custom onClick={selectAnswer}>
-              <option>Select Label</option>
+            <input
+              className="form-control"
+              list="datalistLabelsOptions"
+              placeholder="Select Label..."
+              onClick={selectAnswer}
+            />
+            <datalist id="datalistLabelsOptions">
               {labels.map((label) => (
-                <option key={label.id_label}>{label.name}</option>
+                // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                <option key={label.id_label} value={label.name} />
               ))}
-            </Form.Control>
+            </datalist>
           </Col>
 
           <Col lg="3">

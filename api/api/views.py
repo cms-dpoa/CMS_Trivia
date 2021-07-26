@@ -41,6 +41,18 @@ class LabelViewSet(viewsets.ModelViewSet):
     queryset = Label.objects.all().order_by('id_label')
     serializer_class = LabelSerializer
 
+    #Override POST to create new Game instance and return id_game.
+    def create(self, request):
+        label_data = request.data
+        prev_label = Label.objects.filter(name = label_data["name"])
+        if prev_label.exists():
+            return JsonResponse(data = {"message": "Label already exists"})
+        else:
+            last_labelid = Label.objects.latest('id_label').id_label
+            new_label = Label.objects.create(id_label = last_labelid+1, name=label_data["name"], was_created = True)
+            new_label.save()
+            return JsonResponse(data = {"id_label": last_labelid+1,"message": "Label created correctly."})
+
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all().order_by('id_game')
     serializer_class = GameSerializer

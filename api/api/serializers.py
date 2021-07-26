@@ -26,15 +26,3 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
         model = Vote
         fields = ('id', 'dataset', 'label', 'user', 'game')
 
-class OptionSerializer(serializers.Serializer):
-    id_label = serializers.IntegerField()
-    name = serializers.CharField(max_length=100)
-    is_correct = serializers.BooleanField()
-
-class QuestionSerializer(serializers.Serializer):
-    id_data = serializers.IntegerField()
-    title = serializers.CharField(max_length=200)
-    options = OptionSerializer(many = True, required = False)
-
-class QuestionaireSeralizer(serializers.Serializer):
-    questions = QuestionSerializer(many = True)

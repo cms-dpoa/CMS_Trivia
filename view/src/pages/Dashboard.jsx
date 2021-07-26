@@ -26,13 +26,19 @@ const Dashboard = () => {
 
       <Form>
         <Form.Group as={Row} controlId="select-section" className="mb-0">
-          <Col sm="6">
-            <Form.Control as="select" custom onChange={handleDatasetSelected}>
-              <option>Select Dataset</option>
+          <Col sm="12">
+            <input
+              className="form-control"
+              list="datalistDatasetsOptions"
+              placeholder="Select Dataset..."
+              onChange={handleDatasetSelected}
+            />
+            <datalist id="datalistDatasetsOptions">
               {datasets.map((dataset) => (
-                <option key={dataset.id_dataset}>{dataset.title}</option>
+                // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                <option key={dataset.id_dataset} value={dataset.title} />
               ))}
-            </Form.Control>
+            </datalist>
           </Col>
         </Form.Group>
       </Form>

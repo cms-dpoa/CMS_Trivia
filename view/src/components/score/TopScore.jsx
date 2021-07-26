@@ -14,31 +14,35 @@ const TopScore = () => {
 
   return (
     <Container>
-      <h1>Tops Score</h1>
+      <h1>Leaderboard</h1>
 
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>Top</th>
             <th>UserName</th>
-            <th># Game</th>
+            <th># Games</th>
             <th>Mean Score</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Josue</td>
             <td>1</td>
+            <td>Kati</td>
+            <td>5</td>
+            <td>5.00</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Juan</td>
+            <td>2</td>
             <td>4.50</td>
           </tr>
           <tr>
-            <td>Juan</td>
-            <td>2</td>
-            <td>4.25</td>
-          </tr>
-          <tr>
-            <td>Kati</td>
             <td>3</td>
-            <td>5.00</td>
+            <td>Josue</td>
+            <td>4</td>
+            <td>4.25</td>
           </tr>
         </tbody>
       </Table>

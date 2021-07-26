@@ -8,7 +8,7 @@ def generate_options(correct_label):
     options = []
     # Add correct option
     correct = Label.objects.filter(id_label=correct_label).values("id_label", "name")
-    options.append({'id_label': correct[0]["id_label"], 'name': correct[0]["name"], 'is_correct': True})
+    options.append({'id_label': correct[0]["id_label"], 'name': correct[0]["name"], 'is_correct': True, 'show': True})
 
     # Get all id_labels except for Miscellaneous and the correct id_label.
     possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label", "name")

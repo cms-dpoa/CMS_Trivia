@@ -3,7 +3,8 @@ import { Container, Form, Col, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getAnalisisAction } from "../../redux/ducks/analysisDucks";
 import { getDatasAction } from "../../redux/ducks/datasDucks";
-import TopReliability from "./TopReliability";
+import TopReliability from "./charts/TopReliability";
+import PieTop5 from "./charts/PieTop5";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,12 @@ const Dashboard = () => {
   const handleDatasetSelected = () => {
     console.log("cambiio");
   };
+  const dataFormat = {
+    title: "",
+    labels: ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"],
+    amplitudes: [19, 12, 5, 3, 2],
+  };
+  const { labels, amplitudes } = dataFormat;
 
   return (
     <Container>
@@ -44,7 +51,16 @@ const Dashboard = () => {
         </Form.Group>
       </Form>
 
-      <TopReliability />
+      {/* <Row>
+        <Col>
+          <TopReliability labels={labels} amplitudes={amplitudes} />
+        </Col>
+        <Col>
+          <PieTop5 labels={labels} amplitudes={amplitudes} />
+        </Col>
+      </Row> */}
+      <TopReliability labels={labels} amplitudes={amplitudes} />
+      <PieTop5 labels={labels} amplitudes={amplitudes} />
     </Container>
   );
 };

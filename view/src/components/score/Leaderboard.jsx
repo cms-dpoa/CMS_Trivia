@@ -3,7 +3,7 @@ import { Table, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 // import { getAutdAction } from "../../redux/ducks/authDucks";
 
-const TopScore = () => {
+const Leaderboard = () => {
   const dispatch = useDispatch();
 
   //   useEffect(() => {
@@ -50,4 +50,4 @@ const TopScore = () => {
   );
 };
 
-export default TopScore;
+export default Leaderboard;

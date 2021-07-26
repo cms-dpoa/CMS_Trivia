@@ -16,15 +16,14 @@ const Dashboard = () => {
 
   const analysis = useSelector((store) => store.analysis.array);
   const datasets = useSelector((store) => store.datas.array);
-  console.log(analysis);
 
   const handleDatasetSelected = () => {
     console.log("cambiio");
   };
   const dataFormat = {
     title: "",
-    labels: ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"],
-    amplitudes: [19, 12, 5, 3, 2],
+    labels: ["Exotica/Dark Matter", "Physics Modelling", "Exotica/Gravitons"],
+    amplitudes: [19, 12, 5],
   };
   const { labels, amplitudes } = dataFormat;
 
@@ -51,16 +50,14 @@ const Dashboard = () => {
         </Form.Group>
       </Form>
 
-      {/* <Row>
-        <Col>
+      <Row className="mt-4">
+        <Col sm="9">
           <TopReliability labels={labels} amplitudes={amplitudes} />
         </Col>
-        <Col>
+        <Col sm="3">
           <PieTop5 labels={labels} amplitudes={amplitudes} />
         </Col>
-      </Row> */}
-      <TopReliability labels={labels} amplitudes={amplitudes} />
-      <PieTop5 labels={labels} amplitudes={amplitudes} />
+      </Row>
     </Container>
   );
 };

@@ -53,7 +53,7 @@ const TopLabeledDataset = () => {
   return (
     <Container>
       <h2>TopLabeledDataset</h2>
-      <Bar data={data} options={options} height={300} />
+      <Bar data={data} options={options} height={600} />
     </Container>
   );
 };

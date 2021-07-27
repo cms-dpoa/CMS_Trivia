@@ -17,6 +17,8 @@ def get_analysis():
 
 def get_votes(dataset):
 
+    dataset = Data.objects.get(pk = dataset)
+
     #Get all votes for dataset
     votes = Vote.objects.filter(dataset = dataset)
     labels = [vote.label.name for vote in votes]
@@ -30,7 +32,14 @@ def get_votes(dataset):
     votes_df["player_score"] = player_score
     votes_df["labels"] = labels
     votes_df = votes_df[["labels", "player_score"]].groupby("labels", as_index=False).sum()
+    
+    #Only return top 3.
+    votes_df = votes_df.sort_values("player_score", ascending = False)
+    labels = list(votes_df["labels"].values)[:3]
+    amplitudes = list(votes_df["player_score"].values)[:3]
+    
 
-    return {"labels": list(votes_df["labels"].values), \
-            "amplitudes": list(votes_df["player_score"].values)}
+    return {"title": dataset.title, 
+            "labels": labels, \
+            "amplitudes": amplitudes}
 

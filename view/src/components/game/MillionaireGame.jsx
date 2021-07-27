@@ -29,6 +29,7 @@ const MillionaireGame = () => {
     if (numQuestion <= 5) {
       const optionsQuestion = Object.values(question.options);
       const answerSeleted = optionsQuestion.find(
+        // eslint-disable-next-line eqeqeq
         (option) => option.id_label == IdAswerSelected
       );
       if (answerSeleted.is_correct) {
@@ -39,8 +40,6 @@ const MillionaireGame = () => {
     if (numQuestion < 10) {
       setQuestion(questions[numQuestion]);
       setActivateBtnSendAnswer(false);
-      const print = `Question ${numQuestion} - Score ${score}`;
-      console.log(print);
     }
   };
 
@@ -61,6 +60,7 @@ const MillionaireGame = () => {
             <Fragment>
               <Jokers />
               <Question
+                score={score}
                 question={question}
                 numQuestion={numQuestion}
                 setAnswerSelected={setIdAnswerSelected}

@@ -3,6 +3,7 @@ import { Table, Container, DropdownButton, Dropdown } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { VscJson } from "react-icons/vsc";
+import { GrDocumentCsv } from "react-icons/gr";
 
 const TableLabaled = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,33 @@ const TableLabaled = () => {
   //   }, []);
 
   // const user = useSelector((store) => store.auth.user);
+
+  const info = [
+    {
+      title: "WprimeToWZ_width0p2_M-800...",
+      votes: 55,
+      top_label_1: "Higgs Physics/Standard Model",
+      percentage_top_label_1: 92.1,
+      top_label_2: "Higgs Physics/Beyond Standard Model",
+      percentage_top_label_2: 7.2,
+    },
+    {
+      title: "ADDmonoPhoton_MD-2_d-3_TuneCUETP8M1_13TeV...",
+      votes: 43,
+      top_label_1: "Standard Model Physics/Drell-Yan",
+      percentage_top_label_1: 80.1,
+      top_label_2: "Standard Model Physics/ElectroWeak",
+      percentage_top_label_2: 17.2,
+    },
+    {
+      title: "Muplus_Pt1000-gun/RunIIFall15MiniAODv...",
+      votes: 39,
+      top_label_1: "Supersymmetry",
+      percentage_top_label_1: 72.1,
+      top_label_2: "Physics Modelling",
+      percentage_top_label_2: 27.2,
+    },
+  ];
 
   return (
     <Container>
@@ -29,40 +57,31 @@ const TableLabaled = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Dataset 1</td>
-            <td>55</td>
-            <td>Label x</td>
-            <td>92.10%</td>
-            <td>Label y</td>
-            <td>7.20%</td>
-          </tr>
-          <tr>
-            <td>Dataset 2</td>
-            <td>43</td>
-            <td>Label W</td>
-            <td>80.10%</td>
-            <td>Label Y</td>
-            <td>17.20%</td>
-          </tr>
-          <tr>
-            <td>Dataset 3</td>
-            <td>39</td>
-            <td>Label Z</td>
-            <td>72.10%</td>
-            <td>Label X</td>
-            <td>27.20%</td>
-          </tr>
+          {info.map((infoDataset) => (
+            <tr key={infoDataset.title}>
+              <td>{infoDataset.title}</td>
+              <td>{infoDataset.votes}</td>
+              <td>{infoDataset.top_label_1}</td>
+              <td>{infoDataset.percentage_top_label_1}</td>
+              <td>{infoDataset.top_label_2}</td>
+              <td>{infoDataset.percentage_top_label_2}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
+
       <DropdownButton id="dropdown-basic-button" title="Download Table ">
-        <Dropdown.Item href="#/action-1">
-          Excel
-          <RiFileExcel2Line size="1.5em" className="ml-5 my-auto" />
-        </Dropdown.Item>
         <Dropdown.Item href="#/action-2">
           Json
-          <VscJson size="1.5em" className="ml-5 my-auto" />
+          <VscJson size="1.5em" className="ml-5" />
+        </Dropdown.Item>
+        <Dropdown.Item href="#/action-2">
+          CSV
+          <GrDocumentCsv size="1.5em" className="ml-5" />
+        </Dropdown.Item>
+        <Dropdown.Item href="#/action-1">
+          Excel
+          <RiFileExcel2Line size="1.5em" className="ml-5" />
         </Dropdown.Item>
       </DropdownButton>
     </Container>

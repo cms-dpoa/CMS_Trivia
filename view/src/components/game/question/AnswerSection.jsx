@@ -21,7 +21,7 @@ const AnswerSection = ({
     return className;
   };
 
-  console.log(listOptions);
+  // console.log(listOptions);
 
   const testVisi = () => {
     const optionsVisi = setInvisibleOptions(listOptions, 1);
@@ -32,7 +32,7 @@ const AnswerSection = ({
   return (
     <ButtonGroup>
       <Row>
-        {listOptions.map((option) => (
+        {options.map((option) => (
           <Col key={option.id_label} sm="12" lg="6">
             <Button
               block
@@ -46,7 +46,7 @@ const AnswerSection = ({
             </Button>
           </Col>
         ))}
-        <Button onClick={testVisi}>test</Button>
+        {/* <Button onClick={testVisi}>test</Button> */}
       </Row>
     </ButtonGroup>
   );

@@ -1,10 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Button, Row } from "react-bootstrap";
+import { Container, Button, Row, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import GameOver from "./GameOver";
 import Question from "./question/Question";
 import { getQuestionsAction } from "../../redux/ducks/questionDucks";
-import Jokers from "./Jokers";
 
 const MillionaireGame = () => {
   const dispatch = useDispatch();
@@ -58,7 +57,6 @@ const MillionaireGame = () => {
         <Fragment>
           {questions.length > 0 ? (
             <Fragment>
-              <Jokers />
               <Question
                 score={score}
                 question={question}
@@ -76,7 +74,21 @@ const MillionaireGame = () => {
               </Button>
             </Fragment>
           ) : (
-            <h5>Loading</h5>
+            <Container className="text-center mt-5 pt-5">
+              <Spinner
+                as="span"
+                animation="border"
+                size="lg"
+                role="status"
+                aria-hidden="true"
+                className="mt-5"
+              />
+              <h4>Loading...</h4>
+              <p>
+                (If it takes a long time to load, it is likely that there are
+                problems with the API connection.)
+              </p>
+            </Container>
           )}
         </Fragment>
       )}

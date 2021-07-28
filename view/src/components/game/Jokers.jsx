@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { GiMiddleArrow } from "react-icons/gi";
-import { FiPhoneCall } from "react-icons/fi";
+import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
+import ModalJokerStatics from "./ModalJokerStatics";
 import "./Jokers.css";
 
-const Jokers = () => {
+const Jokers = ({ options }) => {
+  const [showModalStaticJoker, setShowModalStaticJoker] = useState(false);
+  const handleStaticJoker = () => setShowModalStaticJoker(true);
+  const labels = Object.values(options.options).map((option) => option.name);
+
   return (
     <Container className="text-right mt-4">
       <Row>
@@ -17,7 +22,7 @@ const Jokers = () => {
         </Col>
 
         <Col className="p-0 joker col-1">
-          <FiPhoneCall
+          <FaBowlingBall
             className="border border-secondary p-1 rounded"
             size="2.5em"
           />
@@ -27,9 +32,15 @@ const Jokers = () => {
           <ImStatsDots
             className="border border-secondary p-1 rounded"
             size="2.5em"
+            onClick={handleStaticJoker}
           />
         </Col>
       </Row>
+      <ModalJokerStatics
+        show={showModalStaticJoker}
+        setShow={setShowModalStaticJoker}
+        labels={labels}
+      />
     </Container>
   );
 };

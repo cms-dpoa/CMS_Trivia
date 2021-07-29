@@ -3,16 +3,21 @@ import random
 import numpy as np
 
 
-def generate_options(correct_label):
+def generate_options(correct_label, mode):
 
     options = []
     # Add correct option
     correct = Label.objects.filter(id_label=correct_label).values("id_label", "name")
     options.append({'id_label': correct[0]["id_label"], 'name': correct[0]["name"], 'is_correct': True, 'show': True})
 
-    # Get all id_labels except for Miscellaneous and the correct id_label.
-    possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label", "name")
-    possible_labels = possible_labels.exclude(id_label=correct_label).values("id_label", "name")
+    if mode=='easy':
+        possible_labels = Label.objects.filter(name__contains='Standard Model Physics').values("id_label", "name")
+        possible_labels = possible_labels.exclude(id_label=correct_label).values("id_label", "name")
+    
+    else:
+        # Get all id_labels except for Miscellaneous and the correct id_label.
+        possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label", "name")
+        possible_labels = possible_labels.exclude(id_label=correct_label).values("id_label", "name")
     
     # Sample 3 id_labels to be used as wrong options.
     chosen_labels = random.sample(range(len(possible_labels)), k=3)
@@ -31,10 +36,14 @@ def generate_options(correct_label):
 
     return options_dict
 
-def question_level_one():
+def question_level_one(mode = 'normal'):
 
-    #Get categories that are not Miscellaneous
-    possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label")
+    if mode=='easy': 
+        #Only sample from Datasets in the standard model
+        possible_labels = Label.objects.filter(name__contains='Standard Model Physics').values("id_label")
+    else:
+        #Get categories that are not Miscellaneous
+        possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label")
 
     #Get all Datasets in a random category and re-sample if category is empty
     possible_datasets = []
@@ -48,8 +57,7 @@ def question_level_one():
     chosen_dataset = random.choice(possible_datasets)
 
     #Generate options for chosen dataset
-    options = generate_options(chosen_dataset['original_label'])
-
+    options = generate_options(chosen_dataset['original_label'], mode = mode)
     #Build question dict
     question = {'id_data': chosen_dataset['id_dataset'], \
                  'title': chosen_dataset['title'], \

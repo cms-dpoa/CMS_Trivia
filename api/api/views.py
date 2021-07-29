@@ -87,6 +87,12 @@ class DataViewSet(viewsets.ModelViewSet):
 class all_questions(viewsets.GenericViewSet):
     def list(self, request):
 
+        try:
+            mode = request.data["mode"]
+        except:
+            print("Easy mode not specified, defaulting to normal.")
+            mode = 'normal'
+
         #Get artificial sub-categories for the Miscelaneous categories
         level_two_categories = misc_categories()
 
@@ -95,7 +101,7 @@ class all_questions(viewsets.GenericViewSet):
         for num_question in range(1, 11):
             tag = "question_"+str(num_question)
             if num_question<6:
-                questions[tag] = question_level_one()
+                questions[tag] = question_level_one(mode)
             else:
                 questions[tag] = question_level_two(level_two_categories)
 

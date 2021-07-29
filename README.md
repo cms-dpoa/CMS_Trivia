@@ -6,7 +6,7 @@ The purpose of this game is to enable CERN researchers to easily assign a label 
 
 The game is vaguely inspired by the TV show: Who Wants to be a Millionaire.
 
-![](https://github.com/cms-dpoa/CMS_Trivia/blob/main/images/logo.PNG?raw=true  =250x250)
+![](https://github.com/cms-dpoa/CMS_Trivia/blob/main/images/logo.PNG?raw=true)
 
 
 # Level 1

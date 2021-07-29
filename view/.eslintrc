@@ -19,7 +19,7 @@
     "prefer-template": "warn",
     "no-var": "warn",
     "react/destructuring-assignment": "warn",
-    // "import/imports-first": ["error", "absolute-first"],
+    "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error"
   },
   "globals": {

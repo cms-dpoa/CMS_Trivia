@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Container, Button, Row, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import GameOver from "./GameOver";
-import Question from "./question/Question";
+import QuestionLayout from "./question/QuestionLayout";
 import { getQuestionsAction } from "../../redux/ducks/questionDucks";
 
 const MillionaireGame = () => {
@@ -57,7 +57,7 @@ const MillionaireGame = () => {
         <Fragment>
           {questions.length > 0 ? (
             <Fragment>
-              <Question
+              <QuestionLayout
                 score={score}
                 question={question}
                 numQuestion={numQuestion}

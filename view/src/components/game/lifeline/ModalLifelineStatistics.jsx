@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Modal, Button } from "react-bootstrap";
-import TopReliability from "../dashboard/charts/TopReliability";
+import TopReliability from "../../dashboard/charts/TopReliability";
 
-const ModalJokerStatics = ({ show, setShow, labels }) => {
+const ModalLifelineStatistics = ({ show, setShow, labels }) => {
   const handleClose = () => setShow(false);
 
   const amplitudes = [5, 9, 7, 2];
@@ -33,4 +33,4 @@ const ModalJokerStatics = ({ show, setShow, labels }) => {
   );
 };
 
-export default ModalJokerStatics;
+export default ModalLifelineStatistics;

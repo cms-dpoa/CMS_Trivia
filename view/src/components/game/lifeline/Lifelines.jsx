@@ -3,10 +3,10 @@ import { Container, Col, Row } from "react-bootstrap";
 import { GiMiddleArrow } from "react-icons/gi";
 import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
-import ModalJokerStatics from "./ModalJokerStatics";
-import "./Jokers.css";
+import ModalLifelineStatistics from "./ModalLifelineStatistics";
+import "./Lifelines.css";
 
-const Jokers = ({ options }) => {
+const Lifelines = ({ options }) => {
   const [showModalStaticJoker, setShowModalStaticJoker] = useState(false);
   const handleStaticJoker = () => setShowModalStaticJoker(true);
   const labels = Object.values(options.options).map((option) => option.name);
@@ -36,7 +36,7 @@ const Jokers = ({ options }) => {
           />
         </Col>
       </Row>
-      <ModalJokerStatics
+      <ModalLifelineStatistics
         show={showModalStaticJoker}
         setShow={setShowModalStaticJoker}
         labels={labels}
@@ -45,4 +45,4 @@ const Jokers = ({ options }) => {
   );
 };
 
-export default Jokers;
+export default Lifelines;

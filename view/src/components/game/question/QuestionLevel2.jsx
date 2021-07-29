@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ModalNewLabel from "./ModalNewLabel";
 import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
-const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
+const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const SelectSection = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   );
 };
 
-export default SelectSection;
+export default QuestionLevel2;
 
 // <div className="col-12 col-lg-5 mx-auto">
 // <input

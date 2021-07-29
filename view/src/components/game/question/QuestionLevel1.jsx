@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
 import setInvisibleOptions from "../../utils/joker";
 
-const AnswerSection = ({
+const QuestionLevel1 = ({
   options,
   setAnswerSelected,
   setActivateBtnSendAnswer,
@@ -52,4 +52,4 @@ const AnswerSection = ({
   );
 };
 
-export default AnswerSection;
+export default QuestionLevel1;

@@ -1,4 +1,4 @@
-const MAIN = "http://localhost:8008";
+const MAIN = "http://localhost:8000";
 // const MAIN = "http://192.168.99.104:8000";
 // const MAIN = "http://backend:8000";
 

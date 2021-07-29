@@ -2,17 +2,20 @@ version: "3.3"
 
 services:
   backend:
-    image: api_cms_game
+    image: backend
     build: "./api"
+    stdin_open: true
     ports:
       - "8000:8000"
 
   frontend:
-    image: view_cms_game
+    image: frontend
     build: "./view"
     depends_on:
       - backend
     ports:
       - "80:80"
-    # links:
-    #   - backend
+      - "8008:8008"
+
+    links:
+      - backend

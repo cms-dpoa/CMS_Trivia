@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Table, Container, DropdownButton, Dropdown } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { VscJson } from "react-icons/vsc";
 import { GrDocumentCsv } from "react-icons/gr";
 
-const TableLabaled = () => {
-  const dispatch = useDispatch();
+const TableLabaled = ({ analysis }) => {
+  console.log(analysis);
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(getAuthAction());
@@ -88,4 +89,16 @@ const TableLabaled = () => {
   );
 };
 
-export default TableLabaled;
+// Estos valores tienen que estar en el store
+const mapStateToProps = (state) => {
+  return {
+    analysis: state.analysis,
+  };
+};
+
+const mapDispatchToProps = {
+  // getAnalsysDataset,
+};
+
+// export default TableLabaled;
+export default connect(mapStateToProps, null)(TableLabaled);

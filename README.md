@@ -6,6 +6,9 @@ The purpose of this game is to enable CERN researchers to easily assign a label 
 
 The game is vaguely inspired by the TV show: Who Wants to be a Millionaire.
 
+![WWTBAM](https://github.com/cms-dpoa/CMS_Trivia/blob/main/images/logo.PNG?raw=true)
+
+
 # Level 1
 In this level, the players' reliability is assessed. This will help us choose a category for an unlabelled dataset in case various options are proposed by different players.
 Questions in this level consist on the classification of an already labelled dataset. 

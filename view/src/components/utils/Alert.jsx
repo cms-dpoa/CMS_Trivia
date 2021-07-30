@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Alert as AlertBoostrap, Button, Col } from "react-bootstrap";
 
-const Alert = ({ showAlert }) => {
-  const [show, setShow] = useState(showAlert);
+const Alert = ({ show, setShow }) => {
+  const handleClose = () => setShow(false);
 
   return (
-    <AlertBoostrap variant="danger" onClose={() => setShow(false)} dismissible>
+    <AlertBoostrap variant="danger" onClose={handleClose} dismissible>
       <AlertBoostrap.Heading>Oh snap! You got an error!</AlertBoostrap.Heading>
       <p>
         Change this and that and try again. Duis mollis, est non commodo luctus,

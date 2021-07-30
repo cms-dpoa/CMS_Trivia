@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Spinner, Button, Container } from "react-bootstrap";
+import { Spinner, Button, Container, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAuthAction } from "../redux/ducks/authDucks";
 import { postGameAction } from "../redux/ducks/gameDucks";
 import { getQuestionsAction } from "../redux/ducks/questionDucks";
+import ModalGameDifficulty from "../components/game/ModalGameDifficulty";
 
 const GameSection = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,11 @@ const GameSection = () => {
 
   const history = useHistory();
   const [isGameStarted, setIsGameStarted] = useState(false);
+  // const [showModalDifficulty, setshowModalDifficulty] = useState(false);
 
   const handleStartGame = () => {
     setIsGameStarted(true);
+    // setshowModalDifficulty(true);
     const { username } = user;
     // dispatch(getQuestionsAction());
     // console.log(questions);
@@ -33,14 +36,15 @@ const GameSection = () => {
     // eslint-disable-next-line dot-notation
     const idGame = { id_game: 1 }["id_game"];
 
-    if (idGame !== 0) {
-      history.push("/play/millionaire");
-    }
+    // if (idGame !== 0) {
+    //   history.push("/play/millionaire");
+    // }
   };
 
   return (
     <Container className="text-center mt-5 pt-5">
-      <h1>Who wants to be a Millionaire? CMS edition</h1>
+      <ModalGameDifficulty show={isGameStarted} setShow={setIsGameStarted} />
+      <h1 className="mt-5 mb-5">Who wants to be a Millionaire? CMS edition</h1>
       <Button
         className="pr-5 pl-5 mt-5"
         onClick={handleStartGame}

@@ -1,6 +1,4 @@
-const MAIN = "http://localhost:8000";
-// const MAIN = "http://192.168.99.104:8000";
-// const MAIN = "http://backend:8000";
+const MAIN = process.env.BACKEND_HOST;
 
 export const ENDPOINT_AUTH = `${MAIN}/auth/`;
 export const ENDPOINT_QUESTION = `${MAIN}/questions/`;

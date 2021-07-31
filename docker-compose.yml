@@ -15,6 +15,5 @@ services:
       - backend
     ports:
       - "80:80"
-      - "8008:8008"
     links:
       - backend

@@ -9,6 +9,7 @@ node_modules
 npm-debug.log*
 README.md
 *.txt
-txts/*
+txts
 .prettierrc
 .eslintrc
+package-lock.json

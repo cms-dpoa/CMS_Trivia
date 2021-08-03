@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Button, Row, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import GameOver from "./GameOver";
 import QuestionLayout from "./question/QuestionLayout";
 import { getQuestionsAction } from "../../redux/ducks/questionDucks";
@@ -24,6 +26,12 @@ const MillionaireGame = () => {
     setQuestion(questions[numQuestion - 1]);
   }
 
+  const configToast = {
+    position: "top-left",
+    autoClose: 3000,
+    draggable: true,
+  };
+
   const NextQuestion = () => {
     if (numQuestion <= 5) {
       const optionsQuestion = Object.values(question.options);
@@ -31,8 +39,14 @@ const MillionaireGame = () => {
         // eslint-disable-next-line eqeqeq
         (option) => option.id_label == IdAswerSelected
       );
+      const tagQuestion = (
+        <span className="font-weight-bold">Question {numQuestion}</span>
+      );
       if (answerSeleted.is_correct) {
         setScore(score + 1);
+        toast.success(<>{tagQuestion} is correct!</>, configToast);
+      } else {
+        toast.error(<>{tagQuestion} is incorrect!</>, configToast);
       }
     }
     setNumQuestion(numQuestion + 1);
@@ -51,6 +65,7 @@ const MillionaireGame = () => {
 
   return (
     <Container>
+      <ToastContainer />
       {numQuestion > 10 ? (
         <GameOver resetGameAction={resetGameAction} score={score} />
       ) : (

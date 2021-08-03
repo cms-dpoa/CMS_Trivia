@@ -1,9 +1,17 @@
 import React, { useEffect } from "react";
-import { Table, Container, DropdownButton, Dropdown } from "react-bootstrap";
+import {
+  Table,
+  Container,
+  DropdownButton,
+  Dropdown,
+  Button,
+} from "react-bootstrap";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { VscJson } from "react-icons/vsc";
 import { GrDocumentCsv } from "react-icons/gr";
+import { CSVLink } from "react-csv";
+// import ExportExcel from "react-export-excel";
 
 const TableLabaled = ({ analysis }) => {
   console.log(analysis);
@@ -76,15 +84,40 @@ const TableLabaled = ({ analysis }) => {
           Json
           <VscJson size="1.5em" className="ml-5" />
         </Dropdown.Item>
-        <Dropdown.Item href="#/action-2">
+
+        <CSVLink
+          data={info}
+          filename="labeled_datasets.csv"
+          className="dropdown-item"
+        >
           CSV
           <GrDocumentCsv size="1.5em" className="ml-5" />
-        </Dropdown.Item>
+        </CSVLink>
+
         <Dropdown.Item href="#/action-1">
           Excel
           <RiFileExcel2Line size="1.5em" className="ml-5" />
         </Dropdown.Item>
       </DropdownButton>
+      {/* <ExportExcel.ExcelFile
+        element={<Button>Descargar</Button>}
+        filename="labeled_datasets.xlsx"
+      >
+        <ExportExcel.ExcelSheet data={info} name="labeled_datasets">
+          <ExportExcel.ExcelColumn label="title" value="title" />
+          <ExportExcel.ExcelColumn label="votes" value="votes" />
+          <ExportExcel.ExcelColumn label="top_label_1" value="top_label_1" />
+          <ExportExcel.ExcelColumn
+            label="percentage_top_label_1"
+            value="percentage_top_label_1"
+          />
+          <ExportExcel.ExcelColumn label="top_label_2" value="top_label_2" />
+          <ExportExcel.ExcelColumn
+            label="percentage_top_label_2"
+            value="percentage_top_label_2"
+          />
+        </ExportExcel.ExcelSheet>
+      </ExportExcel.ExcelFile> */}
     </Container>
   );
 };

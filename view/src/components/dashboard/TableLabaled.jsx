@@ -15,7 +15,7 @@ const TableLabaled = ({ analysis }) => {
 
   // const user = useSelector((store) => store.auth.user);
 
-  const info = [
+  const infoDatasetsTable = [
     {
       title: "WprimeToWZ_width0p2_M-800...",
       votes: 55,
@@ -58,7 +58,7 @@ const TableLabaled = ({ analysis }) => {
           </tr>
         </thead>
         <tbody>
-          {info.map((infoDataset) => (
+          {infoDatasetsTable.map((infoDataset) => (
             <tr key={infoDataset.title}>
               <td>{infoDataset.title}</td>
               <td>{infoDataset.votes}</td>
@@ -72,13 +72,18 @@ const TableLabaled = ({ analysis }) => {
       </Table>
 
       <DropdownButton id="dropdown-basic-button" title="Download Table ">
-        <Dropdown.Item href="#/action-2">
+        <Dropdown.Item
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(infoDatasetsTable)
+          )}`}
+          download="labeled_datasets.json"
+        >
           Json
           <VscJson size="1.5em" className="ml-5" />
         </Dropdown.Item>
 
         <CSVLink
-          data={info}
+          data={infoDatasetsTable}
           filename="labeled_datasets.csv"
           className="dropdown-item"
         >

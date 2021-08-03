@@ -1,9 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Button, Row, Spinner } from "react-bootstrap";
+import { Container, Button, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GameOver from "./GameOver";
+import Loading from "./Loading";
 import QuestionLayout from "./question/QuestionLayout";
 import { getQuestionsAction } from "../../redux/ducks/questionDucks";
 
@@ -89,21 +90,7 @@ const MillionaireGame = () => {
               </Button>
             </Fragment>
           ) : (
-            <Container className="text-center mt-5 pt-5">
-              <Spinner
-                as="span"
-                animation="border"
-                size="lg"
-                role="status"
-                aria-hidden="true"
-                className="mt-5"
-              />
-              <h4>Loading...</h4>
-              <p>
-                (If it takes a long time to load, it is likely that there are
-                problems with the API connection.)
-              </p>
-            </Container>
+            <Loading />
           )}
         </Fragment>
       )}

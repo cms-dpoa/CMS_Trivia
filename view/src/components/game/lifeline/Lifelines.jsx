@@ -5,11 +5,31 @@ import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
 import ModalLifelineStatistics from "./ModalLifelineStatistics";
 import "./Lifelines.css";
+// abbreviation LL = Lifeline
 
 const Lifelines = ({ options }) => {
-  const [showModalStaticJoker, setShowModalStaticJoker] = useState(false);
-  const handleStaticJoker = () => setShowModalStaticJoker(true);
+  const [showModalStatisticsLL, setShowModalStatisticsLL] = useState(false);
   const labels = Object.values(options.options).map((option) => option.name);
+
+  const [removeOneLLIsUsed, setRemoveOneLLIsUsed] = useState(false);
+  const [fiftyFiftyLLIsUsed, setFiftyFiftyLLIsUsed] = useState(false);
+  const [statisticsLLIsUsed, setStatisticsLLIsUsed] = useState(false);
+
+  const handleRemoveOneLL = () => {
+    setRemoveOneLLIsUsed(true);
+    setShowModalStatisticsLL(true);
+  };
+
+  const handleFiftyFiftyLL = () => {
+    setFiftyFiftyLLIsUsed(true);
+    setShowModalStatisticsLL(true);
+  };
+
+  const handleStatisticsLL = () => {
+    setStatisticsLLIsUsed(true);
+    setShowModalStatisticsLL(true);
+    console.log("Click StatisticsLL");
+  };
 
   return (
     <Container className="text-right mt-4">
@@ -18,6 +38,7 @@ const Lifelines = ({ options }) => {
           <GiMiddleArrow
             className="border border-secondary p-1 mr-1 rounded"
             size="2.5em"
+            onClick={handleRemoveOneLL}
           />
         </Col>
 
@@ -25,6 +46,7 @@ const Lifelines = ({ options }) => {
           <FaBowlingBall
             className="border border-secondary p-1 rounded"
             size="2.5em"
+            onClick={handleFiftyFiftyLL}
           />
         </Col>
 
@@ -32,15 +54,15 @@ const Lifelines = ({ options }) => {
           <ImStatsDots
             className="border border-secondary p-1 rounded"
             size="2.5em"
-            onClick={handleStaticJoker}
+            onClick={handleStatisticsLL}
+          />
+          <ModalLifelineStatistics
+            show={showModalStatisticsLL}
+            setShow={setShowModalStatisticsLL}
+            labels={labels}
           />
         </Col>
       </Row>
-      <ModalLifelineStatistics
-        show={showModalStaticJoker}
-        setShow={setShowModalStaticJoker}
-        labels={labels}
-      />
     </Container>
   );
 };

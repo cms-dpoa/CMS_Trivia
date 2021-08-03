@@ -17,7 +17,7 @@ const QuestionLayout = ({
       {numQuestion <= 5 ? (
         <Lifelines options={question} />
       ) : (
-        <p className="mt-5 invisible">delete</p>
+        <p className="mt-5 invisible">Invisible Element</p>
       )}
       <Card className="mt-3">
         <Card.Header as="h5">

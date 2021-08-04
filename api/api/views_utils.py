@@ -27,14 +27,20 @@ def generate_options(correct_label, mode):
         options.append({'id_label':possible_labels[i]['id_label'], 'name': possible_labels[i]['name'], 'is_correct': False , 'show' : True})
     
     # Generate options dict with tags:
-    option_tags = ["option_1", "option_2", "option_3", "option_4"]
+    option_tags = [1, 2, 3, 4]
     options_dict = {}
 
     random.shuffle(options)
     for opt, tag in zip(options, option_tags):
         options_dict[tag] = opt
-
-    return options_dict
+    
+    correct = None
+    for opt_key in options_dict.keys():
+        if options_dict[opt_key]['is_correct'] == True:
+            correct = opt_key
+            break
+        
+    return options_dict, correct
 
 def question_level_one(mode = 'normal'):
 
@@ -57,10 +63,11 @@ def question_level_one(mode = 'normal'):
     chosen_dataset = random.choice(possible_datasets)
 
     #Generate options for chosen dataset
-    options = generate_options(chosen_dataset['original_label'], mode = mode)
+    options, correct = generate_options(chosen_dataset['original_label'], mode = mode)
     #Build question dict
     question = {'id_data': chosen_dataset['id_dataset'], \
                  'title': chosen_dataset['title'], \
+                     'correct': correct, \
                      'options': options}
     return question
     

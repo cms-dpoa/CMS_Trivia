@@ -99,7 +99,7 @@ class all_questions(viewsets.GenericViewSet):
         #Build 10 question dictionary for game setup
         questions = {}
         for num_question in range(1, 11):
-            tag = "question_"+str(num_question)
+            tag = num_question
             if num_question<6:
                 questions[tag] = question_level_one(mode)
             else:

@@ -1,55 +1,46 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Container, Button, Row } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import React, { Fragment, useState, useLayoutEffect } from "react";
+import { Container, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import GameOver from "./GameOver";
 import Loading from "./Loading";
 import QuestionLayout from "./question/QuestionLayout";
-import { getQuestionsAction } from "../../redux/ducks/questionDucks";
 
-const MillionaireGame = () => {
-  const dispatch = useDispatch();
+const MillionaireGame = (props) => {
+  const { questions } = props;
+  const history = useHistory();
 
-  useEffect(() => {
-    dispatch(getQuestionsAction());
-  }, []);
-
-  const loadQuestion = useSelector((store) => store.questions.array);
-  const questions = Object.values(loadQuestion);
+  if (questions.length === 0) {
+    history.push("/play");
+  }
 
   const [numQuestion, setNumQuestion] = useState(1);
-  const [question, setQuestion] = useState(questions[numQuestion - 1]);
+  const [question, setQuestion] = useState(questions[numQuestion]);
   const [score, setScore] = useState(0);
   const [activateBtnSendAnswer, setActivateBtnSendAnswer] = useState(false);
-  const [IdAswerSelected, setIdAnswerSelected] = useState(0);
-  if (questions.length > 0 && !question) {
-    setQuestion(questions[numQuestion - 1]);
-  }
+  const [optionSelected, setOptionSelected] = useState({});
 
   const configToast = {
     position: "top-left",
     autoClose: 3000,
     draggable: true,
   };
+  const toastBody = (
+    <span className="font-weight-bold">Question {numQuestion}</span>
+  );
 
   const NextQuestion = () => {
     if (numQuestion <= 5) {
-      const optionsQuestion = Object.values(question.options);
-      const answerSeleted = optionsQuestion.find(
-        // eslint-disable-next-line eqeqeq
-        (option) => option.id_label == IdAswerSelected
-      );
-      const tagQuestion = (
-        <span className="font-weight-bold">Question {numQuestion}</span>
-      );
-      if (answerSeleted.is_correct) {
+      if (optionSelected.is_correct) {
         setScore(score + 1);
-        toast.success(<>{tagQuestion} is correct!</>, configToast);
+        toast.success(<>{toastBody} is correct!</>, configToast);
       } else {
-        toast.error(<>{tagQuestion} is incorrect!</>, configToast);
+        toast.error(<>{toastBody} is incorrect!</>, configToast);
       }
     }
+
     setNumQuestion(numQuestion + 1);
     if (numQuestion < 10) {
       setQuestion(questions[numQuestion]);
@@ -57,27 +48,20 @@ const MillionaireGame = () => {
     }
   };
 
-  const resetGameAction = () => {
-    setNumQuestion(1);
-    setScore(0);
-    setQuestion(questions[0]);
-    setActivateBtnSendAnswer(false);
-  };
-
   return (
     <Container>
       <ToastContainer />
       {numQuestion > 10 ? (
-        <GameOver resetGameAction={resetGameAction} score={score} />
+        <GameOver score={score} />
       ) : (
         <Fragment>
-          {questions.length > 0 ? (
+          {questions.length !== 0 ? (
             <Fragment>
               <QuestionLayout
                 score={score}
                 question={question}
                 numQuestion={numQuestion}
-                setAnswerSelected={setIdAnswerSelected}
+                setAnswerSelected={setOptionSelected}
                 setActivateBtnSendAnswer={setActivateBtnSendAnswer}
               />
               <Button
@@ -98,4 +82,14 @@ const MillionaireGame = () => {
   );
 };
 
-export default MillionaireGame;
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions.array,
+  };
+};
+
+const mapDispatchToProps = {
+  // getAnalsysDataset,
+};
+
+export default connect(mapStateToProps, null)(MillionaireGame);

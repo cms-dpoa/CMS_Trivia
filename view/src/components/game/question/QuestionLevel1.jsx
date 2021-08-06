@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
 import classNames from "classnames";
+import { connect } from "react-redux";
 
 const QuestionLevel1 = ({
-  options,
   setAnswerSelected,
   setActivateBtnSendAnswer,
+  questions,
+  numQuestion,
   activateRemoveOne,
   activateFiftyFifty,
 }) => {
-  // const [listOptions, setListOptions] = useState(options);
+  let { options } = questions[numQuestion];
+  options = Object.values(options);
 
-  const handleSelectAnswer = (data) => {
-    setAnswerSelected(data.target.id);
+  const handleSelectAnswer = (selectedOption) => {
+    setAnswerSelected(selectedOption);
     setActivateBtnSendAnswer(true);
   };
-
-  useEffect(() => {});
-
-  // const classOptions = (isVisible) => {
-  //   let className = "mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3 ";
-  //   if (!isVisible) {
-  //     className += "invisible";
-  //   }
-  //   return className;
-  // };
 
   const classOptions = (visible) =>
     classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", { invisible: !visible });
@@ -52,20 +45,23 @@ const QuestionLevel1 = ({
           <Col key={option.id_label} sm="12" lg="6">
             <Button
               block
-              key={option.id_label}
-              id={option.id_label}
               variant="outline-primary"
               className={classOptions(option.show)}
-              onClick={handleSelectAnswer}
+              onClick={() => handleSelectAnswer(option)}
             >
               {option.name}
             </Button>
           </Col>
         ))}
-        {/* <Button onClick={testVisi}>test</Button> */}
       </Row>
     </ButtonGroup>
   );
 };
 
-export default QuestionLevel1;
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions.array,
+  };
+};
+
+export default connect(mapStateToProps, null)(QuestionLevel1);

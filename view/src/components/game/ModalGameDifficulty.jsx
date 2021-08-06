@@ -1,14 +1,19 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useLayoutEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch, connect } from "react-redux";
+import { getQuestionsAction } from "../../redux/ducks/questionDucks";
 
 const ModalGameDifficulty = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleStartGame = (difficultyMode) => {
+    dispatch(getQuestionsAction());
     console.log(difficultyMode);
-    history.push("/play/millionaire");
+    // wait until the questions load
+    setTimeout(() => history.push("/play/millionaire"), 400);
   };
 
   return (
@@ -37,18 +42,7 @@ const ModalGameDifficulty = ({ show, setShow }) => {
           >
             Normal
           </Button>
-          <Button
-            className="mr-4 ml-4 pr-4 pl-4"
-            onClick={() => handleStartGame("difficul")}
-          >
-            Difficult
-          </Button>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </Fragment>
   );

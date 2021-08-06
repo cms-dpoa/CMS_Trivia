@@ -1,9 +1,13 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
-const GameOver = ({ resetGameAction, score }) => {
+const GameOver = ({ score }) => {
+  const history = useHistory();
+
   const playAgainAction = () => {
-    resetGameAction();
+    // resetGameAction();
+    history.push("/play");
   };
 
   return (

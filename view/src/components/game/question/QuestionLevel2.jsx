@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import ModalNewLabel from "./ModalNewLabel";
 import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
@@ -54,19 +54,9 @@ const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   );
 };
 
-export default QuestionLevel2;
+const mapDispatchToProps = {
+  // getAnalsysDataset,
+};
 
-// <div className="col-12 col-lg-5 mx-auto">
-// <input
-//   list="type-label"
-//   name="label"
-//   id="label"
-//   placeholder="Select Label"
-// />
-// <datalist id="type-label">
-//   <option value="Labrador"></option>
-//   <option value="Schnauzer"></option>
-//   <option value="Chiguagua"></option>
-//   <option value="Pitbull"></option>
-// </datalist>
-// </div>
+// export default QuestionLevel2;
+export default connect(null, null)(QuestionLevel2);

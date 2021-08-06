@@ -3,23 +3,22 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import { GiMiddleArrow } from "react-icons/gi";
 import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import ModalLifelineStatistics from "./ModalLifelineStatistics";
 import { setShowFieldToFalse } from "../../../redux/ducks/questionDucks";
 import setInvisibleOptions from "../../utils/Lifelines";
-
 // abbreviation LL = Lifeline
 
 const Lifelines = ({
-  options,
   // setActivateRemoveOne,
   // setActivateFiftyFifty,
   numQuestion,
+  questions,
 }) => {
   const dispatch = useDispatch();
-
   const [showModalStatisticsLL, setShowModalStatisticsLL] = useState(false);
   // variable for Statistics Lifeline
+  const { options } = questions[numQuestion];
   const labels = Object.values(options).map((option) => option.name);
 
   const [removeOneLLIsUsed, setRemoveOneLLIsUsed] = useState(false);
@@ -30,7 +29,6 @@ const Lifelines = ({
     setRemoveOneLLIsUsed(true);
     const newOptions = setInvisibleOptions(options, 1);
     dispatch(setShowFieldToFalse(numQuestion, newOptions));
-
     // setActivateRemoveOne(true);
   };
 
@@ -90,4 +88,10 @@ const Lifelines = ({
   );
 };
 
-export default Lifelines;
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions.array,
+  };
+};
+
+export default connect(mapStateToProps, null)(Lifelines);

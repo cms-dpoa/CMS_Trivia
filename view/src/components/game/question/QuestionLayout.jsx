@@ -1,7 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { IoMdHelpCircle } from "react-icons/io";
-import { connect } from "react-redux";
 import QuestionLevel1 from "./QuestionLevel1";
 import QuestionLevel2 from "./QuestionLevel2";
 import Lifelines from "../lifeline/Lifelines";
@@ -11,6 +10,8 @@ const QuestionLayout = ({
   question,
   numQuestion,
   setOptionSelected,
+  isOptionLevel2Selected,
+  setIsOptionLevel2Selected,
   setActivateBtnSendAnswer,
 }) => {
   // const [activateRemoveOne, setActivateRemoveOne] = useState(false);
@@ -25,7 +26,7 @@ const QuestionLayout = ({
           // setActivateFiftyFifty={setActivateFiftyFifty}
         />
       ) : (
-        <p className="mt-5 invisible">Invisible Element</p>
+        <p className="invisible">Invisible Element</p>
       )}
 
       <Card className="mt-3">
@@ -55,6 +56,8 @@ const QuestionLayout = ({
           ) : (
             <QuestionLevel2
               setOptionSelected={setOptionSelected}
+              isOptionSelected={isOptionLevel2Selected}
+              setIsOptionSelected={setIsOptionLevel2Selected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
             />
           )}
@@ -65,4 +68,3 @@ const QuestionLayout = ({
 };
 
 export default QuestionLayout;
-// export default connect(null, null)(QuestionLayout);

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useLayoutEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,6 +21,7 @@ const MillionaireGame = (props) => {
   const [score, setScore] = useState(0);
   const [activateBtnSendAnswer, setActivateBtnSendAnswer] = useState(false);
   const [optionSelected, setOptionSelected] = useState({});
+  const [isOptionLevel2Selected, setIsOptionLevel2Selected] = useState(false);
 
   const configToast = {
     position: "top-left",
@@ -40,11 +41,8 @@ const MillionaireGame = (props) => {
         toast.error(<>{toastBody} is incorrect!</>, configToast);
       }
     } else {
-      Array.from(document.querySelectorAll("input")).forEach(
-        /* eslint-disable no-return-assign */
-        // eslint-disable-next-line no-param-reassign
-        (input) => (input.value = "")
-      );
+      document.getElementById("question-level-2-form").reset();
+      setIsOptionLevel2Selected(false);
     }
 
     setNumQuestion(numQuestion + 1);
@@ -67,6 +65,8 @@ const MillionaireGame = (props) => {
                 score={score}
                 question={question}
                 numQuestion={numQuestion}
+                isOptionLevel2Selected={isOptionLevel2Selected}
+                setIsOptionLevel2Selected={setIsOptionLevel2Selected}
                 setOptionSelected={setOptionSelected}
                 setActivateBtnSendAnswer={setActivateBtnSendAnswer}
               />

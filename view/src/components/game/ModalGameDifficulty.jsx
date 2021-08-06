@@ -1,4 +1,4 @@
-import React, { Fragment, useLayoutEffect } from "react";
+import React, { Fragment } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch, connect } from "react-redux";

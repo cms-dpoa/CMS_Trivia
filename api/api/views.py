@@ -88,7 +88,7 @@ class all_questions(viewsets.GenericViewSet):
     def list(self, request):
 
         try:
-            mode = request.data["mode"]
+            mode = request.GET["mode"]
         except:
             print("Easy mode not specified, defaulting to normal.")
             mode = 'normal'

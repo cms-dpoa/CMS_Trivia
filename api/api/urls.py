@@ -16,5 +16,6 @@ router.register(r'analysis', views.analysisView, basename="analysis")
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
+    url(r'^questions/$', views.all_questions),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

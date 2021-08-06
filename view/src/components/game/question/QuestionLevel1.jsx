@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { connect } from "react-redux";
 
 const QuestionLevel1 = ({
-  setAnswerSelected,
+  setOptionSelected,
   setActivateBtnSendAnswer,
   questions,
   numQuestion,
@@ -15,7 +15,7 @@ const QuestionLevel1 = ({
   options = Object.values(options);
 
   const handleSelectAnswer = (selectedOption) => {
-    setAnswerSelected(selectedOption);
+    setOptionSelected(selectedOption);
     setActivateBtnSendAnswer(true);
   };
 

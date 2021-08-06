@@ -10,7 +10,7 @@ const QuestionLayout = ({
   score,
   question,
   numQuestion,
-  setAnswerSelected,
+  setOptionSelected,
   setActivateBtnSendAnswer,
 }) => {
   // const [activateRemoveOne, setActivateRemoveOne] = useState(false);
@@ -48,14 +48,13 @@ const QuestionLayout = ({
           <Card.Text className="text-center">{question.title}</Card.Text>
           {numQuestion <= 5 ? (
             <QuestionLevel1
-              setAnswerSelected={setAnswerSelected}
+              setOptionSelected={setOptionSelected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
               numQuestion={numQuestion}
-              // activateFiftyFifty={activateFiftyFifty}
             />
           ) : (
             <QuestionLevel2
-              setAnswerSelected={setAnswerSelected}
+              setOptionSelected={setOptionSelected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
             />
           )}

@@ -4,9 +4,8 @@ import { useSelector, useDispatch, connect } from "react-redux";
 import ModalNewLabel from "./ModalNewLabel";
 import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
-const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
+const QuestionLevel2 = ({ setOptionSelected, setActivateBtnSendAnswer }) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getLabelsAction());
   }, []);
@@ -15,8 +14,15 @@ const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
 
-  const selectAnswer = () => {
+  const handleSelectAnswer = (event) => {
+    const label = event.target.value;
+    setOptionSelected({ label });
     setActivateBtnSendAnswer(true);
+  };
+
+  const clearOptionSelected = (event) => {
+    // eslint-disable-next-line no-param-reassign
+    event.target.value = "";
   };
 
   return (
@@ -28,7 +34,8 @@ const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
               className="form-control"
               list="datalistLabelsOptions"
               placeholder="Select Label..."
-              onClick={selectAnswer}
+              onChange={handleSelectAnswer}
+              onClick={clearOptionSelected}
             />
             <datalist id="datalistLabelsOptions">
               {labels.map((label) => (

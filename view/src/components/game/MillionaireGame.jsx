@@ -39,6 +39,12 @@ const MillionaireGame = (props) => {
       } else {
         toast.error(<>{toastBody} is incorrect!</>, configToast);
       }
+    } else {
+      Array.from(document.querySelectorAll("input")).forEach(
+        /* eslint-disable no-return-assign */
+        // eslint-disable-next-line no-param-reassign
+        (input) => (input.value = "")
+      );
     }
 
     setNumQuestion(numQuestion + 1);
@@ -61,7 +67,7 @@ const MillionaireGame = (props) => {
                 score={score}
                 question={question}
                 numQuestion={numQuestion}
-                setAnswerSelected={setOptionSelected}
+                setOptionSelected={setOptionSelected}
                 setActivateBtnSendAnswer={setActivateBtnSendAnswer}
               />
               <Button

@@ -19,9 +19,10 @@ export default function questionReducer(state = data, action) {
   }
 }
 
-export const getQuestionsAction = () => async (dispatch) => {
+export const getQuestionsAction = (mode) => async (dispatch) => {
   try {
-    const res = await axios.get(ENDPOINT_QUESTION);
+    const params = { params: { mode } };
+    const res = await axios.get(ENDPOINT_QUESTION, params);
     dispatch({
       type: GET_QUESTIONS,
       payload: res.data,

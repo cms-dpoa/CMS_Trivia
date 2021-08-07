@@ -10,9 +10,7 @@ const ModalGameDifficulty = ({ show, setShow }) => {
   const dispatch = useDispatch();
 
   const handleStartGame = (difficultyMode) => {
-    dispatch(getQuestionsAction());
-    // console.log(difficultyMode);
-    // wait until the questions load
+    dispatch(getQuestionsAction(difficultyMode));
     setTimeout(() => history.push("/play/millionaire"), 500);
   };
 

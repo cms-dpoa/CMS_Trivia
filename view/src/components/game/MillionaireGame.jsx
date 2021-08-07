@@ -38,7 +38,7 @@ const MillionaireGame = (props) => {
 
   const NextQuestion = () => {
     if (numQuestion <= 5) {
-      setShowOptionsLevel1(initialShowOptionsLevel1);
+      // setShowOptionsLevel1(initialShowOptionsLevel1);
       if (optionSelected.is_correct) {
         setScore(score + 1);
         toast.success(<>{toastBody} is correct!</>, configToast);

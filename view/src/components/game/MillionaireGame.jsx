@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import GameOver from "./GameOver";
 import Loading from "./Loading";
 import QuestionLayout from "./question/QuestionLayout";
+import configToast from "../utils/ConfigToast";
 
 const MillionaireGame = (props) => {
   const { questions } = props;
@@ -27,18 +28,13 @@ const MillionaireGame = (props) => {
     initialShowOptionsLevel1
   );
 
-  const configToast = {
-    position: "top-left",
-    autoClose: 3000,
-    draggable: true,
-  };
   const toastBody = (
     <span className="font-weight-bold">Question {numQuestion}</span>
   );
 
   const NextQuestion = () => {
     if (numQuestion <= 5) {
-      // setShowOptionsLevel1(initialShowOptionsLevel1);
+      setShowOptionsLevel1(initialShowOptionsLevel1);
       if (optionSelected.is_correct) {
         setScore(score + 1);
         toast.success(<>{toastBody} is correct!</>, configToast);

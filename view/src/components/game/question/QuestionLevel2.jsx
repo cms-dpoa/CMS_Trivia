@@ -1,12 +1,17 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { Form, Row, Col, Button, Container } from "react-bootstrap";
+import { useSelector, useDispatch, connect } from "react-redux";
 import ModalNewLabel from "./ModalNewLabel";
 import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
-const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
+const QuestionLevel2 = ({
+  setOptionSelected,
+  setActivateBtnSendAnswer,
+  isOptionSelected,
+}) => {
+  const { isOptionLevel2Selected, setIsOptionLevel2Selected } =
+    isOptionSelected;
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getLabelsAction());
   }, []);
@@ -15,33 +20,75 @@ const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
 
-  const selectAnswer = () => {
+  const handleSelectOption = (event) => {
+    const label = event.target.value;
+    setOptionSelected({ label });
+    setIsOptionLevel2Selected(true);
+  };
+
+  const handelKnowledgeLevel = (knowledgeLevel) => {
+    console.log(knowledgeLevel);
     setActivateBtnSendAnswer(true);
   };
 
+  const clearOptionSelected = (event) => {
+    // eslint-disable-next-line no-param-reassign
+    event.target.value = "";
+    setIsOptionLevel2Selected(false);
+  };
+
+  const datasetKnowledgeLevel = [
+    "I know this dataset for sure",
+    "I think I know but it may be wrong",
+    "I'm just guessing",
+  ];
+
   return (
     <Fragment>
-      <Form>
+      <Form id="question-level-2-form">
         <Form.Group as={Row} controlId="select-section" className="mb-0">
-          <Col sm="6">
-            <input
-              className="form-control"
-              list="datalistLabelsOptions"
-              placeholder="Select Label..."
-              onClick={selectAnswer}
-            />
-            <datalist id="datalistLabelsOptions">
-              {labels.map((label) => (
-                // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                <option key={label.id_label} value={label.name} />
-              ))}
-            </datalist>
-          </Col>
+          <Container>
+            <Row>
+              <Col>
+                <input
+                  className="form-control"
+                  list="datalistLabelsOptions"
+                  placeholder="Select Label..."
+                  onChange={handleSelectOption}
+                  onClick={clearOptionSelected}
+                />
+                <datalist id="datalistLabelsOptions">
+                  {labels.map((label) => (
+                    // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                    <option key={label.id_label} value={label.name} />
+                  ))}
+                </datalist>
+              </Col>
+            </Row>
 
-          <Col lg="3">
+            <Row>
+              <Col>
+                {datasetKnowledgeLevel.map((knowledgeLevel, index) => (
+                  <div key={knowledgeLevel} className="mt-2">
+                    <Form.Check
+                      inline
+                      label={knowledgeLevel}
+                      name="group1"
+                      type="radio"
+                      id={`inline-radio-${index}`}
+                      disabled={!isOptionLevel2Selected}
+                      onClick={() => handelKnowledgeLevel(knowledgeLevel)}
+                    />
+                  </div>
+                ))}
+              </Col>
+            </Row>
+          </Container>
+
+          <Col className="text-right">
             <Button
               variant="primary"
-              className="pl-5 pr-5"
+              className="pl-5 pr-5 mt-sm-3 mt-lg-0"
               onClick={handleShowModalNewLabel}
             >
               Add New Label
@@ -54,19 +101,4 @@ const QuestionLevel2 = ({ setAnswerSelected, setActivateBtnSendAnswer }) => {
   );
 };
 
-export default QuestionLevel2;
-
-// <div className="col-12 col-lg-5 mx-auto">
-// <input
-//   list="type-label"
-//   name="label"
-//   id="label"
-//   placeholder="Select Label"
-// />
-// <datalist id="type-label">
-//   <option value="Labrador"></option>
-//   <option value="Schnauzer"></option>
-//   <option value="Chiguagua"></option>
-//   <option value="Pitbull"></option>
-// </datalist>
-// </div>
+export default connect(null, null)(QuestionLevel2);

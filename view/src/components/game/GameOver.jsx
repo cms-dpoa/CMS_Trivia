@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteAllQuestionsGameOverAction } from "../../redux/ducks/questionDucks";
 
-const GameOver = ({ resetGameAction, score }) => {
+const GameOver = ({ score }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {}, []);
+
   const playAgainAction = () => {
-    resetGameAction();
+    history.push("/play");
+    dispatch(deleteAllQuestionsGameOverAction());
   };
 
   return (

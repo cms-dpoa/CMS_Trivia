@@ -9,16 +9,19 @@ const QuestionLayout = ({
   score,
   question,
   numQuestion,
-  setAnswerSelected,
+  setOptionSelected,
   setActivateBtnSendAnswer,
+  showOptionsLevel1,
+  isOptionLevel2Selected,
 }) => {
   return (
     <Fragment>
       {numQuestion <= 5 ? (
-        <Lifelines options={question} />
+        <Lifelines numQuestion={numQuestion} showOptions={showOptionsLevel1} />
       ) : (
-        <p className="mt-5 invisible">Invisible Element</p>
+        <p className="invisible">Invisible Element</p>
       )}
+
       <Card className="mt-3">
         <Card.Header as="h5">
           <Row>
@@ -33,18 +36,21 @@ const QuestionLayout = ({
             </Col>
           </Row>
         </Card.Header>
+
         <Card.Body>
           <Card.Title>What's the label of this dataset?</Card.Title>
           <Card.Text className="text-center">{question.title}</Card.Text>
           {numQuestion <= 5 ? (
             <QuestionLevel1
-              options={Object.values(question.options)}
-              setAnswerSelected={setAnswerSelected}
+              setOptionSelected={setOptionSelected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
+              numQuestion={numQuestion}
+              showOptions={showOptionsLevel1}
             />
           ) : (
             <QuestionLevel2
-              setAnswerSelected={setAnswerSelected}
+              setOptionSelected={setOptionSelected}
+              isOptionSelected={isOptionLevel2Selected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
             />
           )}

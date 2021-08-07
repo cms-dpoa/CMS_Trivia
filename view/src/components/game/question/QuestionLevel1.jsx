@@ -1,55 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
-import setInvisibleOptions from "../../utils/joker";
+import classNames from "classnames";
+import { connect } from "react-redux";
 
 const QuestionLevel1 = ({
-  options,
-  setAnswerSelected,
+  setOptionSelected,
   setActivateBtnSendAnswer,
+  questions,
+  numQuestion,
+  showOptions,
 }) => {
-  const [listOptions, setListOptions] = useState(options);
-  const selectAnswer = (data) => {
-    setAnswerSelected(data.target.id);
+  let { options } = questions[numQuestion];
+  options = Object.values(options);
+
+  const { showOptionsLevel1 } = showOptions;
+
+  const handleSelectAnswer = (selectedOption) => {
+    setOptionSelected(selectedOption);
     setActivateBtnSendAnswer(true);
   };
 
-  const classes = (isVisible) => {
-    let className = "mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3 ";
-    if (!isVisible) {
-      className += "invisible";
-    }
-    return className;
-  };
-
-  // console.log(listOptions);
-
-  const testVisi = () => {
-    const optionsVisi = setInvisibleOptions(listOptions, 1);
-    setListOptions(optionsVisi);
-    console.log(optionsVisi);
-  };
+  const classOptions = (visible) =>
+    classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", {
+      invisible: !visible,
+    });
 
   return (
     <ButtonGroup>
       <Row>
-        {options.map((option) => (
+        {options.map((option, index) => (
           <Col key={option.id_label} sm="12" lg="6">
             <Button
               block
-              key={option.id_label}
-              id={option.id_label}
               variant="outline-primary"
-              className={classes(option.show)}
-              onClick={selectAnswer}
+              className={classOptions(showOptionsLevel1[index + 1])}
+              onClick={() => handleSelectAnswer(option)}
             >
               {option.name}
             </Button>
           </Col>
         ))}
-        {/* <Button onClick={testVisi}>test</Button> */}
       </Row>
     </ButtonGroup>
   );
 };
 
-export default QuestionLevel1;
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions.array,
+  };
+};
+
+export default connect(mapStateToProps, null)(QuestionLevel1);

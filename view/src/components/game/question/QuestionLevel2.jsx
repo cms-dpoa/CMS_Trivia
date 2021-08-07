@@ -6,10 +6,11 @@ import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
 const QuestionLevel2 = ({
   setOptionSelected,
-  isOptionSelected,
-  setIsOptionSelected,
   setActivateBtnSendAnswer,
+  isOptionSelected,
 }) => {
+  const { isOptionLevel2Selected, setIsOptionLevel2Selected } =
+    isOptionSelected;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLabelsAction());
@@ -22,7 +23,7 @@ const QuestionLevel2 = ({
   const handleSelectOption = (event) => {
     const label = event.target.value;
     setOptionSelected({ label });
-    setIsOptionSelected(true);
+    setIsOptionLevel2Selected(true);
   };
 
   const handelKnowledgeLevel = (knowledgeLevel) => {
@@ -33,7 +34,7 @@ const QuestionLevel2 = ({
   const clearOptionSelected = (event) => {
     // eslint-disable-next-line no-param-reassign
     event.target.value = "";
-    setIsOptionSelected(false);
+    setIsOptionLevel2Selected(false);
   };
 
   const datasetKnowledgeLevel = [
@@ -75,7 +76,7 @@ const QuestionLevel2 = ({
                       name="group1"
                       type="radio"
                       id={`inline-radio-${index}`}
-                      disabled={!isOptionSelected}
+                      disabled={!isOptionLevel2Selected}
                       onClick={() => handelKnowledgeLevel(knowledgeLevel)}
                     />
                   </div>

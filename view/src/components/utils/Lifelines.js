@@ -1,19 +1,18 @@
-export default function setInvisibleOptions(options, numOptionsToSetFalse) {
+function setInvisibleOptions(correctOption, numOptionsToSetFalse) {
+  const showOptions = { 1: true, 2: true, 3: true, 4: true };
   let optionsChanged = 0;
-  const valueOptions = Object.values(options);
+  let options = [1, 2, 3, 4];
+  options = options.filter((option) => option !== correctOption);
 
   while (optionsChanged < numOptionsToSetFalse) {
-    const randomIndex = Math.floor(Math.random() * valueOptions.length);
-    const option = valueOptions[randomIndex];
-    if (!option.is_correct && option.show) {
-      option.show = false;
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const option = options[randomIndex];
+    if (showOptions[option]) {
+      showOptions[option] = false;
       optionsChanged += 1;
     }
   }
-
-  const newOptions = {};
-  valueOptions.forEach((option, index) => {
-    newOptions[index + 1] = option;
-  });
-  return options;
+  return showOptions;
 }
+
+export default setInvisibleOptions;

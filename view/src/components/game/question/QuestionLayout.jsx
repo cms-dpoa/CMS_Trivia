@@ -10,21 +10,14 @@ const QuestionLayout = ({
   question,
   numQuestion,
   setOptionSelected,
-  isOptionLevel2Selected,
-  setIsOptionLevel2Selected,
   setActivateBtnSendAnswer,
+  showOptionsLevel1,
+  isOptionLevel2Selected,
 }) => {
-  // const [activateRemoveOne, setActivateRemoveOne] = useState(false);
-  // const [activateFiftyFifty, setActivateFiftyFifty] = useState(false);
-
   return (
     <Fragment>
       {numQuestion <= 5 ? (
-        <Lifelines
-          numQuestion={numQuestion}
-          // setActivateRemoveOne={setActivateRemoveOne}
-          // setActivateFiftyFifty={setActivateFiftyFifty}
-        />
+        <Lifelines numQuestion={numQuestion} showOptions={showOptionsLevel1} />
       ) : (
         <p className="invisible">Invisible Element</p>
       )}
@@ -52,12 +45,12 @@ const QuestionLayout = ({
               setOptionSelected={setOptionSelected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
               numQuestion={numQuestion}
+              showOptions={showOptionsLevel1}
             />
           ) : (
             <QuestionLevel2
               setOptionSelected={setOptionSelected}
               isOptionSelected={isOptionLevel2Selected}
-              setIsOptionSelected={setIsOptionLevel2Selected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
             />
           )}

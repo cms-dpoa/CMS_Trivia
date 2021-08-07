@@ -22,6 +22,10 @@ const MillionaireGame = (props) => {
   const [activateBtnSendAnswer, setActivateBtnSendAnswer] = useState(false);
   const [optionSelected, setOptionSelected] = useState({});
   const [isOptionLevel2Selected, setIsOptionLevel2Selected] = useState(false);
+  const initialShowOptionsLevel1 = { 1: true, 2: true, 3: true, 4: true };
+  const [showOptionsLevel1, setShowOptionsLevel1] = useState(
+    initialShowOptionsLevel1
+  );
 
   const configToast = {
     position: "top-left",
@@ -34,6 +38,7 @@ const MillionaireGame = (props) => {
 
   const NextQuestion = () => {
     if (numQuestion <= 5) {
+      setShowOptionsLevel1(initialShowOptionsLevel1);
       if (optionSelected.is_correct) {
         setScore(score + 1);
         toast.success(<>{toastBody} is correct!</>, configToast);
@@ -64,10 +69,13 @@ const MillionaireGame = (props) => {
                 score={score}
                 question={question}
                 numQuestion={numQuestion}
-                isOptionLevel2Selected={isOptionLevel2Selected}
-                setIsOptionLevel2Selected={setIsOptionLevel2Selected}
                 setOptionSelected={setOptionSelected}
                 setActivateBtnSendAnswer={setActivateBtnSendAnswer}
+                showOptionsLevel1={{ showOptionsLevel1, setShowOptionsLevel1 }}
+                isOptionLevel2Selected={{
+                  isOptionLevel2Selected,
+                  setIsOptionLevel2Selected,
+                }}
               />
               <Button
                 className="mt-5 mb-5 font-weight-bold"
@@ -91,10 +99,6 @@ const mapStateToProps = (state) => {
   return {
     questions: state.questions.array,
   };
-};
-
-const mapDispatchToProps = {
-  // getAnalsysDataset,
 };
 
 export default connect(mapStateToProps, null)(MillionaireGame);

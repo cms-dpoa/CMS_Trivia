@@ -8,33 +8,32 @@ const QuestionLevel1 = ({
   setActivateBtnSendAnswer,
   questions,
   numQuestion,
+  showOptions,
 }) => {
   let { options } = questions[numQuestion];
   options = Object.values(options);
 
-  useEffect(() => {}, [questions]);
+  const { showOptionsLevel1 } = showOptions;
 
   const handleSelectAnswer = (selectedOption) => {
     setOptionSelected(selectedOption);
     setActivateBtnSendAnswer(true);
   };
 
-  const classOptions = (visible) => {
-    if (!visible) console.log("visible");
-    return classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", {
+  const classOptions = (visible) =>
+    classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", {
       invisible: !visible,
     });
-  };
 
   return (
     <ButtonGroup>
       <Row>
-        {options.map((option) => (
+        {options.map((option, index) => (
           <Col key={option.id_label} sm="12" lg="6">
             <Button
               block
               variant="outline-primary"
-              className={classOptions(option.show)}
+              className={classOptions(showOptionsLevel1[index + 1])}
               onClick={() => handleSelectAnswer(option)}
             >
               {option.name}

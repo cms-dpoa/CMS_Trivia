@@ -3,42 +3,32 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import { GiMiddleArrow } from "react-icons/gi";
 import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
-import { useDispatch, connect } from "react-redux";
+import { connect } from "react-redux";
 import ModalLifelineStatistics from "./ModalLifelineStatistics";
-import { setShowFieldToFalse } from "../../../redux/ducks/questionDucks";
 import setInvisibleOptions from "../../utils/Lifelines";
 // abbreviation LL = Lifeline
 
-const Lifelines = ({
-  // setActivateRemoveOne,
-  // setActivateFiftyFifty,
-  numQuestion,
-  questions,
-}) => {
-  const dispatch = useDispatch();
+const Lifelines = ({ numQuestion, questions, showOptions }) => {
+  const { setShowOptionsLevel1 } = showOptions;
   const [showModalStatisticsLL, setShowModalStatisticsLL] = useState(false);
   // variable for Statistics Lifeline
-  const { options } = questions[numQuestion];
+  const { options, correct } = questions[numQuestion];
   const labels = Object.values(options).map((option) => option.name);
 
   const [removeOneLLIsUsed, setRemoveOneLLIsUsed] = useState(false);
   const [fiftyFiftyLLIsUsed, setFiftyFiftyLLIsUsed] = useState(false);
   const [statisticsLLIsUsed, setStatisticsLLIsUsed] = useState(false);
-  // console.log("questions");
-  // console.log(questions[numQuestion]);
 
   const handleRemoveOneLL = () => {
     setRemoveOneLLIsUsed(true);
-    const newOptions = setInvisibleOptions(options, 1);
-    console.log(questions);
-    dispatch(setShowFieldToFalse(questions));
-    // setActivateRemoveOne(true);
+    const invisibleOptions = setInvisibleOptions(correct, 1);
+    setShowOptionsLevel1(invisibleOptions);
   };
 
   const handleFiftyFiftyLL = () => {
     setFiftyFiftyLLIsUsed(true);
-    // setActivateFiftyFifty(true);
-    setInvisibleOptions(options, 2);
+    const invisibleOptions = setInvisibleOptions(correct, 2);
+    setShowOptionsLevel1(invisibleOptions);
   };
 
   const handleStatisticsLL = () => {

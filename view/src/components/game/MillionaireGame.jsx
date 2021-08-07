@@ -44,7 +44,6 @@ const MillionaireGame = (props) => {
       document.getElementById("question-level-2-form").reset();
       setIsOptionLevel2Selected(false);
     }
-
     setNumQuestion(numQuestion + 1);
     if (numQuestion < 10) {
       setQuestion(questions[numQuestion]);

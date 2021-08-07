@@ -8,35 +8,23 @@ const QuestionLevel1 = ({
   setActivateBtnSendAnswer,
   questions,
   numQuestion,
-  activateRemoveOne,
-  activateFiftyFifty,
 }) => {
   let { options } = questions[numQuestion];
   options = Object.values(options);
+
+  useEffect(() => {}, [questions]);
 
   const handleSelectAnswer = (selectedOption) => {
     setOptionSelected(selectedOption);
     setActivateBtnSendAnswer(true);
   };
 
-  const classOptions = (visible) =>
-    classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", { invisible: !visible });
-
-  // console.log(listOptions);
-
-  // if (activateRemoveOne) {
-  //   console.log("RemoveOne");
-  //   const optionsVisi = setInvisibleOptions(listOptions, 1);
-  //   setListOptions(optionsVisi);
-  //   console.log(optionsVisi);
-  // }
-
-  // if (activateFiftyFifty) {
-  //   console.log("FiftyFifty");
-  //   const optionsVisi = setInvisibleOptions(listOptions, 1);
-  //   setListOptions(optionsVisi);
-  //   console.log(optionsVisi);
-  // }
+  const classOptions = (visible) => {
+    if (!visible) console.log("visible");
+    return classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", {
+      invisible: !visible,
+    });
+  };
 
   return (
     <ButtonGroup>

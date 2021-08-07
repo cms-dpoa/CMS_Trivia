@@ -7,7 +7,7 @@ const data = {
 
 const GET_QUESTIONS = "GET_QUESTIONS";
 const DELETE_QUESTIONS_GAME_OVER = "DELETE_QUESTIONS_GAME_OVER";
-const GET_QUESTIONS_BY_ID = "GET_QUESTIONS_BY_ID";
+const UPDATE_SHOW_FIELD_LIFELINE = "UPDATE_SHOW_FIELD_LIFELINE";
 
 export default function questionReducer(state = data, action) {
   switch (action.type) {
@@ -15,11 +15,8 @@ export default function questionReducer(state = data, action) {
       return { ...state, array: action.payload };
     case DELETE_QUESTIONS_GAME_OVER:
       return { array: action.payload };
-    case GET_QUESTIONS_BY_ID:
-      // const { numQuestion, options } = action.payload;
-      // state.array[numQuestion].options = options;
+    case UPDATE_SHOW_FIELD_LIFELINE:
       return state;
-    // return { ...state, ...state.array.options: action.payload.options };
     default:
       return state;
   }
@@ -48,14 +45,16 @@ export const deleteAllQuestionsGameOverAction = () => async (dispatch) => {
   }
 };
 
-export const setShowFieldToFalse =
-  (numQuestion, options) => async (dispatch) => {
-    try {
-      dispatch({
-        type: GET_QUESTIONS_BY_ID,
-        payload: { numQuestion, options },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const setShowFieldToFalse = (questions) => async (dispatch) => {
+  try {
+    const questionsCopy = Object.assign({}, questions);
+    console.log(questionsCopy);
+
+    dispatch({
+      type: UPDATE_SHOW_FIELD_LIFELINE,
+      payload: questionsCopy,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -27,6 +27,14 @@ const MillionaireGame = (props) => {
   const [showOptionsLevel1, setShowOptionsLevel1] = useState(
     initialShowOptionsLevel1
   );
+  const initialDatasetKnowledgeLevel = [
+    "I know this dataset for sure",
+    "I think I know but it may be wrong",
+    "I'm just guessing",
+  ];
+  const [datasetKnowledgeLevel, setDatasetKnowledgeLevel] = useState(
+    initialDatasetKnowledgeLevel
+  );
 
   const toastBody = (
     <span className="font-weight-bold">Question {numQuestion}</span>
@@ -44,6 +52,7 @@ const MillionaireGame = (props) => {
     } else {
       document.getElementById("question-level-2-form").reset();
       setIsOptionLevel2Selected(false);
+      setDatasetKnowledgeLevel(initialDatasetKnowledgeLevel);
     }
     setNumQuestion(numQuestion + 1);
     if (numQuestion < 10) {
@@ -71,6 +80,10 @@ const MillionaireGame = (props) => {
                 isOptionLevel2Selected={{
                   isOptionLevel2Selected,
                   setIsOptionLevel2Selected,
+                }}
+                datasetKnowledgeLevel={{
+                  datasetKnowledgeLevel,
+                  setDatasetKnowledgeLevel,
                 }}
               />
               <Button

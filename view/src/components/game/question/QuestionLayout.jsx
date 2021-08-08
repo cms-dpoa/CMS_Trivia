@@ -13,6 +13,7 @@ const QuestionLayout = ({
   setActivateBtnSendAnswer,
   showOptionsLevel1,
   isOptionLevel2Selected,
+  datasetKnowledgeLevel,
 }) => {
   return (
     <Fragment>
@@ -52,6 +53,7 @@ const QuestionLayout = ({
               setOptionSelected={setOptionSelected}
               isOptionSelected={isOptionLevel2Selected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}
+              knowledgesLevel2={datasetKnowledgeLevel}
             />
           )}
         </Card.Body>

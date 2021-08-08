@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, Fragment, useEffect } from "react";
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch, connect } from "react-redux";
@@ -8,7 +9,9 @@ const QuestionLevel2 = ({
   setOptionSelected,
   setActivateBtnSendAnswer,
   isOptionSelected,
+  knowledgesLevel2,
 }) => {
+  const { datasetKnowledgeLevel, setDatasetKnowledgeLevel } = knowledgesLevel2;
   const { isOptionLevel2Selected, setIsOptionLevel2Selected } =
     isOptionSelected;
   const dispatch = useDispatch();
@@ -19,11 +22,15 @@ const QuestionLevel2 = ({
   const labels = useSelector((store) => store.labels.array);
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
+  const anotherCategoryOption = "I think it belongs to another category";
 
   const handleSelectOption = (event) => {
     const label = event.target.value;
     setOptionSelected({ label });
     setIsOptionLevel2Selected(true);
+    if (label === anotherCategoryOption) {
+      setDatasetKnowledgeLevel(["I just created a new category"]);
+    }
   };
 
   const handelKnowledgeLevel = (knowledgeLevel) => {
@@ -36,12 +43,6 @@ const QuestionLevel2 = ({
     event.target.value = "";
     setIsOptionLevel2Selected(false);
   };
-
-  const datasetKnowledgeLevel = [
-    "I know this dataset for sure",
-    "I think I know but it may be wrong",
-    "I'm just guessing",
-  ];
 
   return (
     <Fragment>
@@ -58,8 +59,8 @@ const QuestionLevel2 = ({
                   onClick={clearOptionSelected}
                 />
                 <datalist id="datalistLabelsOptions">
+                  <option value={anotherCategoryOption} />
                   {labels.map((label) => (
-                    // eslint-disable-next-line jsx-a11y/control-has-associated-label
                     <option key={label.id_label} value={label.name} />
                   ))}
                 </datalist>

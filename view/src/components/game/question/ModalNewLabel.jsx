@@ -46,6 +46,11 @@ const ModalNewLabel = ({ show, setShow }) => {
                 />
               </Form.Group>
             </Col>
+
+            <p className="font-italic">
+              <span className="font-weight-bold">Note:</span> The administrators
+              will evaluate your request to add this new label to the list.
+            </p>
           </Form>
         </Modal.Body>
         <Modal.Footer>

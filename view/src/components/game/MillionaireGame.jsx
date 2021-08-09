@@ -8,6 +8,7 @@ import GameOver from "./GameOver";
 import Loading from "./Loading";
 import QuestionLayout from "./question/QuestionLayout";
 import configToast from "../utils/ConfigToast";
+import FooterQuestion from "./question/FooterQuestion";
 
 const MillionaireGame = (props) => {
   const { questions } = props;
@@ -87,13 +88,16 @@ const MillionaireGame = (props) => {
                 }}
               />
               <Button
-                className="mt-5 mb-5 font-weight-bold"
+                className="mt-5 mb-4 font-weight-bold"
                 block
                 onClick={NextQuestion}
                 disabled={!activateBtnSendAnswer}
               >
                 Send Answer
               </Button>
+              <FooterQuestion
+                numQuestionState={{ numQuestion, setNumQuestion }}
+              />
             </Fragment>
           ) : (
             <Loading />

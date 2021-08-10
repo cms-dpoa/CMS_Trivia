@@ -7,15 +7,15 @@ const Manage = () => {
   return (
     <Container>
       <Tabs
-        defaultActiveKey="problems-repoted"
+        defaultActiveKey="label-request"
         transition={false}
         className="mb-3"
       >
-        <Tab eventKey="problems-repoted" title="Problems Reported">
-          <ReportProblem />
-        </Tab>
         <Tab eventKey="label-request" title="Label Request">
           <NewLabelRequest />
+        </Tab>
+        <Tab eventKey="problems-repoted" title="Problems Reported">
+          <ReportProblem />
         </Tab>
       </Tabs>
     </Container>

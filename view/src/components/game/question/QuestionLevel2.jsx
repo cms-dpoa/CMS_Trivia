@@ -24,7 +24,7 @@ const QuestionLevel2 = ({
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
   const [labelSelected, setLabelSelected] = useState("");
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
-  const anotherCategoryOption = "I think it belongs to another category";
+  const anotherCategoryOption = "None of the existing categories";
 
   const handleSelectOption = (event) => {
     const labelName = event.target.value;

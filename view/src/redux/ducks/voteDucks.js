@@ -18,21 +18,17 @@ export default function voteReducer(state = data, action) {
 
 export const sendVoteAction =
   (dataset, label, user, game, knowledgeLevel) => async (dispatch) => {
-    try {
-      const bodyVote = {
-        dataset,
-        label,
-        user,
-        game,
-        knowledgeLevel,
-      };
-      console.log(bodyVote);
-      const res = await axios.post(ENDPOINT_VOTE, bodyVote);
-      console.log(res.data);
-      dispatch({
-        type: SEND_VOTE,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const bodyVote = {
+      dataset,
+      label,
+      user,
+      game,
+      knowledgeLevel,
+    };
+    console.log(bodyVote);
+    const res = await axios.post(ENDPOINT_VOTE, bodyVote);
+    console.log(res.data);
+    dispatch({
+      type: SEND_VOTE,
+    });
   };

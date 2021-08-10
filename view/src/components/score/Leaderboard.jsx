@@ -38,7 +38,7 @@ const Leaderboard = ({ leaderboards, username }) => {
               >
                 <td className={setBold}>{key}</td>
                 <td className={setBold}>{leaderboards[key].username}</td>
-                <td className={setBold}>5</td>
+                <td className={setBold}>{leaderboards[key].num_games}</td>
                 <td className={setBold}>{leaderboards[key].score}</td>
               </tr>
             );

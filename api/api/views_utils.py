@@ -13,12 +13,13 @@ def generate_options(correct_label, mode):
     if mode=='easy':
         possible_labels = Label.objects.filter(name__contains='Standard Model Physics').values("id_label", "name")
         possible_labels = possible_labels.exclude(id_label=correct_label).values("id_label", "name")
-    
+        possible_labels = possible_labels.exclude(was_created=True).values("id_label", "name")
+
     else:
-        # Get all id_labels except for Miscellaneous and the correct id_label.
         possible_labels = Label.objects.exclude(name="Miscellaneous").values("id_label", "name")
         possible_labels = possible_labels.exclude(id_label=correct_label).values("id_label", "name")
-    
+        possible_labels = possible_labels.exclude(was_created=True).values("id_label", "name")
+
     # Sample 3 id_labels to be used as wrong options.
     chosen_labels = random.sample(range(len(possible_labels)), k=3)
     

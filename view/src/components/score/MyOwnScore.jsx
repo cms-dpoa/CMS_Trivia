@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { Table, Container } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { getAuthAction } from "../../redux/ducks/authDucks";
+import { connect, useDispatch } from "react-redux";
+import { getMyScoresAction } from "../../redux/ducks/scoreDucks";
 
-const MyOwnScore = () => {
+const MyOwnScore = ({ user, myScores }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAuthAction());
+    dispatch(getMyScoresAction(user.username));
   }, []);
-
-  const user = useSelector((store) => store.auth.user);
 
   return (
     <Container>
@@ -23,23 +21,26 @@ const MyOwnScore = () => {
             <th>Score</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>4.50</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>4.25</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>5.00</td>
-          </tr>
+          {Object.keys(myScores).map((key) => (
+            <tr key={key}>
+              <td>{key}</td>
+              <td>{myScores[key]}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
   );
 };
 
-export default MyOwnScore;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    user: state.auth.user,
+    myScores: state.scores.myScores,
+  };
+};
+
+export default connect(mapStateToProps, null)(MyOwnScore);

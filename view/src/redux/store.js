@@ -5,16 +5,16 @@ import authReducer from "./ducks/authDucks";
 import labelReducer from "./ducks/labelDucks";
 import analysisReducer from "./ducks/analysisDucks";
 import questionReducer from "./ducks/questionDucks";
-import dataReducer from "./ducks/datasDucks";
 import voteReducer from "./ducks/voteDucks";
 import gameReducer from "./ducks/gameDucks";
+import scoreReducer from "./ducks/scoreDucks";
 
 const rootReducer = combineReducers({
   labels: labelReducer,
   auth: authReducer,
   analysis: analysisReducer,
   questions: questionReducer,
-  datas: dataReducer,
+  scores: scoreReducer,
   votes: voteReducer,
   game: gameReducer,
 });

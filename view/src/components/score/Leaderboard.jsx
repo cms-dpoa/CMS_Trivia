@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
 import { Table, Container } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-// import { getAutdAction } from "../../redux/ducks/authDucks";
+import { connect, useDispatch } from "react-redux";
+import { getLeaderBoardAction } from "../../redux/ducks/scoreDucks";
 
-const Leaderboard = () => {
+const Leaderboard = ({ leaderboards, username }) => {
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     dispatch(getAuthAction());
-  //   }, []);
-
-  const user = useSelector((store) => store.auth.user);
+  useEffect(() => {
+    dispatch(getLeaderBoardAction());
+  }, []);
 
   return (
     <Container>
-      <h1>Leaderboard</h1>
+      <h1>Leaderboard {username}</h1>
 
       <Table striped bordered hover>
         <thead>
@@ -26,28 +24,33 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Kati</td>
-            <td>5</td>
-            <td>5.00</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Juan</td>
-            <td>2</td>
-            <td>4.50</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Josue</td>
-            <td>4</td>
-            <td>4.25</td>
-          </tr>
+          {Object.keys(leaderboards).map((key) => (
+            <tr
+              key={key}
+              style={
+                leaderboards[key].username === username
+                  ? { background: "#ffce54" }
+                  : {}
+              }
+            >
+              <td>{key}</td>
+              <td>{leaderboards[key].username}</td>
+              <td>5</td>
+              <td>{leaderboards[key].score}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
   );
 };
 
-export default Leaderboard;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    username: state.auth.user.username,
+    leaderboards: state.scores.leaderboards,
+  };
+};
+
+export default connect(mapStateToProps, null)(Leaderboard);

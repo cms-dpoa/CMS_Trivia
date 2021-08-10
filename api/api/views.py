@@ -143,7 +143,8 @@ class leaderboard(viewsets.GenericViewSet):
             top = allusers[:][::-1]
         ranking = {}
         for i, u in enumerate(top):
-            ranking[i+1] = {"username": u.username, "score": u.mean_score}
+            num_games = Game.objects.filter(username = u.username).count()
+            ranking[i+1] = {"username": u.username, "num_games": num_games, "score": u.mean_score}
         return JsonResponse(data = ranking)
 
 class myscores(viewsets.GenericViewSet):

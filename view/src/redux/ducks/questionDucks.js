@@ -20,25 +20,17 @@ export default function questionReducer(state = data, action) {
 }
 
 export const getQuestionsAction = (mode) => async (dispatch) => {
-  try {
-    const params = { params: { mode } };
-    const res = await axios.get(ENDPOINT_QUESTION, params);
-    dispatch({
-      type: GET_QUESTIONS,
-      payload: res.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  const params = { params: { mode } };
+  const res = await axios.get(ENDPOINT_QUESTION, params);
+  dispatch({
+    type: GET_QUESTIONS,
+    payload: res.data,
+  });
 };
 
 export const deleteAllQuestionsGameOverAction = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: DELETE_QUESTIONS_GAME_OVER,
-      payload: [],
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  dispatch({
+    type: DELETE_QUESTIONS_GAME_OVER,
+    payload: [],
+  });
 };

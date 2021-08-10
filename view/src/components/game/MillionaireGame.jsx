@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Container, Button } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,10 +9,12 @@ import Loading from "./Loading";
 import QuestionLayout from "./question/QuestionLayout";
 import configToast from "../utils/ConfigToast";
 import FooterQuestion from "./question/FooterQuestion";
+import { sendScoreGameLevel1Action } from "../../redux/ducks/gameDucks";
 
 const MillionaireGame = (props) => {
-  const { questions } = props;
+  const { questions, username, idGame } = props;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   if (questions.length === 0) {
     history.push("/play");
@@ -41,6 +43,10 @@ const MillionaireGame = (props) => {
     <span className="font-weight-bold">Question {numQuestion}</span>
   );
 
+  const sendScoreGameLevel1 = () => {
+    dispatch(sendScoreGameLevel1Action(username, score, idGame));
+  };
+
   const NextQuestion = () => {
     if (numQuestion <= 5) {
       setShowOptionsLevel1(initialShowOptionsLevel1);
@@ -49,6 +55,9 @@ const MillionaireGame = (props) => {
         toast.success(<>{toastBody} is correct!</>, configToast);
       } else {
         toast.error(<>{toastBody} is incorrect!</>, configToast);
+      }
+      if (numQuestion === 5) {
+        sendScoreGameLevel1();
       }
     } else {
       document.getElementById("question-level-2-form").reset();
@@ -97,6 +106,7 @@ const MillionaireGame = (props) => {
               </Button>
               <FooterQuestion
                 numQuestionState={{ numQuestion, setNumQuestion }}
+                setQuestion={setQuestion}
               />
             </Fragment>
           ) : (
@@ -111,6 +121,9 @@ const MillionaireGame = (props) => {
 const mapStateToProps = (state) => {
   return {
     questions: state.questions.array,
+    auth: state.auth,
+    username: state.auth.user.username,
+    idGame: state.game.idGame,
   };
 };
 

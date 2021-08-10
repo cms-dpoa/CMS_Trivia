@@ -13,7 +13,7 @@
     "arrow-body-style": "off",
     "react/no-unescaped-entities": "off",
     "react/jsx-fragments": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "eqeqeq": "warn",
     "vars-on-top": "warn",
     "prefer-template": "warn",

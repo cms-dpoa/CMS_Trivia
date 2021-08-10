@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 import { MdReportProblem, MdNavigateNext } from "react-icons/md";
 import ModalReportProblem from "./ModalReportProblem";
 
-const FooterQuestion = ({ numQuestionState }) => {
+const FooterQuestion = ({ numQuestionState, setQuestion, questions }) => {
   const { numQuestion, setNumQuestion } = numQuestionState;
   const [showModalReportProblem, setShowModalReportProblem] = useState(false);
 
@@ -11,8 +12,14 @@ const FooterQuestion = ({ numQuestionState }) => {
     setShowModalReportProblem(true);
   };
 
-  const hableSkipLevel1 = () => {
+  const handleSkipLevel1 = () => {
     setNumQuestion(6);
+    setQuestion(questions[6]);
+  };
+
+  const handleSkipToNextQuestionLevel2 = () => {
+    setQuestion(questions[numQuestion + 1]);
+    setNumQuestion(numQuestion + 1);
   };
 
   return (
@@ -26,12 +33,24 @@ const FooterQuestion = ({ numQuestionState }) => {
       </Button>
 
       {numQuestion === 1 ? (
-        <Button variant="info" onClick={hableSkipLevel1}>
+        <Button variant="info" onClick={handleSkipLevel1}>
           Skip Level 1 <MdNavigateNext size="1.5em" />
+        </Button>
+      ) : null}
+
+      {numQuestion > 5 ? (
+        <Button variant="info" onClick={handleSkipToNextQuestionLevel2}>
+          Skip Question <MdNavigateNext size="1.5em" />
         </Button>
       ) : null}
     </Container>
   );
 };
 
-export default FooterQuestion;
+const mapStateToProps = (state) => {
+  return {
+    questions: state.questions.array,
+  };
+};
+
+export default connect(mapStateToProps, null)(FooterQuestion);

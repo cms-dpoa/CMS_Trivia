@@ -80,7 +80,7 @@ class VoteViewSet(viewsets.ModelViewSet):
     queryset = Vote.objects.all().order_by('id')
     serializer_class = VoteSerializer
     
-        #Override POST to create new Game instance and return id_game.
+    #Override POST to create new Game instance and return id_game.
     def create(self, request):
         vote_data = request.data
         try:
@@ -133,3 +133,27 @@ class analysisView(viewsets.GenericViewSet):
     def create(self, request):
         dataset = request.data["dataset"]
         return JsonResponse(data = get_votes(dataset = dataset))
+
+class leaderboard(viewsets.GenericViewSet):
+    def list(self, request):
+        allusers = User.objects.order_by("mean_score")
+        if allusers.count() >= 10:
+            top = allusers[allusers.count()-10:][::-1]
+        else:
+            top = allusers[:][::-1]
+        ranking = {}
+        for i, u in enumerate(top):
+            ranking[i+1] = {"username": u.username, "score": u.mean_score}
+        return JsonResponse(data = ranking)
+
+class myscores(viewsets.GenericViewSet):
+    def list(self, request):
+        try:
+            user = request.GET["user"]
+            games = Game.objects.filter(username = user)
+            scores = {}
+            for game in games:
+                scores[game.id_game] = game.score
+            return JsonResponse(data = scores)
+        except:
+            return JsonResponse(data = {"message": "Error"})

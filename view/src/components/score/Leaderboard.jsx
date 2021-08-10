@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Table, Container } from "react-bootstrap";
+import classNames from "classnames";
 import { connect, useDispatch } from "react-redux";
 import { getLeaderBoardAction } from "../../redux/ducks/scoreDucks";
 
@@ -12,7 +13,7 @@ const Leaderboard = ({ leaderboards, username }) => {
 
   return (
     <Container>
-      <h1>Leaderboard {username}</h1>
+      <h1>Leaderboard</h1>
 
       <Table striped bordered hover>
         <thead>
@@ -24,21 +25,24 @@ const Leaderboard = ({ leaderboards, username }) => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(leaderboards).map((key) => (
-            <tr
-              key={key}
-              style={
-                leaderboards[key].username === username
-                  ? { background: "#ffce54" }
-                  : {}
-              }
-            >
-              <td>{key}</td>
-              <td>{leaderboards[key].username}</td>
-              <td>5</td>
-              <td>{leaderboards[key].score}</td>
-            </tr>
-          ))}
+          {Object.keys(leaderboards).map((key) => {
+            const isUserLogIn = leaderboards[key].username === username;
+            const setBold = classNames("", {
+              "font-weight-bold": isUserLogIn,
+            });
+
+            return (
+              <tr
+                key={key}
+                style={isUserLogIn ? { background: "#ffce54" } : {}}
+              >
+                <td className={setBold}>{key}</td>
+                <td className={setBold}>{leaderboards[key].username}</td>
+                <td className={setBold}>5</td>
+                <td className={setBold}>{leaderboards[key].score}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>

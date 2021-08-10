@@ -11,11 +11,16 @@ router.register(r'votes', views.VoteViewSet)
 router.register(r'datas', views.DataViewSet)
 router.register(r'questions', views.all_questions, basename="all_questions")
 router.register(r'analysis', views.analysisView, basename="analysis")
+router.register(r'leaderboard', views.leaderboard, basename="leaderboard")
+router.register(r'myscores', views.myscores, basename="myscores")
+
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
     url(r'^questions/$', views.all_questions),
+    url(r'^myscores/$', views.myscores),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -14,6 +14,7 @@ const QuestionLevel2 = ({
   const { datasetKnowledgeLevel, setDatasetKnowledgeLevel } = knowledgesLevel2;
   const { isOptionLevel2Selected, setIsOptionLevel2Selected } =
     isOptionSelected;
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLabelsAction());
@@ -21,20 +22,30 @@ const QuestionLevel2 = ({
 
   const labels = useSelector((store) => store.labels.array);
   const [showModalNewLabel, setShowModalNewLabel] = useState(false);
+  const [labelSelected, setLabelSelected] = useState("");
   const handleShowModalNewLabel = () => setShowModalNewLabel(true);
   const anotherCategoryOption = "I think it belongs to another category";
 
   const handleSelectOption = (event) => {
-    const label = event.target.value;
-    setOptionSelected({ label });
+    const labelName = event.target.value;
+    setLabelSelected(labelName);
+
     setIsOptionLevel2Selected(true);
-    if (label === anotherCategoryOption) {
-      setDatasetKnowledgeLevel(["I just created a new category"]);
+    if (labelName === anotherCategoryOption) {
+      setDatasetKnowledgeLevel({ "I just created a new category": 0 });
     }
   };
 
   const handelKnowledgeLevel = (knowledgeLevel) => {
-    console.log(knowledgeLevel);
+    let idLabel = -1;
+
+    if (labelSelected !== anotherCategoryOption)
+      idLabel = labels.find((label) => label.name === labelSelected).id_label;
+
+    setOptionSelected({
+      idLabel,
+      knowledgeLevel: datasetKnowledgeLevel[knowledgeLevel],
+    });
     setActivateBtnSendAnswer(true);
   };
 
@@ -69,19 +80,21 @@ const QuestionLevel2 = ({
 
             <Row>
               <Col>
-                {datasetKnowledgeLevel.map((knowledgeLevel, index) => (
-                  <div key={knowledgeLevel} className="mt-2">
-                    <Form.Check
-                      inline
-                      label={knowledgeLevel}
-                      name="group1"
-                      type="radio"
-                      id={`inline-radio-${index}`}
-                      disabled={!isOptionLevel2Selected}
-                      onClick={() => handelKnowledgeLevel(knowledgeLevel)}
-                    />
-                  </div>
-                ))}
+                {Object.keys(datasetKnowledgeLevel).map(
+                  (knowledgeLevel, index) => (
+                    <div key={knowledgeLevel} className="mt-2">
+                      <Form.Check
+                        inline
+                        label={knowledgeLevel}
+                        name="group1"
+                        type="radio"
+                        id={`inline-radio-${index}`}
+                        disabled={!isOptionLevel2Selected}
+                        onClick={() => handelKnowledgeLevel(knowledgeLevel)}
+                      />
+                    </div>
+                  )
+                )}
               </Col>
             </Row>
           </Container>

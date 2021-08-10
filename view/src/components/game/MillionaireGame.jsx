@@ -10,6 +10,7 @@ import QuestionLayout from "./question/QuestionLayout";
 import configToast from "../utils/ConfigToast";
 import FooterQuestion from "./question/FooterQuestion";
 import { sendScoreGameLevel1Action } from "../../redux/ducks/gameDucks";
+import { sendVoteAction } from "../../redux/ducks/voteDucks";
 
 const MillionaireGame = (props) => {
   const { questions, username, idGame } = props;
@@ -30,11 +31,11 @@ const MillionaireGame = (props) => {
   const [showOptionsLevel1, setShowOptionsLevel1] = useState(
     initialShowOptionsLevel1
   );
-  const initialDatasetKnowledgeLevel = [
-    "I know this dataset for sure",
-    "I think I know but it may be wrong",
-    "I'm just guessing",
-  ];
+  const initialDatasetKnowledgeLevel = {
+    "I know this dataset for sure": 5,
+    "I think I know but it may be wrong": 2.5,
+    "I'm just guessing": 0,
+  };
   const [datasetKnowledgeLevel, setDatasetKnowledgeLevel] = useState(
     initialDatasetKnowledgeLevel
   );
@@ -45,6 +46,16 @@ const MillionaireGame = (props) => {
 
   const sendScoreGameLevel1 = () => {
     dispatch(sendScoreGameLevel1Action(username, score, idGame));
+  };
+
+  const sendLabelDatasetLevel2 = () => {
+    const idDataset = question.id_data;
+    const { idLabel, knowledgeLevel } = optionSelected;
+
+    if (knowledgeLevel !== 0)
+      dispatch(
+        sendVoteAction(idDataset, idLabel, username, idGame, knowledgeLevel)
+      );
   };
 
   const NextQuestion = () => {
@@ -60,6 +71,7 @@ const MillionaireGame = (props) => {
         sendScoreGameLevel1();
       }
     } else {
+      sendLabelDatasetLevel2();
       document.getElementById("question-level-2-form").reset();
       setIsOptionLevel2Selected(false);
       setDatasetKnowledgeLevel(initialDatasetKnowledgeLevel);

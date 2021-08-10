@@ -6,13 +6,13 @@ const data = {
 };
 
 const GET_VOTES = "GET_VOTES";
-const POST_VOTE = "POST_VOTE";
+const SEND_VOTE = "SEND_VOTE";
 
 export default function voteReducer(state = data, action) {
   switch (action.type) {
     case GET_VOTES:
       return { ...state, array: action.payload };
-    case POST_VOTE:
+    case SEND_VOTE:
       return state;
     default:
       return state;
@@ -31,13 +31,23 @@ export const getVotesAction = () => async (dispatch) => {
   }
 };
 
-export const postVoteAction = (label) => async (dispatch) => {
-  try {
-    const res = await axios.post(ENDPOINT_VOTE, label);
-    dispatch({
-      type: POST_VOTE,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const sendVoteAction =
+  (dataset, label, user, game, knowledgeLevel) => async (dispatch) => {
+    try {
+      const bodyVote = {
+        dataset,
+        label,
+        user,
+        game,
+        knowledgeLevel,
+      };
+      console.log(bodyVote);
+      const res = await axios.post(ENDPOINT_VOTE, bodyVote);
+      console.log(res.data);
+      dispatch({
+        type: SEND_VOTE,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };

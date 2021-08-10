@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import generateStore from "./redux/store";
 import MillionaireGame from "./components/game/MillionaireGame";
+import Manage from "./pages/Manage";
 
 function App() {
   const store = generateStore();
@@ -24,6 +25,7 @@ function App() {
             <Route exact path="/play/millionaire" component={MillionaireGame} />
             <Route exact path="/myscore" component={MyScore} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/manage" component={Manage} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

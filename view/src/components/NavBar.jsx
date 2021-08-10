@@ -20,6 +20,9 @@ const NavBar = () => {
           <Link className="nav-link" to="/dashboard">
             DashBoard
           </Link>
+          <Link className="nav-link" to="/manage">
+            Manage
+          </Link>
         </Nav>
       </Container>
     </Navbar>

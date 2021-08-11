@@ -1,5 +1,9 @@
-function setInvisibleOptions(correctOption, numOptionsToSetFalse) {
-  const showOptions = { 1: true, 2: true, 3: true, 4: true };
+function setInvisibleOptions(
+  currentShowOptions,
+  correctOption,
+  numOptionsToSetFalse
+) {
+  const showOptions = { ...currentShowOptions };
   let optionsChanged = 0;
   let options = [1, 2, 3, 4];
   options = options.filter((option) => option !== correctOption);

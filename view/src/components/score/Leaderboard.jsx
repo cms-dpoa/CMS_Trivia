@@ -30,6 +30,7 @@ const Leaderboard = ({ leaderboards, username }) => {
             const setBold = classNames("", {
               "font-weight-bold": isUserLogIn,
             });
+            const score = Number(leaderboards[key].score.toFixed(2));
 
             return (
               <tr
@@ -39,7 +40,7 @@ const Leaderboard = ({ leaderboards, username }) => {
                 <td className={setBold}>{key}</td>
                 <td className={setBold}>{leaderboards[key].username}</td>
                 <td className={setBold}>{leaderboards[key].num_games}</td>
-                <td className={setBold}>{leaderboards[key].score}</td>
+                <td className={setBold}>{score}</td>
               </tr>
             );
           })}

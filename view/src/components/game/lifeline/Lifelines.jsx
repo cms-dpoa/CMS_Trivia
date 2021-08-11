@@ -9,7 +9,7 @@ import setInvisibleOptions from "../../utils/Lifelines";
 // abbreviation LL = Lifeline
 
 const Lifelines = ({ numQuestion, questions, showOptions }) => {
-  const { setShowOptionsLevel1 } = showOptions;
+  const { showOptionsLevel1, setShowOptionsLevel1 } = showOptions;
   const [showModalStatisticsLL, setShowModalStatisticsLL] = useState(false);
   // variable for Statistics Lifeline
   const { options, correct } = questions[numQuestion];
@@ -21,13 +21,13 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
 
   const handleRemoveOneLL = () => {
     setRemoveOneLLIsUsed(true);
-    const invisibleOptions = setInvisibleOptions(correct, 1);
+    const invisibleOptions = setInvisibleOptions(showOptionsLevel1, correct, 1);
     setShowOptionsLevel1(invisibleOptions);
   };
 
   const handleFiftyFiftyLL = () => {
     setFiftyFiftyLLIsUsed(true);
-    const invisibleOptions = setInvisibleOptions(correct, 2);
+    const invisibleOptions = setInvisibleOptions(showOptionsLevel1, correct, 2);
     setShowOptionsLevel1(invisibleOptions);
   };
 

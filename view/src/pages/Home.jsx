@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <Container>
       <h1 id="introduction">Introduction</h1>
-      <p>
+      <p className="text-justify">
         Datasets in the{" "}
         <a href="https://opendata.cern.ch/">CERN open data portal</a> are
         categorized (or labelled) according to the physics subfield they relate
@@ -30,7 +30,7 @@ const Home = () => {
         Millionaire.
       </p>
       <h1 id="level-1">Level 1</h1>
-      <p>
+      <p className="text-justify">
         In this level, the players&#39; reliability is assessed. This will help
         us choose a category for an unlabelled dataset in case various options
         are proposed by different players. Questions in this level consist on
@@ -54,7 +54,7 @@ const Home = () => {
         </li>
       </ul>
       <h1 id="level-2">Level 2</h1>
-      <p>
+      <p className="text-justify">
         This level is the central part of the game. In this level, questions
         consist on the classification of unlabelled datasets. In this case,
         there will be no options and no lifelines (we don&#39;t know the true

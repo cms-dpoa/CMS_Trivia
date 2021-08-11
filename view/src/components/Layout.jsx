@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Container } from "react-bootstrap";
 import NavBar from "./NavBar";
 import Footer from "./footer/Footer";
 
@@ -6,7 +7,7 @@ const Layout = ({ children }) => {
   return (
     <Fragment>
       <NavBar />
-      {children}
+      <Container id="body-container">{children}</Container>
       <Footer />
     </Fragment>
   );

@@ -26,7 +26,7 @@ const PieTop5 = ({ labels, amplitudes }) => {
       },
     ],
   };
-  return <Doughnut data={data} height={10} width={10} />;
+  return <Doughnut data={data} height={1000} />;
 };
 
 export default PieTop5;

@@ -56,10 +56,10 @@ const Dashboard = () => {
 
       {title !== "" ? (
         <Row className="mt-5">
-          <Col sm="9">
+          <Col className="col-12 d-none d-sm-block" sm="9">
             <TopReliability labels={labels} amplitudes={amplitudes} />
           </Col>
-          <Col sm="3">
+          <Col className="col-12" sm="3">
             <PieTop5 labels={labels} amplitudes={amplitudes} />
           </Col>
         </Row>

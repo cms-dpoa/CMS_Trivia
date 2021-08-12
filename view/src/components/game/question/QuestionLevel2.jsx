@@ -102,7 +102,7 @@ const QuestionLevel2 = ({
           <Col className="text-right">
             <Button
               variant="primary"
-              className="pl-5 pr-5 mt-sm-3 mt-lg-0"
+              className="pl-5 pr-5 mt-3 mt-lg-0"
               onClick={handleShowModalNewLabel}
             >
               Add New Label

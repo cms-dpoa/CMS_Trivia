@@ -21,7 +21,7 @@ const QuestionLevel1 = ({
   };
 
   const classOptions = (visible) =>
-    classNames("mr-3 pl-5 pr-5 mb-3 mb-lg-0 mt-lg-3", {
+    classNames("pl-sm-5 pr-sm-5 mb-3 mr-3 mb-lg-0 mt-lg-3", {
       invisible: !visible,
     });
 

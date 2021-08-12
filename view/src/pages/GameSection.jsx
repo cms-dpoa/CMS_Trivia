@@ -18,7 +18,7 @@ const GameSection = () => {
   };
 
   return (
-    <Container className="text-center mt-5 pt-5">
+    <Container className="text-center mt-sm-5 pt-sm-5">
       <ModalGameDifficulty show={isGameStarted} setShow={setIsGameStarted} />
       <h1 className="mt-5 mb-5">Who wants to be a Millionaire? CMS edition</h1>
       <Button

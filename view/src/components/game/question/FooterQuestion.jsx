@@ -28,18 +28,30 @@ const FooterQuestion = ({ numQuestionState, setQuestion, questions }) => {
         show={showModalReportProblem}
         setShow={setShowModalReportProblem}
       />
-      <Button variant="warning" onClick={handleReportProblem}>
+      <Button
+        variant="warning"
+        className="mt-2 mt-sm-0"
+        onClick={handleReportProblem}
+      >
         <MdReportProblem size="1.5em" /> Report Problem
       </Button>
 
       {numQuestion === 1 ? (
-        <Button variant="info" onClick={handleSkipLevel1}>
+        <Button
+          variant="info"
+          className="mt-2 mt-sm-0"
+          onClick={handleSkipLevel1}
+        >
           Skip Level 1 <MdNavigateNext size="1.5em" />
         </Button>
       ) : null}
 
       {numQuestion > 5 ? (
-        <Button variant="info" onClick={handleSkipToNextQuestionLevel2}>
+        <Button
+          variant="info"
+          className="mt-2 mt-sm-0"
+          onClick={handleSkipToNextQuestionLevel2}
+        >
           Skip Question <MdNavigateNext size="1.5em" />
         </Button>
       ) : null}

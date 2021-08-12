@@ -18,3 +18,9 @@ code {
 #body-container {
   padding-bottom: 2.5rem;
 }
+
+@media screen and (max-width: 1024px) {
+  #body-container {
+    padding-bottom: 5rem;
+  }
+}

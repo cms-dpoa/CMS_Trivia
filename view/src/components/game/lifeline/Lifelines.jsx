@@ -39,7 +39,7 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
   return (
     <Container className="text-right mt-4">
       <Row>
-        <Col className="p-0 col-10">
+        <Col className="p-0 col col-md-10">
           <Button
             className="p-0"
             variant="outline-dark"
@@ -50,7 +50,7 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
           </Button>
         </Col>
 
-        <Col className="p-0 joker col-1">
+        <Col className="p-0 col col-md-1">
           <Button
             className="p-0"
             variant="outline-dark"
@@ -61,7 +61,7 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
           </Button>
         </Col>
 
-        <Col className="p-0 joker col-1">
+        <Col className="p-0 col col-md-1">
           <Button
             className="p-0"
             variant="outline-dark"

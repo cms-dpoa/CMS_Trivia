@@ -5,10 +5,6 @@ COPY package.json .
 RUN npm install
 RUN npm audit fix
 COPY . .
-# COPY src ./src
-# COPY public ./public
-# COPY webpack.config.js .babelrc .env ./ 
-# RUN npm run test
 RUN npm run build
 
 # CREATE NGINX SERVER

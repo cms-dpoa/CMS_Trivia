@@ -31,13 +31,14 @@ const ModalGameDifficulty = ({ show, setShow, username }) => {
         </Modal.Header>
         <Modal.Body className="text-center">
           <Button
-            className="mr-4 ml-4 pr-4 pl-4"
+            className="mr-2 ml-2 mr-sm-4 ml-sm-4 pr-4 pl-4"
             onClick={() => handleStartGame("easy")}
           >
             Easy
           </Button>
+
           <Button
-            className="mr-4 ml-4 pr-4 pl-4"
+            className="mr-2 ml-2 mr-sm-4 ml-sm-4 pr-4 pl-4"
             onClick={() => handleStartGame("normal")}
           >
             Normal

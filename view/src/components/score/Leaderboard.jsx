@@ -15,7 +15,7 @@ const Leaderboard = ({ leaderboards, username }) => {
     <Container>
       <h1>Leaderboard</h1>
 
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Top</th>

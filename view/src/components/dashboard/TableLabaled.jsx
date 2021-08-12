@@ -46,7 +46,7 @@ const TableLabaled = ({ analysis }) => {
     <Container>
       <h1>Table of labeled datasets</h1>
 
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Dataset</th>

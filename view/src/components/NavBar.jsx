@@ -6,10 +6,9 @@ const NavBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Navbar expanded={isExpanded} expand="lg" bg="dark" variant="dark">
+    <Navbar expanded={isExpanded} expand="md" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/home">CMS Game</Navbar.Brand>
-
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => setIsExpanded(!isExpanded)}
@@ -18,7 +17,7 @@ const NavBar = () => {
           id="responsive-navbar-nav"
           className="col-md-4 ms-md-auto pr-1"
         >
-          <Nav>
+          <Nav className="text-center">
             <Link
               className="nav-link"
               to="/home"

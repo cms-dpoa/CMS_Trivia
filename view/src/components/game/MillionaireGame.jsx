@@ -18,7 +18,9 @@ const MillionaireGame = (props) => {
   const dispatch = useDispatch();
 
   if (questions.length === 0) {
-    history.push("/play");
+    const returnPlayPage = () =>
+      questions.length === 0 ? history.push("/play") : null;
+    setTimeout(returnPlayPage, 10000);
   }
 
   const [numQuestion, setNumQuestion] = useState(1);
@@ -76,11 +78,11 @@ const MillionaireGame = (props) => {
       setIsOptionLevel2Selected(false);
       setDatasetKnowledgeLevel(initialDatasetKnowledgeLevel);
     }
-    setNumQuestion(numQuestion + 1);
     if (numQuestion < 10) {
-      setQuestion(questions[numQuestion]);
+      setQuestion(questions[numQuestion + 1]);
       setActivateBtnSendAnswer(false);
     }
+    setNumQuestion(numQuestion + 1);
   };
 
   return (

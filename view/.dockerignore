@@ -4,6 +4,7 @@
 .gitignore
 build/*
 dist/*
+JS-ex
 Dockerfile
 node_modules
 npm-debug.log*

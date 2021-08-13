@@ -15,18 +15,18 @@ const GET_AUTH = "GET_AUTH";
 export default function authReducer(state = data, action) {
   switch (action.type) {
     case GET_AUTH:
-      return state;
+      return { ...state, user: action.payload };
     default:
       return state;
   }
 }
 
-export const getAuthAction = () => async (dispatch) => {
+export const getAuthAction = (username) => async (dispatch) => {
   try {
     // const res = await axios.get(ENDPOINT_AUTH);
     dispatch({
       type: GET_AUTH,
-      payload: [],
+      payload: { username, mean_score: 3.75 },
     });
   } catch (error) {
     console.log(error);

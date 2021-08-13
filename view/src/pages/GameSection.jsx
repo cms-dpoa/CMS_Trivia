@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Spinner, Button, Container, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { getAuthAction } from "../redux/ducks/authDucks";
+import { sendAuthAction } from "../redux/ducks/authDucks";
 import ModalGameDifficulty from "../components/game/ModalGameDifficulty";
 
 const GameSection = () => {
@@ -21,7 +21,7 @@ const GameSection = () => {
 
   const handleStartGame = () => {
     setIsGameStarted(true);
-    dispatch(getAuthAction(username.username));
+    dispatch(sendAuthAction(username.username));
   };
 
   return (

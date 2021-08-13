@@ -69,10 +69,10 @@ const MillionaireGame = (props) => {
       } else {
         toast.error(<>{toastBody} is incorrect!</>, configToast);
       }
-      if (numQuestion === 5) {
+    } else {
+      if (numQuestion === 6) {
         sendScoreGameLevel1();
       }
-    } else {
       sendLabelDatasetLevel2();
       document.getElementById("question-level-2-form").reset();
       setIsOptionLevel2Selected(false);

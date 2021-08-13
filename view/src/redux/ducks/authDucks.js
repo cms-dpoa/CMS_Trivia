@@ -5,7 +5,7 @@ const data = {
   auth: false,
   token: "",
   user: {
-    username: "josue",
+    username: "defaultUser",
     mean_score: 4.75,
   },
 };

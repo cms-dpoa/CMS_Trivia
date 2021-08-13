@@ -11,7 +11,11 @@ const QuestionLevel2 = ({
   isOptionSelected,
   knowledgesLevel2,
 }) => {
-  const { datasetKnowledgeLevel, setDatasetKnowledgeLevel } = knowledgesLevel2;
+  const {
+    initialDatasetKnowledgeLevel,
+    datasetKnowledgeLevel,
+    setDatasetKnowledgeLevel,
+  } = knowledgesLevel2;
   const { isOptionLevel2Selected, setIsOptionLevel2Selected } =
     isOptionSelected;
 
@@ -33,6 +37,8 @@ const QuestionLevel2 = ({
     setIsOptionLevel2Selected(true);
     if (labelName === anotherCategoryOption) {
       setDatasetKnowledgeLevel({ "I just created a new category": 0 });
+    } else if (Object.keys(datasetKnowledgeLevel).length === 1) {
+      setDatasetKnowledgeLevel(initialDatasetKnowledgeLevel);
     }
   };
 

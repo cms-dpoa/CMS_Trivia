@@ -33,7 +33,7 @@ const GameSection = () => {
         <Form.Group>
           <Form.Control
             type="text"
-            placeholder="ENTER an username"
+            placeholder="Your username"
             className="col-10 col-sm-6 col-lg-3 mx-auto mt-4"
             name="username"
             onChange={handleChangeUsername}

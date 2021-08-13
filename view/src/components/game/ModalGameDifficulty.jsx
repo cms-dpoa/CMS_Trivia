@@ -13,7 +13,7 @@ const ModalGameDifficulty = ({ show, setShow, username }) => {
   const handleStartGame = (difficultyMode) => {
     dispatch(getQuestionsAction(difficultyMode));
     dispatch(createGameAction(username));
-    setTimeout(() => history.push("/play/millionaire"), 500);
+    setTimeout(() => history.push("/play/millionaire"), 700);
   };
 
   return (

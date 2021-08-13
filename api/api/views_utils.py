@@ -67,7 +67,7 @@ def question_level_one(mode = 'normal'):
     options, correct = generate_options(chosen_dataset['original_label'], mode = mode)
     #Build question dict
     question = {'id_data': chosen_dataset['id_dataset'], \
-                 'title': chosen_dataset['title'], \
+                 'title': chosen_dataset['title'].split('/')[1], \
                      'correct': correct, \
                      'options': options}
     return question
@@ -85,7 +85,7 @@ def question_level_two(categories):
 
     #Build question dict
     question = {'id_data': chosen_dataset['id_dataset'], \
-                 'title': chosen_dataset['title']
+                 'title': chosen_dataset['title'].split('/')[1]
                  }
 
     return question

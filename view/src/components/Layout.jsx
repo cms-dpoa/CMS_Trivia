@@ -7,7 +7,9 @@ const Layout = ({ children }) => {
   return (
     <Fragment>
       <NavBar />
-      <Container id="body-container">{children}</Container>
+      <Container id="body-container" fluid>
+        {children}
+      </Container>
       <Footer />
     </Fragment>
   );

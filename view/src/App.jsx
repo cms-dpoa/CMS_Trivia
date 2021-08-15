@@ -20,7 +20,7 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/play" />} />
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/play" component={GameSection} />
             <Route exact path="/play/millionaire" component={MillionaireGame} />

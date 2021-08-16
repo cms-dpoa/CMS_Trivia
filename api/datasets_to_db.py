@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-import numpy as np
+import mysql
 
 data_df = pd.read_csv('Data  .txt', delimiter = '\t')
 id_dataset = list(data_df['id_dataset'].values)

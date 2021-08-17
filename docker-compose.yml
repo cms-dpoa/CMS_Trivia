@@ -1,12 +1,18 @@
-version: "3.3"
+version: "3"
 
 services:
   backend:
     image: backend
     build: "./api"
     stdin_open: true
+    env_file:
+      - ./api/.env
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
 
   frontend:
     image: frontend
@@ -17,3 +23,9 @@ services:
       - "80:8080"
     links:
       - backend
+
+  db:
+    image: mysql:5.7
+    env_file:
+      - ./api/.env
+    container_name: mysql_DB

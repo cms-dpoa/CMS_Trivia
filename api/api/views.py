@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import JSONParser 
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 import random
 
 from django.views.decorators.csrf import csrf_exempt
@@ -70,6 +72,24 @@ class LabelViewSet(viewsets.ModelViewSet):
             new_label.save()
             return JsonResponse(data = {"id_label": last_labelid+1,"message": "Label created correctly."})
 
+
+    def update(self, request, pk=None):
+        data = JSONParser().parse(request)
+        queryset = Label.objects.all()
+        label = get_object_or_404(queryset, pk=pk)
+        serializer = LabelSerializer(label, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+
+    def destroy(self, request, pk=None):
+        queryset = Label.objects.all()
+        label = get_object_or_404(queryset, pk=pk)
+        label.delete()
+        return JsonResponse(data = {"message": "Label %s Deleted"%pk})
+        
 
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all().order_by('id_game')

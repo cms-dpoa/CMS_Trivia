@@ -68,7 +68,8 @@ class GameViewSet(viewsets.ModelViewSet):
         current_game.save()
         
         #Compute and update mean_score of player
-        mean_score = Game.objects.filter(username = game_data["username"]).aggregate(Avg('score'))['score__avg']
+        mean_score = Game.objects.filter(username = game_data["username"])
+        mean_score = mean_score.exclude(score = -1).aggregate(Avg('score'))['score__avg']
         player = User.objects.get(username = game_data["username"])
         player.mean_score = mean_score
         player.save()

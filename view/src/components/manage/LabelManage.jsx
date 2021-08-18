@@ -38,7 +38,7 @@ const LabelManage = ({ labels, labelsToCheck }) => {
               <td className="col-1">{index + 1}</td>
               <td className="col-8">{label.name}</td>
 
-              <td className="col-1 p-0 pt-1">
+              <td className="col-1 p-0 pt-1 text-center">
                 {labelsToCheck ? (
                   <Button
                     variant="success"

@@ -4,6 +4,7 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 import LabelManage from "../components/manage/LabelManage";
 import ReportProblem from "../components/manage/ReportProblem";
 import { getLabelsAction } from "../redux/ducks/labelDucks";
+import DatasetManage from "../components/manage/DatasetManage";
 
 const Manage = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ const Manage = () => {
 
         <Tab eventKey="problems-repoted" title="Problems Reported">
           <ReportProblem />
+        </Tab>
+
+        <Tab eventKey="datasets" title="Datasets">
+          <DatasetManage />
         </Tab>
       </Tabs>
     </Container>

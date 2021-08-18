@@ -33,23 +33,37 @@ export const getReportProblemsAction = () => async (dispatch) => {
 };
 
 export const createReportProblemAction = (infoReport) => async (dispatch) => {
-  const res = await axios.post(ENDPOINT_REPORT_PROBLEMS, infoReport);
-  const { status } = res;
-  const { message } = res.data;
-  if (status === 200) {
-    if (Object.keys(res.data).length === 1)
-      toast.warning(message, { ...configToast, className: "text-dark" });
-    else toast.success(message, configToast);
+  let isThereError = false;
+  const res = await axios
+    .post(ENDPOINT_REPORT_PROBLEMS, infoReport)
+    .catch((error) => {
+      if (error.response) {
+        isThereError = true;
+        const errors = error.response.data;
+        Object.keys(errors).map((keyError) =>
+          toast.error(`${keyError} - ${errors[keyError][0]}`, {
+            ...configToast,
+            autoClose: 6000,
+          })
+        );
+      }
+    });
+
+  if (!isThereError) {
+    const { status } = res;
+    const { message } = res.data;
+    if (status === 201) toast.success(message, configToast);
+
+    dispatch({
+      type: CREATE_REPORT_PROBLEM,
+    });
   }
-  dispatch({
-    type: CREATE_REPORT_PROBLEM,
-  });
 };
 
-export const updateReportProblemAction = (jsonReport) => async (dispatch) => {
+export const updateReportProblemAction = (infoReport) => async (dispatch) => {
   await axios.put(
-    `${ENDPOINT_REPORT_PROBLEMS}${jsonReport.id_label}/`,
-    jsonReport
+    `${ENDPOINT_REPORT_PROBLEMS}${infoReport.id_report_problem}/`,
+    infoReport
   );
   const res = await axios.get(ENDPOINT_REPORT_PROBLEMS);
   dispatch({

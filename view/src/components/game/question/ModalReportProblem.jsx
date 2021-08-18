@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from "react";
-import { Modal, Button, Col, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useDispatch, connect } from "react-redux";
 import { createReportProblemAction } from "../../../redux/ducks/reportProblemDuck";
 
-const ModalReportProblem = ({ show, setShow }) => {
+const ModalReportProblem = ({ show, setShow, username, questions }) => {
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const [reportProblem, setReportProblem] = useState({
     title: "",
     description: "",
-    status: "",
-    user: "",
+    suggested_solution: "",
+    user: username,
     dataset: -1,
   });
 
@@ -40,19 +40,49 @@ const ModalReportProblem = ({ show, setShow }) => {
           <Modal.Title>Report Problem</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Please specify the problem you have:
-          <Form className="mt-3">
-            <Col>
-              <Form.Group>
-                <Form.Control
-                  as="textarea"
-                  rows={4}
-                  placeholder="What's the problem?"
-                  name="problem"
-                  onChange={handleOnChange}
-                />
-              </Form.Group>
-            </Col>
+          <Form>
+            <Form.Group>
+              <Form.Label className="font-weight-bold">Title*</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Title"
+                name="title"
+                onChange={handleOnChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label className="font-weight-bold">
+                Describle the problem*
+              </Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={4}
+                placeholder="Describle the problem"
+                name="description"
+                onChange={handleOnChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label className="font-weight-bold">Dataset*</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Dataset"
+                name="dataset"
+                onChange={handleOnChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label className="font-weight-bold">Solution</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Suggest a solution*"
+                name="suggested_solution"
+                onChange={handleOnChange}
+              />
+            </Form.Group>
           </Form>
         </Modal.Body>
 
@@ -69,4 +99,11 @@ const ModalReportProblem = ({ show, setShow }) => {
   );
 };
 
-export default ModalReportProblem;
+const mapStateToProps = (state) => {
+  return {
+    username: state.auth.user.username,
+    questions: state.questions.array,
+  };
+};
+
+export default connect(mapStateToProps, null)(ModalReportProblem);

@@ -53,6 +53,14 @@ const NavBar = ({ username }) => {
             </Link>
 
             <Link
+              className="nav-link"
+              to="/manage"
+              onClick={() => setIsExpanded(false)}
+            >
+              Manage
+            </Link>
+
+            <Link
               className="nav-link font-italic"
               to="/"
               onClick={() => setIsExpanded(false)}

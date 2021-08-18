@@ -10,7 +10,6 @@ import Layout from "./components/Layout";
 import generateStore from "./redux/store";
 import MillionaireGame from "./components/game/MillionaireGame";
 import Manage from "./pages/Manage";
-import ProblemDetails from "./components/manage/ProblemDetails";
 
 function App() {
   const store = generateStore();
@@ -27,11 +26,6 @@ function App() {
             <Route exact path="/myscore" component={MyScore} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/manage" component={Manage} />
-            <Route
-              exact
-              path="/manage/problemDetails"
-              component={ProblemDetails}
-            />
             <Route component={NotFound} />
           </Switch>
         </Layout>

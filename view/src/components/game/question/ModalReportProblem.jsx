@@ -1,12 +1,18 @@
 import React, { Fragment, useState } from "react";
 import { Modal, Button, Col, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-// import { createLabelAction } from "../../../redux/ducks/labelDucks";
+import { createReportProblemAction } from "../../../redux/ducks/reportProblemDuck";
 
 const ModalReportProblem = ({ show, setShow }) => {
+  const dispatch = useDispatch();
   const handleClose = () => setShow(false);
-  const [reportProblem, setReportProblem] = useState({ problem: "" });
-  // const dispatch = useDispatch();
+  const [reportProblem, setReportProblem] = useState({
+    title: "",
+    description: "",
+    status: "",
+    user: "",
+    dataset: -1,
+  });
 
   const handleOnChange = (event) => {
     setReportProblem({
@@ -17,7 +23,7 @@ const ModalReportProblem = ({ show, setShow }) => {
 
   const handleCreateReportProblem = (event) => {
     event.preventDefault();
-    // dispatch(createLabelAction(reportProblem));
+    dispatch(createReportProblemAction(reportProblem));
   };
 
   return (

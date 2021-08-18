@@ -6,7 +6,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ('username', 'mean_score')
 
-class DataSerializer(serializers.HyperlinkedModelSerializer):
+class DataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Data
         fields = ('id_dataset', 'title', 'original_label_id', 'year')
@@ -33,6 +33,6 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
 class ReportProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportProblem
-        fields = ('id_report_problem', 'title' ,'description', 'date', 'status', 'user', 'dataset')
+        fields = ('id_report_problem', 'title' ,'description','suggested_solution', 'date', 'status', 'user', 'dataset')
         depth=1
 

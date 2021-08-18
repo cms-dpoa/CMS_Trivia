@@ -3,8 +3,9 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import JSONParser 
 from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-import random
+from rest_framework import status
+import sys
+
 
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
@@ -81,7 +82,7 @@ class LabelViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
     def destroy(self, request, pk=None):
@@ -207,4 +208,29 @@ class myscores(viewsets.GenericViewSet):
 class ReportProblemViewSet(viewsets.ModelViewSet):
     queryset = ReportProblem.objects.all().order_by('date')
     serializer_class = ReportProblemSerializer
+
+    def create(self, request):
+        report = JSONParser().parse(request)
+        report_serializer = ReportProblemSerializer(data=report)
+        if report_serializer.is_valid():
+            try: 
+                report['user'] = User.objects.get(pk=report['user'])
+                report['dataset'] = Data.objects.get(pk=report['dataset'])
+            except Exception: 
+                ex_type, ex_value, ex_traceback = sys.exc_info()
+                return JsonResponse(data = {"message": '%s %s'%(ex_type, ex_value)}, status=status.HTTP_400_BAD_REQUEST)
+            ReportProblem.objects.create(**report).save()
+            return JsonResponse(data = {"message": "Report created successfully"}, status=status.HTTP_201_CREATED) 
+        return JsonResponse(report_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        data = JSONParser().parse(request)
+        queryset = ReportProblem.objects.all()
+        report = get_object_or_404(queryset, pk=pk)
+        serializer = ReportProblemSerializer(report, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 

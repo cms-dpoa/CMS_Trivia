@@ -15,8 +15,8 @@ def get_analysis():
 
     return analysis
 
-def get_votes(dataset):
 
+def get_votes(dataset):
     dataset = Data.objects.get(pk = dataset)
 
     #Get all votes for dataset

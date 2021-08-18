@@ -8,6 +8,7 @@ import questionReducer from "./ducks/questionDucks";
 import voteReducer from "./ducks/voteDucks";
 import gameReducer from "./ducks/gameDucks";
 import scoreReducer from "./ducks/scoreDucks";
+import reportProblemReducer from "./ducks/reportProblemDuck";
 
 const rootReducer = combineReducers({
   labels: labelReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   scores: scoreReducer,
   votes: voteReducer,
   game: gameReducer,
+  reportProblems: reportProblemReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

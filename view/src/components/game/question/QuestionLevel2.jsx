@@ -21,7 +21,12 @@ const QuestionLevel2 = ({
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getLabelsAction());
+    const excludeMiscellaneous = true;
+    const checkedLabels = true;
+    const createdLabels = null;
+    dispatch(
+      getLabelsAction(excludeMiscellaneous, checkedLabels, createdLabels)
+    );
   }, []);
 
   const labels = useSelector((store) => store.labels.array);

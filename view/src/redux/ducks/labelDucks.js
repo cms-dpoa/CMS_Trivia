@@ -9,6 +9,8 @@ const data = {
 
 const GET_LABELS = "GET_LABELS";
 const CREATE_NEW_LABEL = "CREATE_NEW_LABEL";
+const UPDATE_LABEL = "UPDATE_LABEL";
+const DELETE_LABEL = "DELETE_LABEL";
 
 export default function labelReducer(state = data, action) {
   switch (action.type) {
@@ -16,18 +18,30 @@ export default function labelReducer(state = data, action) {
       return { ...state, array: action.payload };
     case CREATE_NEW_LABEL:
       return state;
+    case UPDATE_LABEL:
+      return { ...state, array: action.payload };
+    case DELETE_LABEL:
+      return { ...state, array: action.payload };
     default:
       return state;
   }
 }
 
-export const getLabelsAction = () => async (dispatch) => {
-  const res = await axios.get(ENDPOINT_LABEL);
-  dispatch({
-    type: GET_LABELS,
-    payload: res.data,
-  });
-};
+export const getLabelsAction =
+  (excludeMiscellaneous, checked, created) => async (dispatch) => {
+    const params = {
+      params: {
+        exclude_miscellaneous: excludeMiscellaneous,
+        created,
+        checked,
+      },
+    };
+    const res = await axios.get(ENDPOINT_LABEL, params);
+    dispatch({
+      type: GET_LABELS,
+      payload: res.data,
+    });
+  };
 
 export const createLabelAction = (label) => async (dispatch) => {
   const res = await axios.post(ENDPOINT_LABEL, label);
@@ -38,8 +52,25 @@ export const createLabelAction = (label) => async (dispatch) => {
       toast.warning(message, { ...configToast, className: "text-dark" });
     else toast.success(message, configToast);
   }
-
   dispatch({
     type: CREATE_NEW_LABEL,
+  });
+};
+
+export const updateLabelsAction = (jsonLabel) => async (dispatch) => {
+  await axios.put(`${ENDPOINT_LABEL}${jsonLabel.id_label}/`, jsonLabel);
+  const res = await axios.get(ENDPOINT_LABEL);
+  dispatch({
+    type: UPDATE_LABEL,
+    payload: res.data,
+  });
+};
+
+export const deleteLabelsAction = (idLabel) => async (dispatch) => {
+  await axios.delete(`${ENDPOINT_LABEL}${idLabel}/`);
+  const res = await axios.get(ENDPOINT_LABEL);
+  dispatch({
+    type: DELETE_LABEL,
+    payload: res.data,
   });
 };

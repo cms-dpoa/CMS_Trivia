@@ -26,6 +26,8 @@ SECRET_KEY = 'wf7zt7)isr%&tmtr#%@a(d5*5_(m6&9q7p!g%f1yvdc8=f3m5p'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR/'backup'}
 
 # Application definition
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
     'corsheaders',
+    'dbbackup',
 ]
 
 MIDDLEWARE = [

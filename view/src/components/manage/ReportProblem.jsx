@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Table, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getLabelsAction } from "../../redux/ducks/labelDucks";
+import { getReportProblemsAction } from "../../redux/ducks/reportProblemDuck";
 import "./ReportProblem.css";
 
 const ReportProblem = () => {
@@ -10,10 +10,11 @@ const ReportProblem = () => {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getLabelsAction());
+    dispatch(getReportProblemsAction());
   }, []);
 
-  const problems = useSelector((store) => store.labels.array);
+  const problems = useSelector((store) => store.reportProblems.array);
+  console.log(problems);
 
   const handleClickProblem = (problem) => {
     console.log(problem);
@@ -33,11 +34,11 @@ const ReportProblem = () => {
         <tbody>
           {problems.map((problem, index) => (
             <tr
-              key={problem.id_label}
+              key={problem.id_report_problem}
               onClick={() => handleClickProblem(problem)}
             >
               <td className="col-1">{index + 1}</td>
-              <td className="col-8">{problem.name}</td>
+              <td className="col-8">{problem.description}</td>
               <td className="col-1 p-0 pt-1">22-08-2021</td>
             </tr>
           ))}

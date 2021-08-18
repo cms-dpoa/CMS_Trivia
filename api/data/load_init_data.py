@@ -12,7 +12,7 @@ def add_labels_to_DB(cursor):
     was_created = list(labels['was_created'].values)
 
     for i in range(len(ids)):
-        command = f"INSERT INTO api_label VALUES({ids[i]}, '{names[i]}', {was_created[i]})"
+        command = f"INSERT INTO api_label VALUES({ids[i]}, '{names[i]}', {was_created[i]}, 1)"
         cursor.execute(command)
     print("Labels added to DB.....OK!")
 

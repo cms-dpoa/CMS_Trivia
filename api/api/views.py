@@ -8,8 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.db.models import Avg
 
-from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer
-from .models import User, Label, Game, Vote, Data
+from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer, ReportProblemSerializer
+from .models import User, Label, Game, Vote, Data, ReportProblem
 from .views_utils import question_level_one, question_level_two, generate_options, misc_categories
 from .analysis import get_analysis, get_votes
 
@@ -37,9 +37,26 @@ class UserViewSet(viewsets.ModelViewSet):
             new_game.save()
         return JsonResponse(data = {"id_game": last_gameid+1})
 
+
 class LabelViewSet(viewsets.ModelViewSet):
-    queryset = Label.objects.all().order_by('id_label')
-    serializer_class = LabelSerializer
+    def list(self, request):
+        queryset = Label.objects.all()
+        parameters = dict(request.GET)
+        exclude_miscellaneous = parameters.get('exclude_miscellaneous')
+        created = parameters.get('created')
+        checked = parameters.get('checked')
+
+        if exclude_miscellaneous is not None:
+            queryset = queryset.exclude(name="Miscellaneous")
+        if created is not None:
+            created = created[0].lower() == 'true'  
+            queryset = queryset.filter(was_created=created)
+        if checked is not None:
+            checked = checked[0].lower() == 'true'  
+            queryset = queryset.filter(was_checked=checked)
+
+        serializer = LabelSerializer(queryset, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
     #Override POST to create new Game instance and return id_game.
     def create(self, request):
@@ -52,6 +69,7 @@ class LabelViewSet(viewsets.ModelViewSet):
             new_label = Label.objects.create(id_label = last_labelid+1, name=label_data["name"], was_created = True)
             new_label.save()
             return JsonResponse(data = {"id_label": last_labelid+1,"message": "Label created correctly."})
+
 
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all().order_by('id_game')
@@ -76,6 +94,7 @@ class GameViewSet(viewsets.ModelViewSet):
         return JsonResponse(data = {"score": game_data["score"], \
                                 "mean_score": mean_score})
 
+
 class VoteViewSet(viewsets.ModelViewSet):
     queryset = Vote.objects.all().order_by('id')
     serializer_class = VoteSerializer
@@ -99,9 +118,11 @@ class VoteViewSet(viewsets.ModelViewSet):
         except:
             return JsonResponse({"message":"Error"})
 
+
 class DataViewSet(viewsets.ModelViewSet):
     queryset = Data.objects.all().order_by('id_dataset')
     serializer_class = DataSerializer
+
 
 class all_questions(viewsets.GenericViewSet):
     def list(self, request):
@@ -126,6 +147,7 @@ class all_questions(viewsets.GenericViewSet):
 
         return JsonResponse(data = questions)
 
+
 class analysisView(viewsets.GenericViewSet):
     def list(self, request):
         return JsonResponse(data = get_analysis())
@@ -133,6 +155,7 @@ class analysisView(viewsets.GenericViewSet):
     def create(self, request):
         dataset = request.data["dataset"]
         return JsonResponse(data = get_votes(dataset = dataset))
+
 
 class leaderboard(viewsets.GenericViewSet):
     def list(self, request):
@@ -147,6 +170,7 @@ class leaderboard(viewsets.GenericViewSet):
             ranking[i+1] = {"username": u.username, "num_games": num_games, "score": u.mean_score}
         return JsonResponse(data = ranking)
 
+
 class myscores(viewsets.GenericViewSet):
     def list(self, request):
         try:
@@ -158,3 +182,9 @@ class myscores(viewsets.GenericViewSet):
             return JsonResponse(data = scores)
         except:
             return JsonResponse(data = {"message": "Error"})
+
+
+class ReportProblemViewSet(viewsets.ModelViewSet):
+    queryset = ReportProblem.objects.all().order_by('date')
+    serializer_class = ReportProblemSerializer
+

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Data, Label, Game, Vote
+from .models import User, Data, Label, Game, Vote, ReportProblem
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -14,15 +14,25 @@ class DataSerializer(serializers.HyperlinkedModelSerializer):
 class LabelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Label
-        fields = ('id_label', 'name', 'was_created')
+        fields = ('id_label', 'name', 'was_created', 'was_checked')
 
 class GameSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Game
         fields = ('id_game', 'username', 'score')
+        depth=1
+
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Vote
         fields = ('id', 'dataset', 'label', 'user', 'game')
+        depth=1
+    
+
+class ReportProblemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReportProblem
+        fields = ('id_report_problem', 'description', 'date', 'status', 'user', 'dataset')
+        depth=1
 

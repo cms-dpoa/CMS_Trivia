@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { Table, Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { getLabelsAction } from "../../redux/ducks/labelDucks";
+import {
+  getLabelsAction,
+  updateLabelsAction,
+  deleteLabelsAction,
+} from "../../redux/ducks/labelDucks";
 
 const NewLabelRequest = () => {
   const dispatch = useDispatch();
@@ -19,12 +23,12 @@ const NewLabelRequest = () => {
   const labels = useSelector((store) => store.labels.array);
 
   const handleAcceptNewLabel = (label) => {
-    console.log(label);
-    console.log("Accept");
+    const labelChanged = { ...label, was_checked: true };
+    dispatch(updateLabelsAction(labelChanged));
   };
 
   const handleDeleteLabel = (label) => {
-    console.log("Delete");
+    dispatch(deleteLabelsAction(label.id_label));
   };
 
   return (

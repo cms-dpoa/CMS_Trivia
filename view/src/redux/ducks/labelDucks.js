@@ -21,13 +21,23 @@ export default function labelReducer(state = data, action) {
   }
 }
 
-export const getLabelsAction = () => async (dispatch) => {
-  const res = await axios.get(ENDPOINT_LABEL);
-  dispatch({
-    type: GET_LABELS,
-    payload: res.data,
-  });
-};
+export const getLabelsAction =
+  (excludeMiscellaneous, checked, created) => async (dispatch) => {
+    const params = {
+      params: {
+        exclude_miscellaneous: excludeMiscellaneous,
+        created,
+        checked,
+      },
+    };
+
+    console.log(params);
+    const res = await axios.get(ENDPOINT_LABEL, params);
+    dispatch({
+      type: GET_LABELS,
+      payload: res.data,
+    });
+  };
 
 export const createLabelAction = (label) => async (dispatch) => {
   const res = await axios.post(ENDPOINT_LABEL, label);

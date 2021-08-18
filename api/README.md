@@ -1,5 +1,6 @@
 # API CMS_Trivia
 
+python .\manage.py makemigrations
 python .\manage.py migrate
 python .\data\load_init_data.py
 

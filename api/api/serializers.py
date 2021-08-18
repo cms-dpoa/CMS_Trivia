@@ -33,6 +33,6 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
 class ReportProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportProblem
-        fields = ('id_report_problem', 'description', 'date', 'status', 'user', 'dataset')
+        fields = ('id_report_problem', 'title' ,'description', 'date', 'status', 'user', 'dataset')
         depth=1
 

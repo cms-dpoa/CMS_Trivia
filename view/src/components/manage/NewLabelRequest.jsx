@@ -8,7 +8,12 @@ const NewLabelRequest = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getLabelsAction());
+    const excludeMiscellaneous = null;
+    const checkedLabels = false;
+    const createdLabels = null;
+    dispatch(
+      getLabelsAction(excludeMiscellaneous, checkedLabels, createdLabels)
+    );
   }, []);
 
   const labels = useSelector((store) => store.labels.array);
@@ -19,7 +24,7 @@ const NewLabelRequest = () => {
   };
 
   const handleDeleteLabel = (label) => {
-    console.log("Accept");
+    console.log("Delete");
   };
 
   return (

@@ -23,7 +23,11 @@ const ModalReportProblem = ({ show, setShow, username, questions }) => {
 
   const handleCreateReportProblem = (event) => {
     event.preventDefault();
-    dispatch(createReportProblemAction(reportProblem));
+    const dataset = Object.values(questions).find(
+      (question) => question.title === reportProblem.dataset
+    ).id_data;
+
+    dispatch(createReportProblemAction({ ...reportProblem, dataset }));
   };
 
   return (
@@ -32,14 +36,14 @@ const ModalReportProblem = ({ show, setShow, username, questions }) => {
         show={show}
         onHide={handleClose}
         backdrop="static"
-        size="md"
+        size="lg"
         keyboard={false}
         centered
       >
         <Modal.Header closeButton>
           <Modal.Title>Report Problem</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="p-4">
           <Form>
             <Form.Group>
               <Form.Label className="font-weight-bold">Title*</Form.Label>
@@ -67,11 +71,15 @@ const ModalReportProblem = ({ show, setShow, username, questions }) => {
             <Form.Group>
               <Form.Label className="font-weight-bold">Dataset*</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Dataset"
+                as="select"
                 name="dataset"
                 onChange={handleOnChange}
-              />
+              >
+                <option hidden>Select Dataset</option>
+                {Object.values(questions).map((question) => (
+                  <option key={question.id_data}>{question.title}</option>
+                ))}
+              </Form.Control>
             </Form.Group>
 
             <Form.Group>

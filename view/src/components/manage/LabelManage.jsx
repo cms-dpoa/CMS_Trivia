@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table, Container, Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {
-  getLabelsAction,
   updateLabelsAction,
   deleteLabelsAction,
 } from "../../redux/ducks/labelDucks";
 
-const NewLabelRequest = () => {
+const LabelManage = ({ labels, labelsToCheck }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const excludeMiscellaneous = null;
-    const checkedLabels = false;
-    const createdLabels = null;
-    dispatch(
-      getLabelsAction(excludeMiscellaneous, checkedLabels, createdLabels)
-    );
-  }, []);
-
-  const labels = useSelector((store) => store.labels.array);
 
   const handleAcceptNewLabel = (label) => {
     const labelChanged = { ...label, was_checked: true };
@@ -31,6 +19,8 @@ const NewLabelRequest = () => {
     dispatch(deleteLabelsAction(label.id_label));
   };
 
+  const showLabelCreatedText = (wasCreated) => (wasCreated ? "Yes" : "No");
+
   return (
     <Container>
       <Table hover responsive="sm">
@@ -38,7 +28,7 @@ const NewLabelRequest = () => {
           <tr>
             <th className="col-1">#</th>
             <th className="col-8">Label Name</th>
-            <th className="col-1"> </th>
+            <th className="col-1">{labelsToCheck ? null : "Created"}</th>
             <th className="col-1"> </th>
           </tr>
         </thead>
@@ -49,13 +39,17 @@ const NewLabelRequest = () => {
               <td className="col-8">{label.name}</td>
 
               <td className="col-1 p-0 pt-1">
-                <Button
-                  variant="success"
-                  className="pt-1"
-                  onClick={() => handleAcceptNewLabel(label)}
-                >
-                  Accept
-                </Button>
+                {labelsToCheck ? (
+                  <Button
+                    variant="success"
+                    className="pt-1"
+                    onClick={() => handleAcceptNewLabel(label)}
+                  >
+                    Accept
+                  </Button>
+                ) : (
+                  showLabelCreatedText(label.was_created)
+                )}
               </td>
 
               <td className="col-1 p-0 pt-1">
@@ -75,4 +69,4 @@ const NewLabelRequest = () => {
   );
 };
 
-export default NewLabelRequest;
+export default LabelManage;

@@ -59,12 +59,7 @@ export const createLabelAction = (label) => async (dispatch) => {
 
 export const updateLabelsAction = (jsonLabel) => async (dispatch) => {
   await axios.put(`${ENDPOINT_LABEL}${jsonLabel.id_label}/`, jsonLabel);
-  const params = {
-    params: {
-      checked: false,
-    },
-  };
-  const res = await axios.get(ENDPOINT_LABEL, params);
+  const res = await axios.get(ENDPOINT_LABEL);
   dispatch({
     type: UPDATE_LABEL,
     payload: res.data,
@@ -73,12 +68,7 @@ export const updateLabelsAction = (jsonLabel) => async (dispatch) => {
 
 export const deleteLabelsAction = (idLabel) => async (dispatch) => {
   await axios.delete(`${ENDPOINT_LABEL}${idLabel}/`);
-  const params = {
-    params: {
-      checked: false,
-    },
-  };
-  const res = await axios.get(ENDPOINT_LABEL, params);
+  const res = await axios.get(ENDPOINT_LABEL);
   dispatch({
     type: DELETE_LABEL,
     payload: res.data,

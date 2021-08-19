@@ -25,20 +25,19 @@ class UserViewSet(viewsets.ModelViewSet):
         user_data = request.data
         prev_user = User.objects.filter(username = user_data["username"])
         #Check if username already exists.
+        new_game = None
         if prev_user.exists():
             #Instantiate new game
-            last_gameid = Game.objects.latest('id_game').id_game
-            new_game = Game.objects.create(id_game = last_gameid+1, username=prev_user[0])
+            new_game = Game.objects.create(username=prev_user[0])
             new_game.save()
         else:
             #Create new_user with mean_score = -1
             new_user = User.objects.create(username=user_data["username"], mean_score = -1)
             new_user.save()
             #Instantiate new game
-            last_gameid = Game.objects.latest('id_game').id_game
-            new_game = Game.objects.create(id_game = last_gameid+1, username=new_user)
+            new_game = Game.objects.create(username=new_user)
             new_game.save()
-        return JsonResponse(data = {"id_game": last_gameid+1})
+        return JsonResponse(data = {"id_game": new_game.id_game})
 
 
 class LabelViewSet(viewsets.ModelViewSet):

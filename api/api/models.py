@@ -9,7 +9,7 @@ class User(models.Model):
 
 
 class Game(models.Model):
-    id_game = models.IntegerField(primary_key=True)
+    id_game = models.AutoField(primary_key=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.FloatField(default=-1)
 

@@ -6,7 +6,7 @@ import { GrDocumentCsv } from "react-icons/gr";
 import { CSVLink } from "react-csv";
 
 const TableLabaled = ({ analysis }) => {
-  console.log(analysis);
+  // console.log(analysis);
   // const dispatch = useDispatch();
 
   // useEffect(() => {

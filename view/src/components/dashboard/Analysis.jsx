@@ -1,34 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { Container, Form, Col, Row } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { getAnalisisAction } from "../../redux/ducks/analysisDucks";
+import React, { useState, Fragment } from "react";
+import {
+  Container,
+  Form,
+  Col,
+  Row,
+  Button,
+  Popover,
+  OverlayTrigger,
+} from "react-bootstrap";
+import { IoMdHelpCircle } from "react-icons/io";
 import TopReliability from "./charts/TopReliability";
 import PieTop5 from "./charts/PieTop5";
 
-const Dashboard = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAnalisisAction());
-  }, []);
-
-  const analysis = useSelector((store) => store.analysis.array);
+const Dashboard = ({ data }) => {
   const [infoDataset, setInfoDataset] = useState({
     title: "",
     labels: [],
-    amplitudes: [],
+    votes: [],
+    scores: [],
   });
-  const { title, labels, amplitudes } = infoDataset;
+  const { title, labels, votes, scores } = infoDataset;
 
   const handleDatasetSelected = (event) => {
     const dataset = event.target.value;
-    setInfoDataset(analysis[dataset]);
+    if (data[dataset]) {
+      setInfoDataset(data[dataset]);
+    }
   };
 
   const clearDatasetSelected = (event) => {
     // eslint-disable-next-line no-param-reassign
     event.target.value = "";
   };
+
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">How the score is computed?</Popover.Title>
+      <Popover.Content>
+        And here's some <strong>amazing</strong> content. It's very engaging.
+        right?
+      </Popover.Content>
+    </Popover>
+  );
 
   return (
     <Container>
@@ -45,24 +58,35 @@ const Dashboard = () => {
               onChange={handleDatasetSelected}
             />
             <datalist id="datalistDatasetsOptions">
-              {Object.values(analysis).map((dataset) => (
-                // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                <option key={dataset.title} value={dataset.title} />
-              ))}
+              {data
+                ? Object.values(data).map((dataset) => (
+                    // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                    <option key={dataset.title} value={dataset.title} />
+                  ))
+                : null}
             </datalist>
           </Col>
         </Form.Group>
       </Form>
 
       {title !== "" ? (
-        <Row className="mt-5">
-          <Col className="col-12 d-none d-sm-block" sm="9">
-            <TopReliability labels={labels} amplitudes={amplitudes} />
-          </Col>
-          <Col className="col-12" sm="3">
-            <PieTop5 labels={labels} amplitudes={amplitudes} />
-          </Col>
-        </Row>
+        <Fragment>
+          <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <Button variant="light" className="mt-3 mb-3">
+              Score <IoMdHelpCircle />
+            </Button>
+          </OverlayTrigger>
+
+          <Row>
+            <Col className="col-12 d-none d-sm-block" sm="9">
+              <TopReliability labels={labels} votes={votes} scores={scores} />
+            </Col>
+            <Col className="col-12" sm="3">
+              <h6 className="text-center">Votes</h6>
+              <PieTop5 labels={labels} votes={votes} scores={scores} />
+            </Col>
+          </Row>
+        </Fragment>
       ) : (
         <Container className="text-center mt-5 pt-5">
           <h4>Select a Dataset</h4>

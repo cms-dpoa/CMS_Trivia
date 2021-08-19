@@ -47,7 +47,7 @@ class Vote(models.Model):
     knowledgeLevel = models.FloatField()
 
     def __str__(self):
-        return f"{self.id}, {self.dataset}, {self.label}"
+        return f"{self.id_vote}, {self.dataset}, {self.label}"
 
 
 class ReportProblem(models.Model):

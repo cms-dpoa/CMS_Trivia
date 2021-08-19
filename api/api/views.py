@@ -6,8 +6,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 import sys
 
-from django_pandas.io import read_frame
-
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.db.models import Avg

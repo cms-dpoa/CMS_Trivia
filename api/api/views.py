@@ -145,6 +145,27 @@ class DataViewSet(viewsets.ModelViewSet):
     queryset = Data.objects.all().order_by('id_dataset')
     serializer_class = DataSerializer
 
+    def retrieve(self, request, pk=None):
+        queryset = Data.objects.all()
+        dataset = get_object_or_404(queryset, pk=pk)
+        serializer = DataSerializer(dataset)
+        return JsonResponse(serializer.data)        
+
+
+    def update(self, request, pk=None):
+        data = JSONParser().parse(request)
+        queryset = Data.objects.all()
+        dataset = get_object_or_404(queryset, pk=pk)
+        label = None
+        try: 
+            label = get_object_or_404(Label.objects.all(), pk=data['original_label'])
+        except:
+            return JsonResponse(data = {"message": 'Wrong Label'}, status=status.HTTP_400_BAD_REQUEST)
+        dataset.original_label = label
+        dataset.save()
+        serializer = DataSerializer(dataset)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+
 
 class all_questions(viewsets.GenericViewSet):
     def list(self, request):

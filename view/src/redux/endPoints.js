@@ -11,5 +11,5 @@ export const ENDPOINT_VOTE = `${MAIN}/votes/`;
 export const ENDPOINT_USER = `${MAIN}/users/`;
 export const ENDPOINT_LEADERBOARD = `${MAIN}/leaderboard/`;
 export const ENDPOINT_MY_SCORE = `${MAIN}/myscores/`;
-export const ENDPOINT_DATA = `${MAIN}/datas/`;
+export const ENDPOINT_DATASET = `${MAIN}/datas/`;
 export const ENDPOINT_REPORT_PROBLEMS = `${MAIN}/reportProblems/`;

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import GameOver from "./GameOver";
@@ -87,7 +87,6 @@ const MillionaireGame = (props) => {
 
   return (
     <Container>
-      <ToastContainer />
       {numQuestion > 10 ? (
         <GameOver score={score} />
       ) : (

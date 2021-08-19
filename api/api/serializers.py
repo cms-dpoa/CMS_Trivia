@@ -9,7 +9,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class DataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Data
-        fields = ('id_dataset', 'title', 'original_label_id', 'year')
+        fields = ('id_dataset', 'title', 'original_label', 'year')
+        depth=1
+
 
 class LabelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -34,5 +36,5 @@ class ReportProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportProblem
         fields = ('id_report_problem', 'title' ,'description','suggested_solution', 'date', 'status', 'user', 'dataset')
-        depth=1
+        depth=2
 

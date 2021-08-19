@@ -11,7 +11,7 @@ import "./ReportProblem.css";
 const ReportProblem = () => {
   const dispatch = useDispatch();
 
-  const [showDetailProblem, setShowDetailProblem] = useState(false);
+  const [showModalDetailProblem, setShowModalDetailProblem] = useState(false);
   const [problemSelected, setProblemSelected] = useState(null);
 
   useEffect(() => {
@@ -24,14 +24,14 @@ const ReportProblem = () => {
     const problemChanged = { ...problemSelect, status: "IN POGRESS" };
     setProblemSelected(problemChanged);
     dispatch(updateReportProblemAction(problemChanged));
-    setShowDetailProblem(true);
+    setShowModalDetailProblem(true);
   };
 
   return (
     <Container>
       <ModalProblemDetails
-        show={showDetailProblem}
-        setShow={setShowDetailProblem}
+        show={showModalDetailProblem}
+        setShow={setShowModalDetailProblem}
         problem={problemSelected}
       />
 

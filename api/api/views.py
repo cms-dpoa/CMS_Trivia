@@ -117,26 +117,26 @@ class GameViewSet(viewsets.ModelViewSet):
 
 
 class VoteViewSet(viewsets.ModelViewSet):
-    queryset = Vote.objects.all().order_by('id')
+    queryset = Vote.objects.all().order_by('id_vote')
     serializer_class = VoteSerializer
     
     #Override POST to create new Game instance and return id_game.
     def create(self, request):
         vote_data = request.data
         try:
-            last_voteid = Vote.objects.latest('id').id
             v_dataset = Data.objects.get(id_dataset = int(vote_data["dataset"]))
             v_label = Label.objects.get(id_label = int(vote_data["label"]))
             v_user = User.objects.get(username = vote_data["user"])
             v_game = Game.objects.get(id_game = int(vote_data["game"]))
-            new_vote = Vote.objects.create(id = last_voteid+1,\
-                                            dataset = v_dataset, \
-                                            label = v_label, \
-                                            user = v_user, \
-                                            game = v_game)
+            new_vote = Vote.objects.create(dataset = v_dataset, 
+                                           label = v_label, 
+                                           user = v_user, 
+                                           game = v_game,
+                                           knowledgeLevel=vote_data["knowledgeLevel"])
             new_vote.save()
             return JsonResponse({"message":"Vote created"})
-        except:
+        except Exception as error:
+            print(error)
             return JsonResponse({"message":"Error"})
 
 

@@ -83,10 +83,10 @@ const ModalReportProblem = ({ show, setShow, username, questions }) => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label className="font-weight-bold">Solution</Form.Label>
+              <Form.Label className="font-weight-bold">Solution*</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Suggest a solution*"
+                placeholder="Suggest a solution"
                 name="suggested_solution"
                 onChange={handleOnChange}
               />

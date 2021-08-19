@@ -3,7 +3,8 @@ from django.db import models
 class User(models.Model):
     username = models.CharField(max_length=20, primary_key=True)
     mean_score = models.FloatField(default=-1)
-    
+    is_admin = models.BooleanField(default=False)
+
     def __str__(self):
         return self.username
 
@@ -38,6 +39,7 @@ class Data(models.Model):
 
 
 class Vote(models.Model):
+    id_vote = models.AutoField(primary_key=True)
     dataset = models.ForeignKey(Data, on_delete=models.CASCADE)
     label = models.ForeignKey(Label, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

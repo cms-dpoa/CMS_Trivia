@@ -25,11 +25,11 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
         depth=1
 
 
-class VoteSerializer(serializers.HyperlinkedModelSerializer):
+class VoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vote
-        fields = ('id', 'dataset', 'label', 'user', 'game')
-        depth=1
+        fields = ('id_vote', 'dataset', 'label', 'user', 'game')
+        # depth=1
     
 
 class ReportProblemSerializer(serializers.ModelSerializer):

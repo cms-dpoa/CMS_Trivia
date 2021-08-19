@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -12,8 +12,7 @@ import FooterQuestion from "./question/FooterQuestion";
 import { sendScoreGameLevel1Action } from "../../redux/ducks/gameDucks";
 import { sendVoteAction } from "../../redux/ducks/voteDucks";
 
-const MillionaireGame = (props) => {
-  const { questions, username, idGame } = props;
+const MillionaireGame = ({ questions, username, idGame }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -60,6 +59,12 @@ const MillionaireGame = (props) => {
       );
   };
 
+  useEffect(() => {
+    if (numQuestion === 6) {
+      sendScoreGameLevel1();
+    }
+  }, [numQuestion]);
+
   const NextQuestion = () => {
     if (numQuestion <= 5) {
       setShowOptionsLevel1(initialShowOptionsLevel1);
@@ -70,9 +75,6 @@ const MillionaireGame = (props) => {
         toast.error(<>{toastBody} is incorrect!</>, configToast);
       }
     } else {
-      if (numQuestion === 6) {
-        sendScoreGameLevel1();
-      }
       sendLabelDatasetLevel2();
       document.getElementById("question-level-2-form").reset();
       setIsOptionLevel2Selected(false);
@@ -91,7 +93,7 @@ const MillionaireGame = (props) => {
         <GameOver score={score} />
       ) : (
         <Fragment>
-          {questions.length !== 0 ? (
+          {questions && question ? (
             <Fragment>
               <QuestionLayout
                 score={score}

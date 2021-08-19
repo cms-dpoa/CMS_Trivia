@@ -73,7 +73,6 @@ def question_level_one(mode = 'normal'):
     return question
     
 def question_level_two(categories):
-
     #Sample artifical category
     chosen_category = random.choice(categories)
 
@@ -111,4 +110,3 @@ def misc_categories():
     artificial_categories = np.unique(titles_underscore, return_counts = False)
 
     return artificial_categories
-

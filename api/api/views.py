@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 import sys
 
+from django_pandas.io import read_frame
 
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
@@ -13,7 +14,7 @@ from django.db.models import Avg
 
 from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer, ReportProblemSerializer
 from .models import User, Label, Game, Vote, Data, ReportProblem
-from .views_utils import question_level_one, question_level_two, generate_options, misc_categories
+from .views_utils import question_level_one, question_level_two, misc_categories
 from .analysis import get_analysis, get_votes
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -168,7 +169,6 @@ class DataViewSet(viewsets.ModelViewSet):
 
 class all_questions(viewsets.GenericViewSet):
     def list(self, request):
-
         try:
             mode = request.GET["mode"]
         except:
@@ -180,12 +180,24 @@ class all_questions(viewsets.GenericViewSet):
 
         #Build 10 question dictionary for game setup
         questions = {}
-        for num_question in range(1, 11):
+        ids_datasets = []
+        num_question=1
+        while num_question<11:
             tag = num_question
             if num_question<6:
-                questions[tag] = question_level_one(mode)
-            else:
-                questions[tag] = question_level_two(level_two_categories)
+                question = question_level_one(mode)
+                id_dataset_question = question['id_data']
+                if(  id_dataset_question not in ids_datasets):
+                    questions[tag] = question
+                    ids_datasets.append(id_dataset_question)
+                    num_question += 1
+            else:                
+                question = question_level_two(level_two_categories)
+                id_dataset_question = question['id_data']
+                if(  id_dataset_question not in ids_datasets):
+                    questions[tag] = question
+                    ids_datasets.append(id_dataset_question)
+                    num_question += 1
 
         return JsonResponse(data = questions)
 

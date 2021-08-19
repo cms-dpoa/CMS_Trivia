@@ -29,7 +29,7 @@ class VoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vote
         fields = ('id_vote', 'dataset', 'label', 'user', 'game', 'knowledgeLevel')
-        # depth=1
+        depth=1
     
 
 class ReportProblemSerializer(serializers.ModelSerializer):

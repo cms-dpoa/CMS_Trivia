@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-def get_analysis():
+def get_votes_per_dataset():
     analysis = {}
 
     # Get the list of *unique* voted datasets (i.e: datasets that appeared in level 2)
@@ -11,7 +11,9 @@ def get_analysis():
 
     # Get vote statistics for each dataset
     for dataset in voted_datasets:
-        analysis[Data.objects.get(pk=dataset).title] = get_votes(dataset)
+        votes = get_votes(dataset)
+        if( sum(votes['amplitudes']) > 0 ):
+            analysis[Data.objects.get(pk=dataset).title] = votes
 
     return analysis
 
@@ -38,8 +40,14 @@ def get_votes(dataset):
     labels = list(votes_df["labels"].values)[:3]
     amplitudes = list(votes_df["player_score"].values)[:3]
     
-
     return {"title": dataset.title, 
             "labels": labels, \
             "amplitudes": amplitudes}
 
+
+def get_analysis():
+    analysis = {
+        'votesPerDataset': get_votes_per_dataset()
+    }
+
+    return analysis

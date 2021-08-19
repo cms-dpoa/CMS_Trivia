@@ -3,8 +3,15 @@ import { Container, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { MdReportProblem, MdNavigateNext } from "react-icons/md";
 import ModalReportProblem from "./ModalReportProblem";
+import getURLOpenDataCERNFromLabel from "../../utils/linkShowRun1";
 
-const FooterQuestion = ({ numQuestionState, setQuestion, questions }) => {
+const FooterQuestion = ({
+  numQuestionState,
+  setQuestion,
+  questions,
+  activeShowRun1Btn,
+  labelSelected,
+}) => {
   const { numQuestion, setNumQuestion } = numQuestionState;
   const [showModalReportProblem, setShowModalReportProblem] = useState(false);
 
@@ -34,6 +41,16 @@ const FooterQuestion = ({ numQuestionState, setQuestion, questions }) => {
         onClick={handleReportProblem}
       >
         <MdReportProblem size="1.5em" /> Report Problem
+      </Button>
+
+      <Button
+        variant="info"
+        className="mt-2 mt-sm-0"
+        target="_blank"
+        disabled={!activeShowRun1Btn}
+        href={getURLOpenDataCERNFromLabel(labelSelected)}
+      >
+        Show Run-1 open data with this label
       </Button>
 
       {numQuestion === 1 ? (

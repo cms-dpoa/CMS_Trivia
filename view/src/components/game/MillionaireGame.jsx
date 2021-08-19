@@ -123,6 +123,10 @@ const MillionaireGame = ({ questions, username, idGame }) => {
               <FooterQuestion
                 numQuestionState={{ numQuestion, setNumQuestion }}
                 setQuestion={setQuestion}
+                activeShowRun1Btn={activateBtnSendAnswer}
+                labelSelected={
+                  optionSelected !== {} ? optionSelected.name : null
+                }
               />
             </Fragment>
           ) : (

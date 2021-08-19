@@ -107,9 +107,10 @@ const InfoGame = () => {
                   <div className="timeline-body">
                     <p className="text-muted">
                       There&#39;s also the possibility to create a new category.
-                      How much we trust your answers will be based on your score
-                      in Level 1. By answering these questions you will help
-                      built a more complete CMS open data portal.
+                      We trust the answers based on the option you choose on
+                      your expertise and on your score in Level1. By answering
+                      these questions you will help built a more complete CMS
+                      open data portal.
                     </p>
                   </div>
                 </div>

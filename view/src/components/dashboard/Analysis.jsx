@@ -7,10 +7,12 @@ import {
   Button,
   Popover,
   OverlayTrigger,
+  Image,
 } from "react-bootstrap";
 import { IoMdHelpCircle } from "react-icons/io";
 import TopReliability from "./charts/TopReliability";
 import PieTop5 from "./charts/PieTop5";
+import ScoreImg from "../../assets/score.png";
 
 const Dashboard = ({ data }) => {
   const [infoDataset, setInfoDataset] = useState({
@@ -34,11 +36,15 @@ const Dashboard = ({ data }) => {
   };
 
   const popover = (
-    <Popover id="popover-basic">
+    <Popover style={{ maxWidth: "40%" }}>
       <Popover.Title as="h3">How the score is computed?</Popover.Title>
       <Popover.Content>
-        And here's some <strong>amazing</strong> content. It's very engaging.
-        right?
+        Each user has a score (call <strong>Mean Score</strong>), which is
+        obtained with the questions of level 1. Also, for each dataset labeled
+        in level 2, the
+        <strong> level of knowledge</strong> of that label is obtained.
+        Therefore, the score is calculated:
+        <Image src={ScoreImg} alt="score metric" className="mt-3" thumbnail />
       </Popover.Content>
     </Popover>
   );
@@ -72,7 +78,7 @@ const Dashboard = ({ data }) => {
       {title !== "" ? (
         <Fragment>
           <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-            <Button variant="light" className="mt-3 mb-3">
+            <Button variant="light" className="mt-3 mb-3 d-none d-sm-block">
               Score <IoMdHelpCircle />
             </Button>
           </OverlayTrigger>
@@ -82,7 +88,7 @@ const Dashboard = ({ data }) => {
               <TopReliability labels={labels} votes={votes} scores={scores} />
             </Col>
             <Col className="col-12" sm="3">
-              <h6 className="text-center">Votes</h6>
+              <h6 className="text-center mt-3 mt-sm-0">Votes</h6>
               <PieTop5 labels={labels} votes={votes} scores={scores} />
             </Col>
           </Row>

@@ -1,12 +1,14 @@
 from .models import User, Vote, Data
 import pandas as pd
+from django.db.models import Count
 
 
 def get_votes_per_dataset():
     analysis = {}
 
     # Get the list of *unique* voted datasets (i.e: datasets that appeared in level 2)
-    voted_datasets = Vote.objects.all().values_list('dataset', flat=True).distinct()
+    voted_sorted = Vote.objects.all().values('dataset').annotate(total=Count('dataset')).order_by('-total')
+    voted_datasets = voted_sorted.values_list('dataset', flat=True).distinct()
 
     # Get vote statistics for each dataset
     for dataset in voted_datasets:
@@ -38,6 +40,7 @@ def get_votes(dataset):
     votes_score_df = votes_score_df.merge(count_label)
     votes_score_df.columns = ['labels','score','votes']
     votes_score_df.sort_values(by='score', ascending=False, inplace=True)
+    total_votes = float(votes_score_df['votes'].sum())
     votes_score_df = votes_score_df.head(3)
     # votes_df = votes_df[["labels", "player_score"]].groupby("labels", as_index=False).sum()
     
@@ -50,21 +53,48 @@ def get_votes(dataset):
     return {"title": dataset.title, 
             "labels": labels, 
             "votes": votes,
+            "total_votes":total_votes,
             "scores": scores}
 
 
 
+def get_top_2_labels_per_dataset(votes_per_dataset):
+    datasets = []
 
-def get_top_2_labels_per_dataset():
-    datasets = {}
+    for title_dataset, info_dataset in votes_per_dataset.items():
+        labels = info_dataset['labels']
+        votes = info_dataset['votes']
+        scores = info_dataset['scores']
+        total_votes = info_dataset['total_votes']
+        top_label_2 = ''
+        percentage_top_label_2 = ''
+        score_top_label_2 = ''
+
+        if len(labels)>1:
+            top_label_2 = labels[1]
+            percentage_top_label_2 = 100*votes[1]/total_votes
+            score_top_label_2 = scores[1]
+
+        info_analysis = {"title": title_dataset,
+                        "votes": total_votes,
+                        "top_label_1": labels[0],
+                        "percentage_top_label_1": 100*votes[0]/total_votes,
+                        "score_top_label_1": scores[0],
+                        "top_label_2": top_label_2,
+                        "percentage_top_label_2": percentage_top_label_2,
+                        "score_top_label_2": score_top_label_2,
+                        }
+
+        datasets.append(info_analysis)
     return datasets    
 
 
 
 def get_analysis():
+    votes_per_dataset = get_votes_per_dataset()
     analysis = {
-        'votes_per_dataset': get_votes_per_dataset(),
-        'top2_labels_per_dataset': get_top_2_labels_per_dataset()
+        'votes_per_dataset': votes_per_dataset,
+        'top2_labels_per_dataset': get_top_2_labels_per_dataset(votes_per_dataset)
     }
 
     return analysis

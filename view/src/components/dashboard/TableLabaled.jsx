@@ -1,50 +1,48 @@
-import React, { useEffect } from "react";
-import { Table, Container, DropdownButton, Dropdown } from "react-bootstrap";
-import { useSelector, useDispatch, connect } from "react-redux";
+import React from "react";
+import {
+  Table,
+  Container,
+  DropdownButton,
+  Dropdown,
+  Col,
+  Row,
+} from "react-bootstrap";
 import { VscJson } from "react-icons/vsc";
 import { GrDocumentCsv } from "react-icons/gr";
 import { CSVLink } from "react-csv";
 
-const TableLabaled = ({ analysis }) => {
-  // console.log(analysis);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getAuthAction());
-  //   }, []);
-
-  // const user = useSelector((store) => store.auth.user);
-
-  const infoDatasetsTable = [
-    {
-      title: "WprimeToWZ_width0p2_M-800...",
-      votes: 55,
-      top_label_1: "Higgs Physics/Standard Model",
-      percentage_top_label_1: 92.1,
-      top_label_2: "Higgs Physics/Beyond Standard Model",
-      percentage_top_label_2: 7.2,
-    },
-    {
-      title: "ADDmonoPhoton_MD-2_d-3_TuneCUETP8M1_13TeV...",
-      votes: 43,
-      top_label_1: "Standard Model Physics/Drell-Yan",
-      percentage_top_label_1: 80.1,
-      top_label_2: "Standard Model Physics/ElectroWeak",
-      percentage_top_label_2: 17.2,
-    },
-    {
-      title: "Muplus_Pt1000-gun/RunIIFall15MiniAODv...",
-      votes: 39,
-      top_label_1: "Supersymmetry",
-      percentage_top_label_1: 72.1,
-      top_label_2: "Physics Modelling",
-      percentage_top_label_2: 27.2,
-    },
-  ];
-
+const TableLabaled = ({ data }) => {
   return (
-    <Container>
-      <h1>Table of labeled datasets</h1>
+    <Container className="mb-5">
+      <Row>
+        <Col>
+          <h1>Table of labeled datasets</h1>
+        </Col>
+        <Col xs={12} md={3} className="text-right mb-3 mb-md-0">
+          {data ? (
+            <DropdownButton id="dropdown-basic-button" title="Download Table ">
+              <Dropdown.Item
+                href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                  JSON.stringify(data)
+                )}`}
+                download="labeled_datasets.json"
+              >
+                Json
+                <VscJson size="1.5em" className="ml-5" />
+              </Dropdown.Item>
+
+              <CSVLink
+                data={data}
+                filename="labeled_datasets.csv"
+                className="dropdown-item"
+              >
+                CSV
+                <GrDocumentCsv size="1.5em" className="ml-5" />
+              </CSVLink>
+            </DropdownButton>
+          ) : null}
+        </Col>
+      </Row>
 
       <Table striped bordered hover responsive>
         <thead>
@@ -52,59 +50,40 @@ const TableLabaled = ({ analysis }) => {
             <th>Dataset</th>
             <th># Votes</th>
             <th>Name Top Label 1</th>
-            <th>% Top Label 1</th>
+            <th>% Label 1</th>
+            <th>Score Label 1</th>
             <th>Name Top Label 2</th>
-            <th>% Top Label 2</th>
+            <th>% Label 2</th>
+            <th>Score Label 2</th>
           </tr>
         </thead>
         <tbody>
-          {infoDatasetsTable.map((infoDataset) => (
-            <tr key={infoDataset.title}>
-              <td>{infoDataset.title}</td>
-              <td>{infoDataset.votes}</td>
-              <td>{infoDataset.top_label_1}</td>
-              <td>{infoDataset.percentage_top_label_1}</td>
-              <td>{infoDataset.top_label_2}</td>
-              <td>{infoDataset.percentage_top_label_2}</td>
-            </tr>
-          ))}
+          {data
+            ? data.map((infoDataset) => (
+                <tr key={infoDataset.title}>
+                  <td>{infoDataset.title}</td>
+                  <td>{infoDataset.votes}</td>
+                  <td>{infoDataset.top_label_1}</td>
+                  <td>{infoDataset.percentage_top_label_1.toFixed(2)}</td>
+                  <td>{infoDataset.score_top_label_1.toFixed(2)}</td>
+                  <td>{infoDataset.top_label_2}</td>
+                  <td>
+                    {infoDataset.percentage_top_label_2 !== ""
+                      ? infoDataset.percentage_top_label_2.toFixed(2)
+                      : null}
+                  </td>
+                  <td>
+                    {infoDataset.score_top_label_2 !== ""
+                      ? infoDataset.score_top_label_2.toFixed(2)
+                      : null}
+                  </td>
+                </tr>
+              ))
+            : null}
         </tbody>
       </Table>
-
-      <DropdownButton id="dropdown-basic-button" title="Download Table ">
-        <Dropdown.Item
-          href={`data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(infoDatasetsTable)
-          )}`}
-          download="labeled_datasets.json"
-        >
-          Json
-          <VscJson size="1.5em" className="ml-5" />
-        </Dropdown.Item>
-
-        <CSVLink
-          data={infoDatasetsTable}
-          filename="labeled_datasets.csv"
-          className="dropdown-item"
-        >
-          CSV
-          <GrDocumentCsv size="1.5em" className="ml-5" />
-        </CSVLink>
-      </DropdownButton>
     </Container>
   );
 };
 
-// Estos valores tienen que estar en el store
-const mapStateToProps = (state) => {
-  return {
-    analysis: state.analysis,
-  };
-};
-
-const mapDispatchToProps = {
-  // getAnalsysDataset,
-};
-
-// export default TableLabaled;
-export default connect(mapStateToProps, null)(TableLabaled);
+export default TableLabaled;

@@ -1,11 +1,10 @@
 import React, { Fragment } from "react";
 import { Modal, Button } from "react-bootstrap";
-import TopReliability from "../../dashboard/charts/TopReliability";
+import { connect } from "react-redux";
+import BarPlotLifelineStatistics from "./BarPlotLifelineStatistics";
 
-const ModalLifelineStatistics = ({ show, setShow, labels }) => {
+const ModalLifelineStatistics = ({ show, setShow, votesLifeline }) => {
   const handleClose = () => setShow(false);
-
-  const amplitudes = [5, 9, 7, 2];
 
   return (
     <Fragment>
@@ -21,7 +20,12 @@ const ModalLifelineStatistics = ({ show, setShow, labels }) => {
           <Modal.Title>Statistics Joker</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <TopReliability labels={labels} amplitudes={amplitudes} />
+          {votesLifeline ? (
+            <BarPlotLifelineStatistics
+              labels={votesLifeline.labels}
+              votes={votesLifeline.votes}
+            />
+          ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -33,4 +37,10 @@ const ModalLifelineStatistics = ({ show, setShow, labels }) => {
   );
 };
 
-export default ModalLifelineStatistics;
+const mapStateToProps = (state) => {
+  return {
+    votesLifeline: state.analysis.votesLifeline,
+  };
+};
+
+export default connect(mapStateToProps, null)(ModalLifelineStatistics);

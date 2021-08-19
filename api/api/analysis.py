@@ -98,3 +98,28 @@ def get_analysis():
     }
 
     return analysis
+
+
+def get_votes_dataset_by_categories(idDataset, label_1, label_2, label_3, label_4):
+    labels = {
+        label_1[0]:0,
+        label_2[0]:0,
+        label_3[0]:0,
+        label_4[0]:0
+    }
+
+    idDataset = idDataset[0]
+    dataset = Data.objects.get(pk = idDataset)
+    #Get all votes of the dataset
+    votes = Vote.objects.filter(dataset = dataset)
+
+    for vote in votes:
+        name_label = vote.label.name
+        if name_label  in labels:
+            labels[name_label] += 1
+
+    return {
+                "idDataset": idDataset, 
+                "labels": list(labels.keys()), 
+                "votes": list(labels.values()),
+            }

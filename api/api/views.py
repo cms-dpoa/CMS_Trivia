@@ -13,7 +13,7 @@ from django.db.models import Avg
 from .serializers import UserSerializer, LabelSerializer, GameSerializer, VoteSerializer, DataSerializer, ReportProblemSerializer
 from .models import User, Label, Game, Vote, Data, ReportProblem
 from .views_utils import question_level_one, question_level_two, misc_categories
-from .analysis import get_analysis, get_votes
+from .analysis import get_analysis, get_votes, get_votes_dataset_by_categories
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('username')
@@ -200,10 +200,20 @@ class all_questions(viewsets.GenericViewSet):
         return JsonResponse(data = questions)
 
 
-class analysisView(viewsets.GenericViewSet):
+class analysisView(viewsets.GenericViewSet):    
     def list(self, request):
+        parameters = dict(request.GET)
+        title_dataset = parameters.get('idDataset')
+        print(parameters)
+
+        if title_dataset is not None:
+            votes = get_votes_dataset_by_categories(**parameters)
+            return JsonResponse(data = votes)
+
         return JsonResponse(data = get_analysis())
-    
+
+
+
     def create(self, request):
         dataset = request.data["dataset"]
         return JsonResponse(data = get_votes(dataset = dataset))

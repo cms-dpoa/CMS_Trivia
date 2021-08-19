@@ -3,16 +3,19 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import { GiMiddleArrow } from "react-icons/gi";
 import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import ModalLifelineStatistics from "./ModalLifelineStatistics";
 import setInvisibleOptions from "../../utils/Lifelines";
+import { getVotesByDatasetAndCateroriesAction } from "../../../redux/ducks/analysisDucks";
 // abbreviation LL = Lifeline
 
 const Lifelines = ({ numQuestion, questions, showOptions }) => {
+  const dispatch = useDispatch();
   const { showOptionsLevel1, setShowOptionsLevel1 } = showOptions;
   const [showModalStatisticsLL, setShowModalStatisticsLL] = useState(false);
   // variable for Statistics Lifeline
-  const { options, correct } = questions[numQuestion];
+  // eslint-disable-next-line camelcase
+  const { id_data, options, correct } = questions[numQuestion];
   const labels = Object.values(options).map((option) => option.name);
 
   const [removeOneLLIsUsed, setRemoveOneLLIsUsed] = useState(false);
@@ -32,6 +35,7 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
   };
 
   const handleStatisticsLL = () => {
+    dispatch(getVotesByDatasetAndCateroriesAction(id_data, labels));
     setStatisticsLLIsUsed(true);
     setShowModalStatisticsLL(true);
   };
@@ -72,7 +76,6 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
             <ModalLifelineStatistics
               show={showModalStatisticsLL}
               setShow={setShowModalStatisticsLL}
-              labels={labels}
             />
           </Button>
         </Col>

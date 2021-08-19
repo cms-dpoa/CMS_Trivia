@@ -6,7 +6,7 @@ const data = {
   token: "",
   user: {
     username: "defaultUser",
-    mean_score: 4.75,
+    mean_score: 0,
   },
 };
 

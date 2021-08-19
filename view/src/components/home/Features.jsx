@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { MdDevices } from "react-icons/md";
-import { FaCircle, FaGamepad } from "react-icons/fa";
+import { FaGamepad } from "react-icons/fa";
 import { ImStatsBars } from "react-icons/im";
 
 const Features = () => {

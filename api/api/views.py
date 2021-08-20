@@ -205,6 +205,7 @@ class analysisView(viewsets.GenericViewSet):
         parameters = dict(request.GET)
         title_dataset = parameters.get('idDataset')
 
+        #This is for the lifeline of the statitic
         if title_dataset is not None:
             votes = get_votes_dataset_by_categories(**parameters)
             return JsonResponse(data = votes)

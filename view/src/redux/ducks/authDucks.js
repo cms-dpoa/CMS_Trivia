@@ -7,6 +7,7 @@ const data = {
   user: {
     username: "defaultUser",
     mean_score: 0,
+    is_admin: false,
   },
 };
 

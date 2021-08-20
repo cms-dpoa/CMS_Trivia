@@ -53,13 +53,15 @@ const LabelManage = ({ labels, labelsToCheck }) => {
               </td>
 
               <td className="col-1 p-0 pt-1">
-                <Button
-                  variant="danger"
-                  className="p-1"
-                  onClick={() => handleDeleteLabel(label)}
-                >
-                  <RiDeleteBin6Line size="1.25em" />
-                </Button>
+                {label.was_created ? (
+                  <Button
+                    variant="danger"
+                    className="p-1"
+                    onClick={() => handleDeleteLabel(label)}
+                  >
+                    <RiDeleteBin6Line size="1.25em" />
+                  </Button>
+                ) : null}
               </td>
             </tr>
           ))}

@@ -204,7 +204,6 @@ class analysisView(viewsets.GenericViewSet):
     def list(self, request):
         parameters = dict(request.GET)
         title_dataset = parameters.get('idDataset')
-        print(parameters)
 
         if title_dataset is not None:
             votes = get_votes_dataset_by_categories(**parameters)

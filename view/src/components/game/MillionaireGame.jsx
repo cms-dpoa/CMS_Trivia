@@ -41,6 +41,7 @@ const MillionaireGame = ({ questions, username, idGame }) => {
     initialDatasetKnowledgeLevel
   );
 
+  console.log(optionSelected);
   const toastBody = (
     <span className="font-weight-bold">Question {numQuestion}</span>
   );
@@ -100,6 +101,7 @@ const MillionaireGame = ({ questions, username, idGame }) => {
                 question={question}
                 numQuestion={numQuestion}
                 setOptionSelected={setOptionSelected}
+                optionSelected={optionSelected}
                 setActivateBtnSendAnswer={setActivateBtnSendAnswer}
                 showOptionsLevel1={{ showOptionsLevel1, setShowOptionsLevel1 }}
                 isOptionLevel2Selected={{

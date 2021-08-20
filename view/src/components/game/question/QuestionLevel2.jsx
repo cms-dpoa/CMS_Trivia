@@ -6,6 +6,7 @@ import ModalNewLabel from "./ModalNewLabel";
 import { getLabelsAction } from "../../../redux/ducks/labelDucks";
 
 const QuestionLevel2 = ({
+  optionSelected,
   setOptionSelected,
   setActivateBtnSendAnswer,
   isOptionSelected,
@@ -39,6 +40,11 @@ const QuestionLevel2 = ({
     const labelName = event.target.value;
     setLabelSelected(labelName);
 
+    setOptionSelected({
+      ...optionSelected,
+      name: labelName,
+    });
+
     setIsOptionLevel2Selected(true);
     if (labelName === anotherCategoryOption) {
       setDatasetKnowledgeLevel({ "I just created a new category": 0 });
@@ -55,6 +61,7 @@ const QuestionLevel2 = ({
 
     setOptionSelected({
       idLabel,
+      name: labelSelected,
       knowledgeLevel: datasetKnowledgeLevel[knowledgeLevel],
     });
     setActivateBtnSendAnswer(true);

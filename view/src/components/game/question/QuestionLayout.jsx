@@ -9,6 +9,7 @@ const QuestionLayout = ({
   score,
   question,
   numQuestion,
+  optionSelected,
   setOptionSelected,
   setActivateBtnSendAnswer,
   showOptionsLevel1,
@@ -50,6 +51,7 @@ const QuestionLayout = ({
             />
           ) : (
             <QuestionLevel2
+              optionSelected={optionSelected}
               setOptionSelected={setOptionSelected}
               isOptionSelected={isOptionLevel2Selected}
               setActivateBtnSendAnswer={setActivateBtnSendAnswer}

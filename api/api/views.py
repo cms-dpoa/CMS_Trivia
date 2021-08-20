@@ -18,10 +18,24 @@ from .analysis import get_analysis, get_votes, get_votes_dataset_by_categories
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('username')
     serializer_class = UserSerializer
+
+    # TODO: CHANGE WITH THE AUTH
+    def retrieve(self, request, pk=None):
+        queryset = User.objects.all()
+        try:
+            user = get_object_or_404(queryset, pk=pk)
+            serializer = UserSerializer(user)
+            return JsonResponse(serializer.data) 
+        except:
+            return JsonResponse(data = {
+                                        "username": "defaultUser",
+                                        "mean_score": 0,
+                                        "is_admin": False
+                                        })
     
     #Override POST to create new Game instance and return id_game.
     def create(self, request):
-        user_data = request.data
+        user_data = JSONParser().parse(request)
         prev_user = User.objects.filter(username = user_data["username"])
         #Check if username already exists.
         new_game = None
@@ -30,8 +44,7 @@ class UserViewSet(viewsets.ModelViewSet):
             new_game = Game.objects.create(username=prev_user[0])
             new_game.save()
         else:
-            #Create new_user with mean_score = -1
-            new_user = User.objects.create(username=user_data["username"], mean_score = -1)
+            new_user = User.objects.create(**user_data)
             new_user.save()
             #Instantiate new game
             new_game = Game.objects.create(username=new_user)

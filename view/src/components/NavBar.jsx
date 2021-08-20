@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { connect } from "react-redux";
 
-const NavBar = ({ username }) => {
+const NavBar = ({ username, isAdmin }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -43,22 +43,24 @@ const NavBar = ({ username }) => {
             >
               My Score
             </Link>
-
-            <Link
-              className="nav-link"
-              to="/dashboard"
-              onClick={() => setIsExpanded(false)}
-            >
-              DashBoard
-            </Link>
-
-            <Link
-              className="nav-link"
-              to="/manage"
-              onClick={() => setIsExpanded(false)}
-            >
-              Manage
-            </Link>
+            {isAdmin ? (
+              <Fragment>
+                <Link
+                  className="nav-link"
+                  to="/dashboard"
+                  onClick={() => setIsExpanded(false)}
+                >
+                  DashBoard
+                </Link>
+                <Link
+                  className="nav-link"
+                  to="/manage"
+                  onClick={() => setIsExpanded(false)}
+                >
+                  Manage
+                </Link>
+              </Fragment>
+            ) : null}
 
             <Link
               className="nav-link font-italic"
@@ -78,6 +80,7 @@ const NavBar = ({ username }) => {
 const mapStateToProps = (state) => {
   return {
     username: state.auth.user.username,
+    isAdmin: state.auth.user.is_admin,
   };
 };
 

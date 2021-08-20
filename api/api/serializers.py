@@ -4,7 +4,7 @@ from .models import User, Data, Label, Game, Vote, ReportProblem
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'mean_score')
+        fields = ('username', 'mean_score', 'is_admin')
 
 class DataSerializer(serializers.ModelSerializer):
     class Meta:

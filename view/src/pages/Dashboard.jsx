@@ -4,9 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAnalisisAction } from "../redux/ducks/analysisDucks";
 import Analysis from "../components/dashboard/Analysis";
 import TableLabaled from "../components/dashboard/TableLabaled";
+import NotFound from "./NotFound";
 
 const MyScore = () => {
   const dispatch = useDispatch();
+  const isAdmin = useSelector((store) => store.auth.user.is_admin);
+
+  if (!isAdmin) {
+    return <NotFound />;
+  }
 
   useEffect(() => {
     dispatch(getAnalisisAction());

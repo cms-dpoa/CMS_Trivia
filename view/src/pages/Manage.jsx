@@ -4,9 +4,15 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 import LabelManage from "../components/manage/LabelManage";
 import ReportProblem from "../components/manage/ReportProblem";
 import { getLabelsAction } from "../redux/ducks/labelDucks";
+import NotFound from "./NotFound";
 
 const Manage = () => {
   const dispatch = useDispatch();
+  const isAdmin = useSelector((store) => store.auth.user.is_admin);
+
+  if (!isAdmin) {
+    return <NotFound />;
+  }
 
   useEffect(() => {
     const excludeMiscellaneous = null;

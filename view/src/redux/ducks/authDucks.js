@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ENDPOINT_AUTH } from "../endPoints";
+import { ENDPOINT_AUTH, ENDPOINT_USER } from "../endPoints";
 
 const data = {
   auth: false,
@@ -26,24 +26,16 @@ export default function authReducer(state = data, action) {
 }
 
 export const sendAuthAction = (username) => async (dispatch) => {
-  try {
-    // const res = await axios.get(ENDPOINT_AUTH);
-    dispatch({
-      type: SEND_AUTH,
-      payload: { username, mean_score: 3.75 },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await axios.get(`${ENDPOINT_USER + username}/`);
+  dispatch({
+    type: SEND_AUTH,
+    payload: res.data,
+  });
 };
 
 export const getAuthAction = () => async (dispatch) => {
-  try {
-    // const res = await axios.get(ENDPOINT_AUTH);
-    dispatch({
-      type: GET_AUTH,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  // const res = await axios.get(ENDPOINT_AUTH);
+  dispatch({
+    type: GET_AUTH,
+  });
 };

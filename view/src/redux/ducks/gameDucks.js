@@ -3,7 +3,7 @@ import { ENDPOINT_GAME, ENDPOINT_USER } from "../endPoints";
 
 const data = {
   array: [],
-  idGame: 30,
+  idGame: 0,
 };
 
 const GET_GAMES = "GET_GAMES";

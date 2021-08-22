@@ -1,11 +1,13 @@
 import axios from "axios";
 import { ENDPOINT_AUTH, ENDPOINT_USER } from "../endPoints";
 
+const defaultUser = "defaultUser";
+
 const data = {
   auth: false,
   token: "",
   user: {
-    username: "defaultUser",
+    username: defaultUser,
     mean_score: 0,
     is_admin: false,
   },
@@ -27,9 +29,13 @@ export default function authReducer(state = data, action) {
 
 export const sendAuthAction = (username) => async (dispatch) => {
   const res = await axios.get(`${ENDPOINT_USER + username}/`);
+  const resData = res.data;
+  if (resData.username === defaultUser) {
+    resData.username = username;
+  }
   dispatch({
     type: SEND_AUTH,
-    payload: res.data,
+    payload: resData,
   });
 };
 

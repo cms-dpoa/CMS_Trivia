@@ -1,6 +1,6 @@
 const { host } = window.location;
-const MAIN = `http://${host}/api`;
-// const MAIN = "http://localhost:8000";
+// const MAIN = `http://${host}/api`;
+const MAIN = "http://localhost:8000";
 
 export const ENDPOINT_AUTH = `${MAIN}/auth/`;
 export const ENDPOINT_QUESTION = `${MAIN}/questions/`;

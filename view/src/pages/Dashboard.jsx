@@ -6,7 +6,7 @@ import Analysis from "../components/dashboard/Analysis";
 import TableLabaled from "../components/dashboard/TableLabaled";
 import NotFound from "./NotFound";
 
-const MyScore = () => {
+const DashBoard = () => {
   const dispatch = useDispatch();
   const isAdmin = useSelector((store) => store.auth.user.is_admin);
 
@@ -22,11 +22,11 @@ const MyScore = () => {
 
   return (
     <Container>
-      <Tabs defaultActiveKey="my-score" transition={false} className="mb-3">
-        <Tab eventKey="my-score" title="Dashboard">
+      <Tabs defaultActiveKey="dashboard" transition={false} className="mb-3">
+        <Tab eventKey="dashboard" title="Dashboard">
           <Analysis data={analysis ? analysis.votes_per_dataset : null} />
         </Tab>
-        <Tab eventKey="top-score" title="Table">
+        <Tab eventKey="table" title="Table">
           <TableLabaled
             data={analysis ? analysis.top2_labels_per_dataset : null}
           />
@@ -36,4 +36,4 @@ const MyScore = () => {
   );
 };
 
-export default MyScore;
+export default DashBoard;

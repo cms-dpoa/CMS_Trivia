@@ -52,6 +52,17 @@ class UserViewSet(viewsets.ModelViewSet):
         return JsonResponse(data = {"id_game": new_game.id_game})
 
 
+    def update(self, request, pk=None):
+        data = JSONParser().parse(request)
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class LabelViewSet(viewsets.ModelViewSet):
     def list(self, request):
         queryset = Label.objects.all()

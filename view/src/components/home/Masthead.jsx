@@ -10,7 +10,7 @@ const Masthead = () => {
         <Col>
           <h2>Play games, tag CMS exprimental datasets and win!</h2>
           <Link to="/play">
-            <Button className="mt-4 pl-5 pr-5"> Go to play </Button>
+            <Button className="mt-4 pl-5 pr-5"> Go play </Button>
           </Link>
         </Col>
 

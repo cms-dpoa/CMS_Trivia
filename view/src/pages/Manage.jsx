@@ -40,11 +40,10 @@ const Manage = () => {
         transition={false}
         className="mb-3"
       >
-        <Tab eventKey="label-request" title="Label Request">
+        <Tab eventKey="label-request" title="Labels Request">
           <LabelManage labels={labelsToCheck} labelsToCheck />
         </Tab>
-
-        <Tab eventKey="active-label" title="Active Label">
+        <Tab eventKey="active-label" title="Active Labels">
           <LabelManage labels={activeLabels} labelsToCheck={false} />
         </Tab>
 

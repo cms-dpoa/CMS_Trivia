@@ -29,6 +29,10 @@ Thanks for playing!
 
 # How to build the project
 
-## Docker
+You can easily build and run the project with docker. To do this run the following command in the main project directory:
 
-1. Make sure to set the IP of the service in file `.env`
+```
+docker-compose up --build
+```
+
+The docker image of the build is call `frontend` and the API is `backend`.

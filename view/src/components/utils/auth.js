@@ -7,7 +7,6 @@ export const setCokiesAuth = (infoAuth) => {
 };
 
 export const isLogIn = () => {
-  console.log(cookies.get("auth"));
   return cookies.get("auth");
 };
 
@@ -20,7 +19,6 @@ export const getAuthFromCookie = () => {
 };
 
 export const logOut = () => {
-  console.log("Log out");
   cookies.remove("auth", { path: "/" });
   window.location.href = "./";
 };

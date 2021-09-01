@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Spinner, Button, Container, Form } from "react-bootstrap";
 import { useDispatch, connect } from "react-redux";
 import { sendAuthAction } from "../redux/ducks/authDucks";
 import ModalGameDifficulty from "../components/game/ModalGameDifficulty";
 
-const GameSection = () => {
+const GameSection = ({ isAuth, usernameOfAuthCookie }) => {
   const dispatch = useDispatch();
 
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isUsernameSetted, setIsUsernameSetted] = useState(false);
   const [username, setUsername] = useState({ username: "" });
+
+  useEffect(() => {
+    setIsUsernameSetted(isAuth);
+    setUsername({
+      username: usernameOfAuthCookie,
+    });
+  }, [isAuth]);
 
   const handleChangeUsername = (event) => {
     setIsUsernameSetted(true);
@@ -22,6 +29,7 @@ const GameSection = () => {
   const handleStartGame = (event) => {
     event.preventDefault();
     setIsGameStarted(true);
+    console.log(username.username);
     dispatch(sendAuthAction(username.username));
   };
 
@@ -31,7 +39,7 @@ const GameSection = () => {
       <h1 className="mt-5 mb-5">Who wants to be a Millionaire? CMS edition</h1>
 
       <Form onSubmit={handleStartGame}>
-        {!false ? (
+        {!isAuth ? (
           <Form.Group>
             <Form.Control
               type="text"
@@ -71,7 +79,7 @@ const GameSection = () => {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.auth.user.username,
+    usernameOfAuthCookie: state.auth.user.username,
     isAuth: state.auth.isAuth,
   };
 };

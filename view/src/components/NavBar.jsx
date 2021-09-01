@@ -1,11 +1,20 @@
-import React, { useState, Fragment } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import React, { useState, Fragment, useEffect } from "react";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { BiUserCircle } from "react-icons/bi";
-import { connect } from "react-redux";
+import { BiUserCircle, BiLogOut } from "react-icons/bi";
+import { connect, useDispatch } from "react-redux";
+import { logOut, isLogIn } from "./utils/auth";
+import { setAuthFromCookieAction } from "../redux/ducks/authDucks";
 
-const NavBar = ({ username, isAdmin }) => {
+const NavBar = ({ username, isAdmin, isAuth }) => {
+  const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    if (!isAuth && isLogIn()) {
+      dispatch(setAuthFromCookieAction());
+    }
+  }, [isAuth]);
 
   return (
     <Navbar expanded={isExpanded} expand="md" bg="dark" variant="dark">
@@ -43,6 +52,7 @@ const NavBar = ({ username, isAdmin }) => {
             >
               My Score
             </Link>
+
             {isAdmin ? (
               <Fragment>
                 <Link
@@ -62,14 +72,28 @@ const NavBar = ({ username, isAdmin }) => {
               </Fragment>
             ) : null}
 
-            <Link
+            {/* <Link
               className="nav-link font-italic"
               to="/"
               onClick={() => setIsExpanded(false)}
             >
               {`${username} `}
               <BiUserCircle size="1.2em" />
-            </Link>
+            </Link> */}
+
+            <NavDropdown
+              title={
+                <>
+                  {`${username} `}
+                  <BiUserCircle size="1.2em" />
+                </>
+              }
+              id="nav-dropdown-user"
+            >
+              <NavDropdown.Item onClick={logOut}>
+                Log Out <BiLogOut className="ml-3" />
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -79,6 +103,7 @@ const NavBar = ({ username, isAdmin }) => {
 
 const mapStateToProps = (state) => {
   return {
+    isAuth: state.auth.isAuth,
     username: state.auth.user.username,
     isAdmin: state.auth.user.is_admin,
   };

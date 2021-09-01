@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Spinner, Button, Container, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { sendAuthAction } from "../redux/ducks/authDucks";
 import ModalGameDifficulty from "../components/game/ModalGameDifficulty";
 
@@ -19,7 +19,8 @@ const GameSection = () => {
     });
   };
 
-  const handleStartGame = () => {
+  const handleStartGame = (event) => {
+    event.preventDefault();
     setIsGameStarted(true);
     dispatch(sendAuthAction(username.username));
   };
@@ -29,41 +30,50 @@ const GameSection = () => {
       <ModalGameDifficulty show={isGameStarted} setShow={setIsGameStarted} />
       <h1 className="mt-5 mb-5">Who wants to be a Millionaire? CMS edition</h1>
 
-      <Form>
-        <Form.Group>
-          <Form.Control
-            type="text"
-            placeholder="Your username"
-            className="col-10 col-sm-6 col-lg-3 mx-auto mt-4"
-            name="username"
-            onChange={handleChangeUsername}
-          />
-        </Form.Group>
-      </Form>
-
-      <Button
-        className="pr-5 pl-5 mt-3"
-        onClick={handleStartGame}
-        disabled={isGameStarted || !isUsernameSetted}
-      >
-        {isGameStarted ? (
-          <>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-              className="mr-2"
+      <Form onSubmit={handleStartGame}>
+        {!false ? (
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="Your username"
+              className="col-10 col-sm-6 col-lg-3 mx-auto mt-4"
+              name="username"
+              onChange={handleChangeUsername}
             />
-            Loading...
-          </>
-        ) : (
-          "Start Game"
-        )}
-      </Button>
+          </Form.Group>
+        ) : null}
+
+        <Button
+          className="pr-5 pl-5 mt-3"
+          type="submit"
+          disabled={isGameStarted || !isUsernameSetted}
+        >
+          {isGameStarted ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="mr-2"
+              />
+              Loading...
+            </>
+          ) : (
+            "Start Game"
+          )}
+        </Button>
+      </Form>
     </Container>
   );
 };
 
-export default GameSection;
+const mapStateToProps = (state) => {
+  return {
+    username: state.auth.user.username,
+    isAuth: state.auth.isAuth,
+  };
+};
+
+export default connect(mapStateToProps, null)(GameSection);

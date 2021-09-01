@@ -52,7 +52,6 @@ const Leaderboard = ({ leaderboards, username }) => {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
     username: state.auth.user.username,
     leaderboards: state.scores.leaderboards,
   };

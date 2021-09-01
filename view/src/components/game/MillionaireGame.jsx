@@ -143,7 +143,6 @@ const MillionaireGame = ({ questions, username, idGame }) => {
 const mapStateToProps = (state) => {
   return {
     questions: state.questions.array,
-    auth: state.auth,
     username: state.auth.user.username,
     idGame: state.game.idGame,
   };

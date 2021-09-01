@@ -37,7 +37,6 @@ const MyOwnScore = ({ user, myScores }) => {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
     user: state.auth.user,
     myScores: state.scores.myScores,
   };

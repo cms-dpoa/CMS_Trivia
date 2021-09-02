@@ -15,6 +15,7 @@ import { sendVoteAction } from "../../redux/ducks/voteDucks";
 const MillionaireGame = ({ questions, username, idGame }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const totalQuestions = Object.values(questions).length;
 
   // if (questions.length === 0) {
   //   const returnPlayPage = () =>
@@ -81,7 +82,7 @@ const MillionaireGame = ({ questions, username, idGame }) => {
       setIsOptionLevel2Selected(false);
       setDatasetKnowledgeLevel(initialDatasetKnowledgeLevel);
     }
-    if (numQuestion < 10) {
+    if (numQuestion < totalQuestions) {
       setQuestion(questions[numQuestion + 1]);
       setActivateBtnSendAnswer(false);
     }
@@ -90,7 +91,7 @@ const MillionaireGame = ({ questions, username, idGame }) => {
 
   return (
     <Container>
-      {numQuestion > 10 ? (
+      {numQuestion > totalQuestions ? (
         <GameOver score={score} />
       ) : (
         <Fragment>

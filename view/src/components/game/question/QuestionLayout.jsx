@@ -29,11 +29,14 @@ const QuestionLayout = ({
           <Row>
             <Col>
               Question {numQuestion}
-              <IoMdHelpCircle className="ml-3" />
+              <span className="font-italic text-muted font-weight-normal ml-4">
+                Level {numQuestion > 5 ? 2 : 1}
+              </span>
             </Col>
             <Col>
               <p className="text-right mb-0 font-italic font-weight-normal">
                 Score: {score}
+                <IoMdHelpCircle className="ml-3" />
               </p>
             </Col>
           </Row>

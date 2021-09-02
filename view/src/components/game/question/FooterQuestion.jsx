@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { MdReportProblem, MdNavigateNext } from "react-icons/md";
+import { GiFinishLine } from "react-icons/gi";
 import ModalReportProblem from "./ModalReportProblem";
 import getURLOpenDataCERNFromLabel from "../../utils/linkShowRun1";
 
@@ -29,6 +30,11 @@ const FooterQuestion = ({
     setNumQuestion(numQuestion + 1);
   };
 
+  const handleEndGame = () => {
+    const totalQuestions = Object.values(questions).length;
+    setNumQuestion(numQuestion + totalQuestions);
+  };
+
   return (
     <Container className="row justify-content-between m-0 p-0">
       <ModalReportProblem
@@ -50,8 +56,14 @@ const FooterQuestion = ({
         disabled={!activeShowRun1Btn}
         href={getURLOpenDataCERNFromLabel(labelSelected)}
       >
-        Show Run-1 open data with this label
+        Run-1 open data with this label
       </Button>
+
+      {numQuestion > 10 ? (
+        <Button variant="danger" onClick={handleEndGame}>
+          End Game <GiFinishLine size="1.5em" />
+        </Button>
+      ) : null}
 
       {numQuestion === 1 ? (
         <Button

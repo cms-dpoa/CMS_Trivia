@@ -203,8 +203,8 @@ class all_questions(viewsets.GenericViewSet):
         #Build 10 question dictionary for game setup
         questions = {}
         ids_datasets = []
-        num_question=1
-        while num_question<11:
+        num_question = 1
+        while num_question < 46:
             tag = num_question
             if num_question<6:
                 question = question_level_one(mode)
@@ -216,7 +216,7 @@ class all_questions(viewsets.GenericViewSet):
             else:                
                 question = question_level_two(level_two_categories)
                 id_dataset_question = question['id_data']
-                if(  id_dataset_question not in ids_datasets):
+                if( id_dataset_question not in ids_datasets):
                     questions[tag] = question
                     ids_datasets.append(id_dataset_question)
                     num_question += 1

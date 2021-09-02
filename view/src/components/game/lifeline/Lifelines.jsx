@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import {
+  Container,
+  Col,
+  Row,
+  Button,
+  Popover,
+  OverlayTrigger,
+} from "react-bootstrap";
 import { GiMiddleArrow } from "react-icons/gi";
 import { FaBowlingBall } from "react-icons/fa";
 import { ImStatsDots } from "react-icons/im";
@@ -40,44 +47,80 @@ const Lifelines = ({ numQuestion, questions, showOptions }) => {
     setShowModalStatisticsLL(true);
   };
 
+  const infoLifelines = {
+    1: {
+      title: "Delete One",
+      description: "Randomly eliminates an incorrect option.",
+    },
+    2: {
+      title: "50/50",
+      description: "Randomly eliminates two incorrect options.",
+    },
+    3: {
+      title: "Public Help",
+      description:
+        "Obtain help from the 'public'. This lifeline will show you the number of votes for this dataset (made so far by other players) with these labels.",
+    },
+  };
+
+  const InfoTooltip = (lifelineCode) => {
+    const infoLifeline = infoLifelines[lifelineCode];
+    const { title, description } = infoLifeline;
+
+    return (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">
+          <strong>{title}</strong>
+        </Popover.Title>
+        <Popover.Content>{description}</Popover.Content>
+      </Popover>
+    );
+  };
+
   return (
     <Container className="text-right mt-4">
       <Row>
         <Col className="p-0 col col-md-10">
-          <Button
-            className="p-0"
-            variant="outline-dark"
-            onClick={handleRemoveOneLL}
-            disabled={removeOneLLIsUsed}
-          >
-            <GiMiddleArrow className="p-1" size="2.5em" />
-          </Button>
+          <OverlayTrigger placement="left" overlay={InfoTooltip(1)}>
+            <Button
+              className="p-0"
+              variant="outline-dark"
+              onClick={handleRemoveOneLL}
+              disabled={removeOneLLIsUsed}
+            >
+              <GiMiddleArrow className="p-1" size="2.5em" />
+            </Button>
+          </OverlayTrigger>
         </Col>
 
         <Col className="p-0 col col-md-1">
-          <Button
-            className="p-0"
-            variant="outline-dark"
-            onClick={handleFiftyFiftyLL}
-            disabled={fiftyFiftyLLIsUsed}
-          >
-            <FaBowlingBall className="p-1" size="2.5em" />
-          </Button>
+          <OverlayTrigger placement="left" overlay={InfoTooltip(2)}>
+            <Button
+              className="p-0"
+              variant="outline-dark"
+              onClick={handleFiftyFiftyLL}
+              disabled={fiftyFiftyLLIsUsed}
+            >
+              <FaBowlingBall className="p-1" size="2.5em" />
+            </Button>
+          </OverlayTrigger>
         </Col>
 
         <Col className="p-0 col col-md-1">
-          <Button
-            className="p-0"
-            variant="outline-dark"
-            onClick={handleStatisticsLL}
-            disabled={statisticsLLIsUsed}
-          >
-            <ImStatsDots className="p-1" size="2.5em" />
-            <ModalLifelineStatistics
-              show={showModalStatisticsLL}
-              setShow={setShowModalStatisticsLL}
-            />
-          </Button>
+          <OverlayTrigger placement="left" overlay={InfoTooltip(3)}>
+            <Button
+              className="p-0"
+              variant="outline-dark"
+              onClick={handleStatisticsLL}
+              disabled={statisticsLLIsUsed}
+            >
+              <ImStatsDots className="p-1" size="2.5em" />
+              <ModalLifelineStatistics
+                show={showModalStatisticsLL}
+                setShow={setShowModalStatisticsLL}
+              />
+            </Button>
+          </OverlayTrigger>
         </Col>
       </Row>
     </Container>

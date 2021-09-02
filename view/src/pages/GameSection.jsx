@@ -29,7 +29,6 @@ const GameSection = ({ isAuth, usernameOfAuthCookie }) => {
   const handleStartGame = (event) => {
     event.preventDefault();
     setIsGameStarted(true);
-    console.log(username.username);
     dispatch(sendAuthAction(username.username));
   };
 

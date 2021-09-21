@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import GameOver from "./GameOver";
 import Loading from "./Loading";
@@ -13,7 +12,7 @@ import { sendScoreGameLevel1Action } from "../../redux/ducks/gameDucks";
 import { sendVoteAction } from "../../redux/ducks/voteDucks";
 
 const MillionaireGame = ({ questions, username, idGame }) => {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const totalQuestions = Object.values(questions).length;
 
@@ -42,7 +41,6 @@ const MillionaireGame = ({ questions, username, idGame }) => {
     initialDatasetKnowledgeLevel
   );
 
-  console.log(optionSelected);
   const toastBody = (
     <span className="font-weight-bold">Question {numQuestion}</span>
   );
@@ -91,7 +89,7 @@ const MillionaireGame = ({ questions, username, idGame }) => {
 
   return (
     <Container>
-      {numQuestion > totalQuestions ? (
+      {numQuestion > totalQuestions && totalQuestions > 0 ? (
         <GameOver score={score} />
       ) : (
         <Fragment>

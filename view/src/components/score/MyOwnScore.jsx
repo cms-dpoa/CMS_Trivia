@@ -23,9 +23,9 @@ const MyOwnScore = ({ user, myScores }) => {
         </thead>
 
         <tbody>
-          {Object.keys(myScores).map((key) => (
+          {Object.keys(myScores).map((key, index) => (
             <tr key={key}>
-              <td>{key}</td>
+              <td>{index + 1}</td>
               <td>{myScores[key]}</td>
             </tr>
           ))}

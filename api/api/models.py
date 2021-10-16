@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     username = models.CharField(max_length=20, primary_key=True)
     mean_score = models.FloatField(default=-1)
@@ -53,16 +54,16 @@ class Vote(models.Model):
 
 class ReportProblem(models.Model):
     STATUS = (
-        ('NEW', 'NEW'),
-        ('IN POGRESS', 'IN POGRESS'),
-        ('FINISHED', 'FINISHED'),
+        ("NEW", "NEW"),
+        ("IN POGRESS", "IN POGRESS"),
+        ("FINISHED", "FINISHED"),
     )
 
     id_report_problem = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
-    suggested_solution = models.CharField(max_length=1000,  default='')
+    suggested_solution = models.CharField(max_length=1000, default="")
     date = models.DateField(auto_now=True)
-    status = models.CharField(max_length=20, blank=False, choices=STATUS, default='NEW')
+    status = models.CharField(max_length=20, blank=False, choices=STATUS, default="NEW")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dataset = models.ForeignKey(Data, on_delete=models.CASCADE)

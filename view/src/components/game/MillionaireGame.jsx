@@ -128,6 +128,7 @@ const MillionaireGame = ({ questions, username, idGame }) => {
                 labelSelected={
                   optionSelected !== {} ? optionSelected.name : null
                 }
+                dataset={question.title}
               />
             </Fragment>
           ) : (

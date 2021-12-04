@@ -5,6 +5,7 @@ import { MdReportProblem, MdNavigateNext } from "react-icons/md";
 import { GiFinishLine } from "react-icons/gi";
 import ModalReportProblem from "./ModalReportProblem";
 import getURLOpenDataCERNFromLabel from "../../utils/linkShowRun1";
+import getURLOpenDataCERNFromDataset from "../../utils/linkShowDataset";
 
 const FooterQuestion = ({
   numQuestionState,
@@ -12,6 +13,7 @@ const FooterQuestion = ({
   questions,
   activeShowRun1Btn,
   labelSelected,
+  dataset
 }) => {
   const { numQuestion, setNumQuestion } = numQuestionState;
   const [showModalReportProblem, setShowModalReportProblem] = useState(false);
@@ -79,11 +81,23 @@ const FooterQuestion = ({
         <Button
           variant="info"
           className="mt-2 mt-sm-0"
+          target="_blank"
+          href={getURLOpenDataCERNFromDataset(dataset)}
+        >
+          Show this dataset
+        </Button>
+      ) : null}
+
+      {numQuestion > 5 ? (
+        <Button
+          variant="info"
+          className="mt-2 mt-sm-0"
           onClick={handleSkipToNextQuestionLevel2}
         >
           Skip Question <MdNavigateNext size="1.5em" />
         </Button>
-      ) : null}
+      ) : null} 
+
     </Container>
   );
 };

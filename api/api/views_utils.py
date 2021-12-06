@@ -142,10 +142,12 @@ def misc_categories():
     titles_underscore = []
     for title in misc_titles:
         underscore = title.find("_")
-        if underscore == -1:
-            titles_underscore.append(title[1:])
-        else:
-            titles_underscore.append(title[1 : underscore + 1])
+        ppd = title.find("PPD")
+        if ppd == -1:
+            if underscore == -1:
+                titles_underscore.append(title[1:])
+            else:
+                titles_underscore.append(title[1 : underscore + 1])
 
     # Artifical categories
     titles_underscore = np.array(titles_underscore)
